@@ -1,0 +1,14 @@
+com\MichiSistema\negocio\impl\ComprobanteServiceImpl.class
+com\MichiSistema\negocio\ProductoService.class
+com\MichiSistema\negocio\impl\UsuarioServiceImpl.class
+com\MichiSistema\negocio\OrdenService.class
+com\MichiSistema\negocio\ComprobanteService.class
+com\MichiSistema\negocio\TrabajadorService.class
+com\MichiSistema\negocio\impl\ProductoServiceImpl.class
+com\MichiSistema\negocio\impl\OrdenServiceImpl.class
+com\MichiSistema\negocio\EventoService.class
+com\MichiSistema\negocio\impl\TrabajadorServiceImpl.class
+com\MichiSistema\negocio\UsuarioService.class
+com\MichiSistema\negocio\impl\ClienteServiceImpl.class
+com\MichiSistema\negocio\impl\EventoServiceImpl.class
+com\MichiSistema\negocio\ClienteService.class

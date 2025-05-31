@@ -1,0 +1,7 @@
+pe\edu\pucp\MichiSistema\Service\EventoServiceTest.class
+pe\edu\pucp\MichiSistema\Service\ProductoServiceTest.class
+pe\edu\pucp\MichiSistema\Service\UsuarioServiceTest.class
+pe\edu\pucp\MichiSistema\Service\ClienteServiceTest.class
+pe\edu\pucp\MichiSistema\Service\OrdenServiceTest.class
+pe\edu\pucp\MichiSistema\Service\ComprobanteServiceTest.class
+pe\edu\pucp\MichiSistema\Service\TrabajadorServiceTest.class

@@ -1,0 +1,14 @@
+pe\edu\pucp\MichiSistema\NEGOCIOImpl\UsuarioServiceImpl.class
+pe\edu\pucp\MichiSistema\NEGOCIOImpl\OrdenServiceImpl.class
+pe\edu\pucp\MichiSistema\NEGOCIO\ComprobanteService.class
+pe\edu\pucp\MichiSistema\NEGOCIOImpl\TrabajadorServiceImpl.class
+pe\edu\pucp\MichiSistema\NEGOCIO\ProductoService.class
+pe\edu\pucp\MichiSistema\NEGOCIO\UsuarioService.class
+pe\edu\pucp\MichiSistema\NEGOCIOImpl\ClienteServiceImpl.class
+pe\edu\pucp\MichiSistema\NEGOCIO\EventoService.class
+pe\edu\pucp\MichiSistema\NEGOCIOImpl\ComprobanteServiceImpl.class
+pe\edu\pucp\MichiSistema\NEGOCIO\ClienteService.class
+pe\edu\pucp\MichiSistema\NEGOCIO\OrdenService.class
+pe\edu\pucp\MichiSistema\NEGOCIO\TrabajadorService.class
+pe\edu\pucp\MichiSistema\NEGOCIOImpl\ProductoServiceImpl.class
+pe\edu\pucp\MichiSistema\NEGOCIOImpl\EventoServiceImpl.class
