@@ -8,9 +8,9 @@
   </parent>
     <groupId>com.MichiSistema</groupId>
     <artifactId>MichiSistemaWS</artifactId>
-    <version>1.0</version>
+    <version>0</version>
     <packaging>war</packaging>
-    <name>MichiSistemaWS-1.0</name>
+    <name>MichiSistemaWS-0</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -32,13 +32,8 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>MichiSistemaNegocio</artifactId>
-            <version>0</version>
+            <version>${project.version}</version>
         </dependency>
-        <dependency> 
-            <groupId>com.mysql</groupId> 
-            <artifactId>mysql-connector-j</artifactId> 
-            <version>9.3.0</version> 
-            </dependency>  
     </dependencies>
     
     <build>
