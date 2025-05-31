@@ -11,4 +11,5 @@ package com.MichiSistema.Enum;
  */
 public enum TipoCliente{
     EIN, TIN, SSN, OSCAR2
+    EIN, TIN, SSN, ADIOS, OVEJA
 }
