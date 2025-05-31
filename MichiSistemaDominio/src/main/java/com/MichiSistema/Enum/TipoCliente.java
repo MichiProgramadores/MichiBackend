@@ -10,5 +10,5 @@ package com.MichiSistema.Enum;
  * @author Usuario
  */
 public enum TipoCliente{
-    EIN, TIN, SSN,HOLA
+    EIN, TIN, SSN, ADIOS
 }
