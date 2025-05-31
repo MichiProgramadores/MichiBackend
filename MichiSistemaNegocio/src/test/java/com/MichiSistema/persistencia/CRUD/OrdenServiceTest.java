@@ -83,8 +83,8 @@ public class OrdenServiceTest {
     EstadoFechaDevolucionCRUD crud = new EstadoFechaDevolucionCRUD();
     EstadoFechaDevolucion estado = new EstadoFechaDevolucion();
     estado.setTipoFechaDevolucion(TipoFechaDevolucion.DEVUELTO_FECHA_LIMITE);
-    estado.setPenalidad(15.0);//penalidad asignada
-    estado.setPorcentajeDesc(15);
+    estado.setPenalidad(24.0);//penalidad asignada
+//    estado.setPorcentajeDesc(15);
         
     crud.insertar(estado); // 👈 esto guardará el estado en BD
     return estado;
