@@ -36,6 +36,8 @@ import com.MichiSistema.negocio.TrabajadorService;
 import com.MichiSistema.negocio.impl.ClienteServiceImpl;
 import com.MichiSistema.negocio.impl.ProductoServiceImpl;
 import com.MichiSistema.negocio.impl.TrabajadorServiceImpl;
+import java.util.HashSet;
+//import pe.edu.pucp.MichiSistema.persistencia.DAOimpl.EstadoFechaDevolucionCRUD;
 
 
 /**
@@ -81,8 +83,9 @@ public class OrdenServiceTest {
     EstadoFechaDevolucionCRUD crud = new EstadoFechaDevolucionCRUD();
     EstadoFechaDevolucion estado = new EstadoFechaDevolucion();
     estado.setTipoFechaDevolucion(TipoFechaDevolucion.DEVUELTO_FECHA_LIMITE);
-    estado.setPenalidad(0.0);
-    estado.setPorcentajeDesc(10); // ➡️ descuento de prueba
+    estado.setPenalidad(15.0);//penalidad asignada
+    estado.setPorcentajeDesc(15);
+        
     crud.insertar(estado); // 👈 esto guardará el estado en BD
     return estado;
 
