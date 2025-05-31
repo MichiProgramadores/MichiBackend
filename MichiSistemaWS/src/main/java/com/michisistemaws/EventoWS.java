@@ -4,22 +4,30 @@
  */
 package com.michisistemaws;
 
+import com.MichiSistema.dominio.Evento;
+import com.MichiSistema.negocio.EventoService;
+import com.MichiSistema.negocio.impl.EventoServiceImpl;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import jakarta.xml.ws.WebServiceException;
+import java.util.List;
 
-/**
- *
- * @author Usuario
- */
 @WebService(serviceName = "EventoWS")
 public class EventoWS {
 
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    private EventoService eventoService;
+    
+    public EventoWS(){
+        eventoService=new EventoServiceImpl();
+    }
+    
+    @WebMethod(operationName = "listarEvento")
+    public List<Evento> listaComprobantes() {
+        try{
+            return eventoService.listarEventos();
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar eventos "+ex.getMessage());
+        }
     }
 }
