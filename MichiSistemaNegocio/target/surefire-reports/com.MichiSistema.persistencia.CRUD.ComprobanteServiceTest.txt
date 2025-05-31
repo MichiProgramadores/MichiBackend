@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.330 s -- in com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.241 s -- in com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest
