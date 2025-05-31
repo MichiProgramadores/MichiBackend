@@ -31,7 +31,7 @@ public class OrdenWS {
         try{
             return ordenService.listarOrdenes();
         }catch(Exception ex){
-            throw new WebServiceException("Error al listar empleado "+ex.getMessage());
+            throw new WebServiceException("Error al listar orden "+ex.getMessage());
         }
     }
 }
