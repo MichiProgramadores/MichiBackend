@@ -4,9 +4,14 @@
  */
 package com.Michisistema.ws;
 
-import javax.jws.WebService;
-import javax.jws.WebMethod;
-import javax.jws.WebParam;
+import com.MichiSistema.dominio.Orden;
+import com.MichiSistema.negocio.OrdenService;
+import com.MichiSistema.negocio.impl.OrdenServiceImpl;
+import jakarta.jws.WebService;
+import jakarta.jws.WebMethod;
+import jakarta.jws.WebParam;
+import jakarta.xml.ws.WebServiceException;
+import java.util.List;
 
 /**
  *
@@ -15,11 +20,18 @@ import javax.jws.WebParam;
 @WebService(serviceName = "OrdenWS")
 public class OrdenWS {
 
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    private OrdenService ordenService;
+    
+    public OrdenWS(){
+        ordenService=new OrdenServiceImpl();
+    }
+    
+    @WebMethod(operationName = "listaOrdenes")
+    public List<Orden> listaOrdenes() {
+        try{
+            return ordenService.listarOrdenes();
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar empleado "+ex.getMessage());
+        }
     }
 }
