@@ -106,7 +106,7 @@ public class OrdenServiceTest {
        if(producto.getStockActual()>detalle.getCantidadSolicitada())
             detalle.setCantidadEntregada(detalle.getCantidadSolicitada());
        else detalle.setCantidadSolicitada(producto.getStockActual());
-     
+     //HOLA
     
     Orden orden = new Orden(
             TipoRecepcion.DELIVERY,
