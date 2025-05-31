@@ -12,19 +12,19 @@ public class EstadoFechaDevolucion {
      private int tipoEstadoFechaDevol_id;
      private double penalidad;
      private TipoFechaDevolucion tipoFechaDevolucion;
-     private int porcentajeDesc;
+//     private int porcentajeDesc;
 
-    public EstadoFechaDevolucion(int tipoEstadoFechaDevol_id, double penalidad, TipoFechaDevolucion tipoFechaDevolucion, int porcentajeDesc) {
+    public EstadoFechaDevolucion(int tipoEstadoFechaDevol_id, double penalidad, TipoFechaDevolucion tipoFechaDevolucion) {
         this.tipoEstadoFechaDevol_id = tipoEstadoFechaDevol_id;
         this.penalidad = penalidad;
         this.tipoFechaDevolucion = tipoFechaDevolucion;
-        this.porcentajeDesc = porcentajeDesc;
+//        this.porcentajeDesc = porcentajeDesc;
     }
 
     public EstadoFechaDevolucion() {
         this.penalidad = 0;
         this.tipoFechaDevolucion = TipoFechaDevolucion.DEVUELTO_FECHA_LIMITE; // o cualquier valor default
-        this.porcentajeDesc = 0; // Valor inicial sin descuento
+//        this.porcentajeDesc = 0; // Valor inicial sin descuento
     }
 
      
@@ -60,16 +60,16 @@ public class EstadoFechaDevolucion {
     /**
      * @return the porcentajeDesc
      */
-    public int getPorcentajeDesc() {
-        return porcentajeDesc;
-    }
-
-    /**
-     * @param porcentajeDesc the porcentajeDesc to set
-     */
-    public void setPorcentajeDesc(int porcentajeDesc) {
-        this.porcentajeDesc = porcentajeDesc;
-    }
+//    public int getPorcentajeDesc() {
+//        return porcentajeDesc;
+//    }
+//
+//    /**
+//     * @param porcentajeDesc the porcentajeDesc to set
+//     */
+//    public void setPorcentajeDesc(int porcentajeDesc) {
+//        this.porcentajeDesc = porcentajeDesc;
+//    }
      
      
 }

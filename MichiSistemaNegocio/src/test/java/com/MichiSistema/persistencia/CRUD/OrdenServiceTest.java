@@ -121,7 +121,7 @@ public class OrdenServiceTest {
     );
 
     orden.setEstado(estado);   // ✅ usas el que creaste
-    orden.aplicarDescuentoPorEstado();
+//    orden.aplicarDescuentoPorEstado();
     orden.getListaOrdenes().add(detalle);
     
     return orden;

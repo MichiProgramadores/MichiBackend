@@ -51,12 +51,12 @@ public class Orden {
         this.trabajadorID = trabajadorID;
     }
 
-    public void aplicarDescuentoPorEstado() {
-        if (estado != null) {
-            double descuento = estado.getPorcentajeDesc();
-            this.totalPagar = this.totalPagar * ((100 - descuento) / 100);
-        }
-    }
+//    public void aplicarDescuentoPorEstado() {
+//        if (estado != null) {
+//            double descuento = estado.getPorcentajeDesc();
+//            this.totalPagar = this.totalPagar * ((100 - descuento) / 100);
+//        }
+//    }
 
 
     // Getters y Setters

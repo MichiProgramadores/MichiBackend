@@ -34,6 +34,9 @@ public class ClienteServiceImpl implements ClienteService {
         if (cliente.getEmail() == null || cliente.getEmail().trim().isEmpty()) {
             throw new Exception("El email del cliente no puede estar vacío");
         }
+        if (!cliente.getEmail().contains("@")) {
+            throw new Exception("El email del cliente debe contener el símbolo '@'");
+        }
         if (cliente.getTipoCliente() == null) {
             throw new Exception("El tipo de cliente no puede ser nulo");
         }
