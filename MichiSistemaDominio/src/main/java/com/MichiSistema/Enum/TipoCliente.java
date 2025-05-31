@@ -10,5 +10,8 @@ package com.MichiSistema.Enum;
  * @author Usuario
  */
 public enum TipoCliente{
-    EIN, TIN, SSN, PRUEBA_OVEJA, OVEJA, PRUEBA_MAIN,CHIZURU
+    EIN, TIN, SSN //EMPLOYER IDENTIFICATION NUMBER
+                    //TAXPAYER IDENTIFICATION NUMBER
+                    //SOCIAL SECURITY NUMBER
+    //EN BASE AL TIPO DE NUMERO DE IDENTIFICACION
 }

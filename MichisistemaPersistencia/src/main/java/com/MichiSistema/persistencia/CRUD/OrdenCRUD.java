@@ -83,11 +83,33 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         orden.setTotalPagar(rs.getDouble("total_pagar"));
         orden.setSaldo(rs.getDouble("saldo"));
         orden.setCantDias(rs.getInt("cantidad_dias"));
-        orden.setFecha_devolucion(rs.getDate("fecha_devolucion").toLocalDate());
-        orden.setFecha_entrega(rs.getDate("fecha_entrega").toLocalDate());
-        orden.setFecha_emisión(rs.getDate("fecha_emision").toLocalDate());
-        orden.setClienteID(rs.getInt("cliente_persona_id"));  // Mapear cliente_persona_id
-        orden.setTrabajadorID(rs.getInt("trabajador_persona_id"));  // Mapear cliente_persona_id
+
+        // Validación para fecha_devolucion
+        java.sql.Date fechaDevolucion = rs.getDate("fecha_devolucion");
+        if (fechaDevolucion != null) {
+            orden.setFecha_devolucion(fechaDevolucion.toLocalDate());
+        } else {
+            orden.setFecha_devolucion(null);  // O asignar otra cosa según tu lógica
+        }
+
+        // Validación para fecha_entrega
+        java.sql.Date fechaEntrega = rs.getDate("fecha_entrega");
+        if (fechaEntrega != null) {
+            orden.setFecha_entrega(fechaEntrega.toLocalDate());
+        } else {
+            orden.setFecha_entrega(null);
+        }
+
+        // Validación para fecha_emision
+        java.sql.Date fechaEmision = rs.getDate("fecha_emision");
+        if (fechaEmision != null) {
+            orden.setFecha_emisión(fechaEmision.toLocalDate());
+        } else {
+            orden.setFecha_emisión(null);
+        }
+
+        orden.setClienteID(rs.getInt("cliente_persona_id"));  
+        orden.setTrabajadorID(rs.getInt("trabajador_persona_id"));  
         return orden;
     }
 
