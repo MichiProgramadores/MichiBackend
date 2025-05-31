@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/WebServices/WebService.java to edit this template
  */
-package com.Michisistema.ws;
+package com.michisistemaws;
 
 import com.MichiSistema.dominio.Orden;
 import com.MichiSistema.negocio.OrdenService;
