@@ -4,9 +4,15 @@
  */
 package com.Michisistema.ws;
 
+import com.MichiSistema.dominio.Cliente;
+import com.MichiSistema.negocio.ClienteService;
 import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
+import jakarta.xml.ws.WebServiceException;
+import java.util.List;
+import com.MichiSistema.negocio.impl.ClienteServiceImpl;
+import com.MichiSistema.negocio.ClienteService;
 
 /**
  *
@@ -18,8 +24,17 @@ public class ClienteWS {
     /**
      * This is a sample web service operation
      */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " !";
+    private ClienteService clienteService;
+    
+    public ClienteWS(){
+        clienteService=new ClienteServiceImpl();
+    }
+    @WebMethod(operationName = "listaClientes")
+    public List<Cliente> listaClientes() {
+        try{
+            return clienteService.listarClientes();
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar clientes "+ex.getMessage());
+        }
     }
 }
