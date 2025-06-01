@@ -37,4 +37,5 @@ public class ClienteWS {
             throw new WebServiceException("Error al listar clientes "+ex.getMessage());
         }
     }
+    //uwu
 }
