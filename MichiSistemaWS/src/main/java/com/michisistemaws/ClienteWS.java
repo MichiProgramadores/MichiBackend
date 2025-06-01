@@ -29,13 +29,50 @@ public class ClienteWS {
     public ClienteWS(){
         clienteService=new ClienteServiceImpl();
     }
-    @WebMethod(operationName = "listaClientes")
-    public List<Cliente> listaClientes() {
+    
+    @WebMethod(operationName = "listarClientes")
+    public List<Cliente> listarClientes() {
         try{
             return clienteService.listarClientes();
         }catch(Exception ex){
             throw new WebServiceException("Error al listar clientes "+ex.getMessage());
         }
     }
-    //uwu
+    
+    @WebMethod(operationName = "registrarCliente")
+    public void registrarCliente(@WebParam(name = "cliente") Cliente cliente) {
+        try{
+            clienteService.registrarCliente(cliente);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al registrar cliente "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "actualizarCliente")
+    public void actualizarCliente(@WebParam(name = "cliente") Cliente cliente) {
+        try{
+            clienteService.actualizarCliente(cliente);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al actualizar cliente "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "eliminarCliente")
+    public void eliminarCliente(@WebParam(name = "idCliente") int idCliente) {
+        try{
+            clienteService.eliminarCliente(idCliente);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al eliminar cliente "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "obtenerCliente")
+    public Cliente obtenerCliente(@WebParam(name = "idCliente") int idCliente) {
+        try{
+            return clienteService.obtenerCliente(idCliente);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al obtener cliente "+ex.getMessage());
+        }
+    }
+    
 }

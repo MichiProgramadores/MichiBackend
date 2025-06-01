@@ -22,8 +22,8 @@ public class EventoWS {
         eventoService=new EventoServiceImpl();
     }
     
-    @WebMethod(operationName = "listarEvento")
-    public List<Evento> listaComprobantes() {
+    @WebMethod(operationName = "listarEventos")
+    public List<Evento> listarEventos() {
         try{
             return eventoService.listarEventos();
         }catch(Exception ex){
