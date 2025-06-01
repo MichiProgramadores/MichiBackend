@@ -2,6 +2,8 @@
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
     ref="http://localhost:8080/MichiSistemaWS/ClienteWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
+    ref="http://localhost:8080/MichiSistemaWS/ComprobanteWS?WSDL"/>
+  <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
     ref="http://localhost:8080/MichiSistemaWS/EventoWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
     ref="http://localhost:8080/MichiSistemaWS/OrdenWS?WSDL"/>
@@ -9,5 +11,7 @@
     ref="http://localhost:8080/MichiSistemaWS/ProductoWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
     ref="http://localhost:8080/MichiSistemaWS/TrabajadorWS?WSDL"/>
+  <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
+    ref="http://localhost:8080/MichiSistemaWS/UsuarioWS?WSDL"/>
 </discovery>
 

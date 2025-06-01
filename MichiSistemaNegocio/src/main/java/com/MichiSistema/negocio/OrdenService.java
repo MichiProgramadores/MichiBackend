@@ -11,7 +11,6 @@ import com.MichiSistema.dominio.Orden;
 import java.util.Date;
 import java.util.List;
 
-
 public interface OrdenService{
     void registrarOrden(Orden orden) throws Exception;
     void actualizarOrden(Orden orden) throws Exception;

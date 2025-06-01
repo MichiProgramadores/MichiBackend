@@ -112,8 +112,7 @@ public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements Comprobant
         actualizar(comprobante);
     }
     
-    @Override
-                       
+    @Override             
     public void insertar(Comprobante comprobante) {
     try (Connection conn = DBManager.getInstance().obtenerConexion()) {
         conn.setAutoCommit(false);

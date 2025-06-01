@@ -18,5 +18,4 @@ public interface ClienteService {
     void eliminarCliente(int idCliente) throws Exception;
     Cliente obtenerCliente(int idCliente) throws Exception;
     ArrayList<Cliente> listarClientes() throws Exception;
-
 }

@@ -144,8 +144,6 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             throw new RuntimeException("Error al registrar Orden", e);
         }
     }
-
-    
     
     private void registrarDetalles(Connection conn, Orden orden) throws SQLException {
         String sp = "{CALL sp_registrar_detalle_orden(?, ?, ?, ?,?,?)}";
@@ -162,6 +160,10 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             }
         }
     }
+    
+    
+    
+    
 }
     
    

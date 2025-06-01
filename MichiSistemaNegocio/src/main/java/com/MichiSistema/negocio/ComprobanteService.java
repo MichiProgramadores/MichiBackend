@@ -17,6 +17,5 @@ public interface ComprobanteService {
     void eliminarComprobante(int idComprobante) throws Exception;
     Comprobante obtenerComprobante(int idComprobante) throws Exception;
     List<Comprobante> listarComprobante() throws Exception;
-
     public void actualizarEstadoComprobante(int id_comprobante, String toString);
 }

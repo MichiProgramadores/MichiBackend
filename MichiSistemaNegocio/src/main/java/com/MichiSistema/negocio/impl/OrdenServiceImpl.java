@@ -116,7 +116,6 @@ public class OrdenServiceImpl  implements OrdenService{
     public List<Orden> listarOrdenes() throws Exception {
         return ordenDAO.obtenerTodos();
     }
-    
 
     @Override
     public void actualizarEstadoFechaDevolucion(Integer ventaId, TipoFechaDevolucion estadoFecha) throws Exception {
@@ -127,6 +126,5 @@ public class OrdenServiceImpl  implements OrdenService{
     public void actualizarEstadoDevolucion(int ventaId, TipoEstadoDevolucion estado) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-
 
 }

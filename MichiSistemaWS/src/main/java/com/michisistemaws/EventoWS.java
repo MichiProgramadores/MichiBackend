@@ -30,4 +30,41 @@ public class EventoWS {
             throw new WebServiceException("Error al listar eventos "+ex.getMessage());
         }
     }
+    
+    @WebMethod(operationName = "registrarEvento")
+    public void registrarEvento(@WebParam(name = "evento") Evento evento) {
+        try{
+            eventoService.registrarEvento(evento);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al registrar evento "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "actualizarEvento")
+    public void actualizarEvento(@WebParam(name = "evento") Evento evento) {
+        try{
+            eventoService.actualizarEvento(evento);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al actualizar evento "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "eliminarEvento")
+    public void eliminarEvento(@WebParam(name = "idEvento") int idEvento) {
+        try{
+            eventoService.eliminarEvento(idEvento);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al eliminar evento "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "obtenerEvento")
+    public Evento obtenerEvento(@WebParam(name = "idEvento") int idEvento) {
+        try{
+            return eventoService.obtenerEvento(idEvento);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al obtener evento "+ex.getMessage());
+        }
+    }
+    
 }

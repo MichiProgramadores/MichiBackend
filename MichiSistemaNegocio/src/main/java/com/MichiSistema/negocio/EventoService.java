@@ -18,5 +18,4 @@ public interface EventoService {
     void eliminarEvento(int idEvento) throws Exception;
     Evento obtenerEvento(int idEvento) throws Exception;
     ArrayList<Evento> listarEventos() throws Exception;
-
 }
