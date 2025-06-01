@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/WebServices/WebService.java to edit this template
- */
 package com.michisistemaws;
 
 import com.MichiSistema.dominio.Trabajador;
@@ -14,7 +10,7 @@ import jakarta.xml.ws.WebServiceException;
 import java.util.List;
 
 
-@WebService(serviceName = "TrabajadorWS")
+@WebService(serviceName = "TrabajadorWS", targetNamespace = "com.MichiSistema")
 public class TrabajadorWS {
 
     private TrabajadorService trabajadorService;
@@ -29,6 +25,44 @@ public class TrabajadorWS {
             return trabajadorService.listarTrabajadores();
         }catch(Exception ex){
             throw new WebServiceException("Error al listar trabajadores "+ex.getMessage());
+        }
+    }
+        @WebMethod(operationName = "registrarTrabajador")
+    public void registrarTrabajador(@WebParam(name = "trabajador") Trabajador trabajador) {
+        try {
+            trabajadorService.registrarTrabajador(trabajador);
+           // return "Trabajador registrado exitosamente";
+        } catch (Exception ex) {
+            throw new WebServiceException("Error al registrar trabajador: " + ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "actualizarTrabajador")
+    public void actualizarTrabajador(@WebParam(name = "trabajador") Trabajador trabajador) {
+        try {
+            trabajadorService.actualizarTrabajador(trabajador);
+            //return "Trabajador actualizado exitosamente";
+        } catch (Exception ex) {
+            throw new WebServiceException("Error al actualizar trabajador: " + ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "eliminarTrabajador")
+    public String eliminarTrabajador(@WebParam(name = "idTrabajador") int idTrabajador) {
+        try {
+            trabajadorService.eliminarTrabajador(idTrabajador);
+            return "Trabajador eliminado exitosamente";
+        } catch (Exception ex) {
+            throw new WebServiceException("Error al eliminar trabajador: " + ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "obtenerTrabajador")
+    public Trabajador obtenerTrabajador(@WebParam(name = "idTrabajador") int idTrabajador) {
+        try {
+            return trabajadorService.obtenerTrabajador(idTrabajador);
+        } catch (Exception ex) {
+            throw new WebServiceException("Error al obtener trabajador: " + ex.getMessage());
         }
     }
 }

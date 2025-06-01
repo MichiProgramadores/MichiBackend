@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/WebServices/WebService.java to edit this template
- */
 package com.michisistemaws;
 
 import com.MichiSistema.dominio.Producto;
@@ -17,7 +13,7 @@ import java.util.List;
  *
  * @author OsquiCnapi
  */
-@WebService(serviceName = "ProductoWS")
+@WebService(serviceName = "ProductoWS", targetNamespace = "com.MichiSistema")
 public class ProductoWS {
 
     private ProductoService productoService;
@@ -34,4 +30,38 @@ public class ProductoWS {
             throw new WebServiceException("Error al listar productos "+ex.getMessage());
         }
     }
+    @WebMethod(operationName = "registrarProducto")
+    public void registrarProducto(@WebParam(name = "producto") Producto producto) {
+        try{
+            productoService.registrarProducto(producto);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al registrar productos "+ex.getMessage());
+        }
+    }
+    @WebMethod(operationName = "obtenerProducto")
+    public Producto obtenerProducto(@WebParam(name = "idProducto") int idProducto) {
+        try{
+            return productoService.obtenerProducto(idProducto);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al obtener producto "+ex.getMessage());
+        }
+    }
+    @WebMethod(operationName = "eliminarProducto")
+    public void eliminarProducto(@WebParam(name = "idProducto") int idProducto) {
+        try{
+            productoService.obtenerProducto(idProducto);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al obtener producto "+ex.getMessage());
+        }
+    }
+    @WebMethod(operationName = "actualizarProducto")
+    public void actualizarProducto(@WebParam(name = "producto") Producto producto) {
+        try{
+            productoService.actualizarProducto(producto);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al actualizar producto "+ex.getMessage());
+        }
+    }
+    
+    
 }
