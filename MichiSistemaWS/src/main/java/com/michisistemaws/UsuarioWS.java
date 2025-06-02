@@ -28,30 +28,29 @@ public class UsuarioWS {
         }
     }
      @WebMethod(operationName = "registrarUsuario")
-    public String registrarUsuario(@WebParam(name = "usuario") Usuario usuario) {
+    public void registrarUsuario(@WebParam(name = "usuario") Usuario usuario) {
         try {
             usuarioService.registrarUsuario(usuario);
-            return "Usuario registrado exitosamente";
+            //return "Usuario registrado exitosamente";
         } catch (Exception ex) {
             throw new WebServiceException("Error al registrar usuario: " + ex.getMessage());
         }
     }
     
     @WebMethod(operationName = "actualizarUsuario")
-    public String actualizarUsuario(@WebParam(name = "usuario") Usuario usuario) {
+    public void actualizarUsuario(@WebParam(name = "usuario") Usuario usuario) {
         try {
             usuarioService.actualizarUsuario(usuario);
-            return "Usuario actualizado exitosamente";
+            //return "Usuario actualizado exitosamente";
         } catch (Exception ex) {
             throw new WebServiceException("Error al actualizar usuario: " + ex.getMessage());
         }
     }
     
     @WebMethod(operationName = "eliminarUsuario")
-    public String eliminarUsuario(@WebParam(name = "idUsuario") int idUsuario) {
+    public void eliminarUsuario(@WebParam(name = "idUsuario") int idUsuario) {
         try {
             usuarioService.eliminarUsuario(idUsuario);
-            return "Usuario eliminado exitosamente";
         } catch (Exception ex) {
             throw new WebServiceException("Error al eliminar usuario: " + ex.getMessage());
         }

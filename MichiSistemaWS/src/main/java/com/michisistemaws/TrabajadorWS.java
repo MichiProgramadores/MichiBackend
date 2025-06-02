@@ -48,10 +48,9 @@ public class TrabajadorWS {
     }
     
     @WebMethod(operationName = "eliminarTrabajador")
-    public String eliminarTrabajador(@WebParam(name = "idTrabajador") int idTrabajador) {
+    public void eliminarTrabajador(@WebParam(name = "idTrabajador") int idTrabajador) {
         try {
             trabajadorService.eliminarTrabajador(idTrabajador);
-            return "Trabajador eliminado exitosamente";
         } catch (Exception ex) {
             throw new WebServiceException("Error al eliminar trabajador: " + ex.getMessage());
         }
