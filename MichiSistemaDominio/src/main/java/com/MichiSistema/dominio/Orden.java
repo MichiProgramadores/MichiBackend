@@ -9,6 +9,7 @@ import java.time.LocalDate; // Para manejar la fecha (dia/mes/anio)
 import java.util.ArrayList;
 import com.MichiSistema.Enum.TipoEstadoDevolucion;
 import com.MichiSistema.Enum.TipoFechaDevolucion;
+import java.sql.Date;
 
 public class Orden {
     private int idOrden;
@@ -18,7 +19,7 @@ public class Orden {
     private double totalPagar;
     private double saldo;
     private int cantDias;
-    private LocalDate fecha_devolucion;
+    private Date fecha_devolucion;
     private LocalDate fecha_entrega;
     private LocalDate fecha_emisión;
     private ArrayList<DetalleOrden> listaOrdenes;
@@ -35,7 +36,7 @@ public class Orden {
     }
 
     public Orden(TipoRecepcion tipoRecepcion, String setUpPersonalizado, double totalPagar,
-                 double saldo, int cantDias, LocalDate fecha_devolucion, LocalDate fecha_emisión,
+                 double saldo, int cantDias, Date fecha_devolucion, LocalDate fecha_emisión,
                  int clienteID, int trabajadorID) {
         this.tipoRecepcion = tipoRecepcion;
         this.fecha_registro = LocalDateTime.now();
@@ -78,8 +79,8 @@ public class Orden {
     public void setCantDias(int cantDias) { this.cantDias = cantDias; }
     public int getIdOrden() { return idOrden; }
     public void setIdOrden(int idOrden) { this.idOrden = idOrden; }
-    public LocalDate getFecha_devolucion() { return fecha_devolucion; }
-    public void setFecha_devolucion(LocalDate fecha_devolucion) { this.fecha_devolucion = fecha_devolucion; }
+    public Date getFecha_devolucion() { return fecha_devolucion; }
+    public void setFecha_devolucion(Date fecha_devolucion) { this.fecha_devolucion = fecha_devolucion; }
     public ArrayList<DetalleOrden> getListaOrdenes() { return listaOrdenes; }
     public void setListaOrdenes(ArrayList<DetalleOrden> listaOrdenes) { this.listaOrdenes = listaOrdenes; }
     public TipoEstadoDevolucion getTipoEstadoDevolucion() { return tipoEstadoDevolucion; }

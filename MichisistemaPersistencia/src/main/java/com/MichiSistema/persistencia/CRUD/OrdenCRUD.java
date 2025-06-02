@@ -22,7 +22,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         ps.setDouble(4, orden.getTotalPagar());  // Monto total a pagar
         ps.setDouble(5, orden.getSaldo());  // Saldo pendiente
         ps.setInt(6, orden.getCantDias());  
-        ps.setDate(7, Date.valueOf(orden.getFecha_devolucion())); 
+        ps.setDate(7, orden.getFecha_devolucion()); 
         ps.setDate(8, Date.valueOf(orden.getFecha_entrega())); 
         ps.setDate(9, Date.valueOf(orden.getFecha_emisión()));  
         ps.setInt(10, orden.getClienteID());  
@@ -42,7 +42,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         ps.setDouble(4, orden.getTotalPagar());
         ps.setDouble(5, orden.getSaldo());
         ps.setInt(6, orden.getCantDias());
-        ps.setDate(7, Date.valueOf(orden.getFecha_devolucion())); // Convertir LocalDate a Date
+        ps.setDate(7, orden.getFecha_devolucion()); // Convertir LocalDate a Date
         ps.setDate(8, Date.valueOf(orden.getFecha_entrega()));    // Convertir LocalDate a Date
         ps.setDate(9, Date.valueOf(orden.getFecha_emisión()));    // Convertir LocalDate a Date
         ps.setInt(10, orden.getIdOrden());
@@ -87,7 +87,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         // Validación para fecha_devolucion
         java.sql.Date fechaDevolucion = rs.getDate("fecha_devolucion");
         if (fechaDevolucion != null) {
-            orden.setFecha_devolucion(fechaDevolucion.toLocalDate());
+            orden.setFecha_devolucion(fechaDevolucion);
         } else {
             orden.setFecha_devolucion(null);  // O asignar otra cosa según tu lógica
         }
