@@ -50,12 +50,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         return ps;
     }
     
-    protected PreparedStatement getDeleteDetallesPS(Connection conn, Integer ordenId) throws SQLException {
-        String query = "DELETE FROM DetalleOrden WHERE orden_id = ? and producto_id >0";
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setInt(1, ordenId);
-        return ps;
-    }
+
 
     @Override
     protected PreparedStatement getDeletePS(Connection conn, Integer id) throws SQLException {
@@ -131,10 +126,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             conn.setAutoCommit(false);
             try {
                 
-//                try (PreparedStatement ps = getDeleteDetallesPS(conn, idOrden)) {
-//                    ps.executeUpdate();
-//
-//                }
+
                 try(PreparedStatement ps2 = getDeletePS(conn, idOrden)){
                     ps2.executeUpdate();
                 }              
