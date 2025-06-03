@@ -98,9 +98,10 @@ public class OrdenServiceImpl  implements OrdenService{
 //        if (orden.getEstado() == TipoFechaDevolucion.) {
 //            throw new Exception("No se puede eliminar una venta completada");
 //        }
-        // Cambiar el estado a Cancelada en lugar de eliminarla físicamente
-//        ordenDAO.actualizarEstado(idOrden, Orden.EstadoOrden.Cancelada); //Como se elimina?
+         //Cambiar el estado a Cancelada en lugar de eliminarla físicamente
+//        ordenDAO.actualizarEstado(idOrden, Orden.); 
         
+        ordenDAO.eliminar(idOrden);
     }
     
     @Override

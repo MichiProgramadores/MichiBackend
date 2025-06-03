@@ -89,6 +89,6 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
     protected void setId(Producto producto, Integer id) {
         producto.setProducto_id(id);
     }
-    
+
 }
 

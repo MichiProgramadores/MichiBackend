@@ -8,5 +8,4 @@ import com.MichiSistema.dominio.Producto;
  * @author rober
  */
 public interface ProductoDAO extends BaseDAO<Producto>{
-   
 }

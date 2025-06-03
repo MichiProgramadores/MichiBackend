@@ -49,6 +49,13 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             
         return ps;
     }
+    
+    protected PreparedStatement getDeleteDetallesPS(Connection conn, Integer ordenId) throws SQLException {
+        String query = "DELETE FROM DetalleOrden WHERE orden_id = ? and producto_id >0";
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, ordenId);
+        return ps;
+    }
 
     @Override
     protected PreparedStatement getDeletePS(Connection conn, Integer id) throws SQLException {
@@ -119,6 +126,47 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
     }
     
     @Override
+    public void eliminar(int idOrden) {
+        try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+            conn.setAutoCommit(false);
+            try {
+                
+//                try (PreparedStatement ps = getDeleteDetallesPS(conn, idOrden)) {
+//                    ps.executeUpdate();
+//
+//                }
+                try(PreparedStatement ps2 = getDeletePS(conn, idOrden)){
+                    ps2.executeUpdate();
+                }              
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al eliminar Orden", e);
+        }
+    }
+    
+    private void registrarDetalles(Connection conn, Orden orden) throws SQLException {
+        String sp = "{CALL sp_registrar_detalle_orden(?, ?, ?, ?,?,?)}";
+        try (CallableStatement cs = conn.prepareCall(sp)) {
+            for (DetalleOrden detalle : orden.getListaOrdenes()) {
+                cs.setInt(1, orden.getIdOrden());
+                cs.setInt(2, detalle.getProducto());//get producto trae el id del producto
+                cs.setInt(3, detalle.getCantidadSolicitada());
+                cs.setInt(4, detalle.getCantidadEntregada());
+                cs.setDouble(5, detalle.getPrecioAsignado());
+                cs.setString(6, detalle.getUnidadMedida().name());
+                //cs.setDouble(7, detalle.getSubtotal());
+                cs.execute();
+            }
+        }
+    }
+
+    @Override
     public void insertar(Orden orden) {
         try (Connection conn = DBManager.getInstance().obtenerConexion()) {
             conn.setAutoCommit(false);
@@ -142,22 +190,6 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al registrar Orden", e);
-        }
-    }
-    
-    private void registrarDetalles(Connection conn, Orden orden) throws SQLException {
-        String sp = "{CALL sp_registrar_detalle_orden(?, ?, ?, ?,?,?)}";
-        try (CallableStatement cs = conn.prepareCall(sp)) {
-            for (DetalleOrden detalle : orden.getListaOrdenes()) {
-                cs.setInt(1, orden.getIdOrden());
-                cs.setInt(2, detalle.getProducto());//get producto trae el id del producto
-                cs.setInt(3, detalle.getCantidadSolicitada());
-                cs.setInt(4, detalle.getCantidadEntregada());
-                cs.setDouble(5, detalle.getPrecioAsignado());
-                cs.setString(6, detalle.getUnidadMedida().name());
-                //cs.setDouble(7, detalle.getSubtotal());
-                cs.execute();
-            }
         }
     }
     
