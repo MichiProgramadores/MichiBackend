@@ -47,7 +47,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         ps.setDate(8, new Date(orden.getFecha_entrega().getTime()));
         ps.setDate(9, new Date(orden.getFecha_emisión().getTime()));   // Convertir LocalDate a Date
         ps.setInt(10, orden.getIdOrden());
-          
+            
         return ps;
     }
     

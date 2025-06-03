@@ -36,13 +36,13 @@ public class Orden {
                  double saldo, int cantDias, Date fecha_devolucion, Date fecha_emisión,
                  int clienteID, int trabajadorID) {
         this.tipoRecepcion = tipoRecepcion;
-        //this.fecha_registro = ;
+        this.fecha_registro = new Date();
         this.setUpPersonalizado = setUpPersonalizado;
         this.totalPagar = totalPagar; 
         this.saldo = saldo;
         this.cantDias = cantDias;
         this.fecha_devolucion = fecha_devolucion;
-        //this.fecha_entrega =;
+        this.fecha_entrega = new Date();
         this.fecha_emisión = fecha_emisión;
         this.listaOrdenes = new ArrayList<>();
         this.clienteID = clienteID;

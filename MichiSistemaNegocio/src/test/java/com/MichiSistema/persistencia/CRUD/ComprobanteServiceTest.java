@@ -85,14 +85,14 @@ public class ComprobanteServiceTest {
     private Orden crearOrdenPrueba(int id) throws Exception {   
     Orden orden = new Orden();
     orden.setTipoRecepcion(TipoRecepcion.RECOJO_EN_TIENDA); // Usa uno de tus enums
-    orden.setFecha_registro(Date.from(Instant.MIN));
+    orden.setFecha_registro(new java.util.Date());
     orden.setSetUpPersonalizado("Sin configuración especial");
     orden.setTotalPagar(100.0);  
     orden.setSaldo(0.0);
     orden.setCantDias(1);
     orden.setFecha_devolucion(Date.valueOf(LocalDate.now().plusDays(1)));
-    orden.setFecha_entrega(Date.from(Instant.MIN));
-    orden.setFecha_emisión(Date.from(Instant.MIN));
+    orden.setFecha_entrega(new java.util.Date());
+    orden.setFecha_emisión(new java.util.Date());
     orden.setClienteID(id);  // Cliente válido
     // Si no se tiene un trabajador creado, debes poner uno válido o crearlo antes
     orden.setTrabajadorID(13);  
