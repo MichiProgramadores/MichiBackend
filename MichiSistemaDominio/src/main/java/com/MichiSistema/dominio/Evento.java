@@ -34,8 +34,8 @@ public class Evento {
     }
     // Constructor sin parámetros (con valores predeterminados)
     public Evento() {
-        this.fechaInicio = Date.from(Instant.MIN); // Fecha de inicio predeterminada es la fecha actual
-        this.fechaFin = Date.from(Instant.MIN); // Fecha de fin predeterminada es la fecha actual
+        this.fechaInicio = new Date(); // Fecha de inicio predeterminada es la fecha actual
+        this.fechaFin = new Date(); // Fecha de fin predeterminada es la fecha actual
         this.horaInicio = LocalTime.MIDNIGHT; // Hora de inicio predeterminada es la medianoche
         this.horaFin = LocalTime.MIDNIGHT; // Hora de fin predeterminada es la medianoche
         this.direccion = ""; // Dirección predeterminada vacía

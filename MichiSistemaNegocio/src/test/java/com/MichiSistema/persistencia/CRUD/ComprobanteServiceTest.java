@@ -22,11 +22,13 @@ import com.MichiSistema.negocio.ClienteService;
 import com.MichiSistema.negocio.ComprobanteService;
 import com.MichiSistema.negocio.OrdenService;
 import com.MichiSistema.negocio.ProductoService;
+import com.MichiSistema.negocio.TrabajadorService;
 import com.MichiSistema.negocio.UsuarioService;
 import com.MichiSistema.negocio.impl.ClienteServiceImpl;
 import com.MichiSistema.negocio.impl.ComprobanteServiceImpl;
 import com.MichiSistema.negocio.impl.OrdenServiceImpl;
 import com.MichiSistema.negocio.impl.ProductoServiceImpl;
+import com.MichiSistema.negocio.impl.TrabajadorServiceImpl;
 import com.MichiSistema.negocio.impl.UsuarioServiceImpl;
 import com.MichiSistema.persistencia.dao.OrdenDAO;
 import java.sql.Date;
@@ -52,6 +54,7 @@ public class ComprobanteServiceTest {
     private ClienteService clienteService;
     private Producto producto;
     private Trabajador trabajador;
+    private TrabajadorService trabajadorService;
     private OrdenService ordenService;
     private Cliente cliente;
     private Orden orden;
@@ -62,6 +65,7 @@ public class ComprobanteServiceTest {
         comprobanteService = new ComprobanteServiceImpl();
         clienteService = new ClienteServiceImpl();
        // usuarioService = new UsuarioServiceImpl();
+       trabajadorService= new TrabajadorServiceImpl();
         productoService = new ProductoServiceImpl();
         ordenService =  new OrdenServiceImpl();   
     }
@@ -82,9 +86,9 @@ public class ComprobanteServiceTest {
         return cliente;
     }
 
-    private Orden crearOrdenPrueba(int id) throws Exception {   
+    private Orden crearOrdenPrueba(int id, int idCliente) throws Exception {   
     Orden orden = new Orden();
-    orden.setTipoRecepcion(TipoRecepcion.RECOJO_EN_TIENDA); // Usa uno de tus enums
+    orden.setTipoRecepcion(TipoRecepcion.RECOJO_EN_TIENDA); 
     orden.setFecha_registro(new java.util.Date());
     orden.setSetUpPersonalizado("Sin configuración especial");
     orden.setTotalPagar(100.0);  
@@ -93,17 +97,24 @@ public class ComprobanteServiceTest {
     orden.setFecha_devolucion(Date.valueOf(LocalDate.now().plusDays(1)));
     orden.setFecha_entrega(new java.util.Date());
     orden.setFecha_emisión(new java.util.Date());
-    orden.setClienteID(id);  // Cliente válido
+    orden.setClienteID(idCliente);  // Cliente válido
     // Si no se tiene un trabajador creado, debes poner uno válido o crearlo antes
-    orden.setTrabajadorID(13);  
+    orden.setTrabajadorID(id);  
     ordenService.registrarOrden(orden);
     return orden;
     }
-    
+    private Trabajador crearTrabajadorPrueba() throws Exception {
+        // Crear un trabajador de prueba
+        Trabajador trabajador= new Trabajador("Carlos", "Sanchez", 987654321, "carlos.sanchez@example.com", TipoTrabajador.DESPACHADOR);
+        trabajadorService.registrarTrabajador(trabajador);
+        return trabajador;
+        
+    }
     private Comprobante crearComprobantePrueba() throws Exception {
         Cliente cliente = crearClientePrueba();
         Producto producto=crearProductoPrueba();
-        Orden orden=crearOrdenPrueba(cliente.getPersona_id());
+        Trabajador trabajador=crearTrabajadorPrueba();
+        Orden orden=crearOrdenPrueba(trabajador.getPersona_id(),cliente.getPersona_id() );
         Comprobante comprobante = new Comprobante();
         comprobante.setCliente_id(cliente.getPersona_id());
        // comprobante.setUsuario(usuario);
@@ -111,10 +122,8 @@ public class ComprobanteServiceTest {
         DetalleComprobante detalle = new DetalleComprobante();
         detalle.setProducto_id(producto.getProducto_id());
         detalle.setCantidad(2);
-        detalle.setSubtotal(producto.getPrecio()*detalle.getCantidad());
-        
-        comprobante.getDetalles().add(detalle);
-        
+        detalle.setSubtotal(producto.getPrecio()*detalle.getCantidad());       
+        comprobante.getDetalles().add(detalle);      
         comprobante.setMonto_total(detalle.getSubtotal());//¿con Sales Tax o no?
         //comprobante.setTax(0.08* comprobante.getMonto_total());
         return comprobante;

@@ -1,14 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.346 s <<< FAILURE! -- in com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest
-com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest.testRegistrarComprobante -- Time elapsed: 6.296 s <<< ERROR!
-java.lang.Exception: El empleado no existe
-	at com.MichiSistema.negocio.impl.OrdenServiceImpl.registrarOrden(OrdenServiceImpl.java:52)
-	at com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest.crearOrdenPrueba(ComprobanteServiceTest.java:99)
-	at com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest.crearComprobantePrueba(ComprobanteServiceTest.java:106)
-	at com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest.testRegistrarComprobante(ComprobanteServiceTest.java:125)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 25.38 s -- in com.MichiSistema.persistencia.CRUD.ComprobanteServiceTest

@@ -190,7 +190,6 @@ public class OrdenServiceTest {
         ordenService.registrarOrden(orden);
         ordenId = orden.getIdOrden();
 
-        // Simplemente ejecutamos eliminar (en tu caso no hace nada, pero se prueba que no falle)
         ordenService.eliminarOrden(ordenId);     
         assertNotNull(orden);
     }

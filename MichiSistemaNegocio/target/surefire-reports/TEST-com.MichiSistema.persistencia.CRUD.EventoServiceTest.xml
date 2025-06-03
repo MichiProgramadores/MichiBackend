@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.MichiSistema.persistencia.CRUD.EventoServiceTest" time="0.107" tests="1" errors="1" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.MichiSistema.persistencia.CRUD.EventoServiceTest" time="10.501" tests="4" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,9 +15,8 @@
     <property name="user.country" value="PE"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\hp\AppData\Local\Temp\surefire5835762924696879975\surefirebooter-20250603114431186_3.jar C:\Users\hp\AppData\Local\Temp\surefire5835762924696879975 2025-06-03T11-44-30_950-jvmRun1 surefire-20250603114431186_1tmp surefire_0-20250603114431186_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\hp\AppData\Local\Temp\surefire3051746932629847154\surefirebooter-20250603150007449_3.jar C:\Users\hp\AppData\Local\Temp\surefire3051746932629847154 2025-06-03T15-00-07_149-jvmRun1 surefire-20250603150007449_1tmp surefire_0-20250603150007449_2tmp"/>
     <property name="jdk.debug" value="release"/>
-    <property name="test" value="com.MichiSistema.persistencia.CRUD.EventoServiceTest#registrarEvento"/>
     <property name="surefire.test.class.path" value="D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaNegocio\target\test-classes;D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaNegocio\target\classes;C:\Users\hp\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\hp\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\hp\.m2\repository\com\MichiSistema\MichiSistemaDominio\0\MichiSistemaDominio-0.jar;C:\Users\hp\.m2\repository\com\MichiSistema\MichisistemaPersistencia\0\MichisistemaPersistencia-0.jar;C:\Users\hp\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.3\junit-jupiter-api-5.10.3.jar;C:\Users\hp\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\hp\.m2\repository\org\junit\platform\junit-platform-commons\1.10.3\junit-platform-commons-1.10.3.jar;C:\Users\hp\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\hp\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.3\junit-jupiter-params-5.10.3.jar;C:\Users\hp\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.3\junit-jupiter-engine-5.10.3.jar;C:\Users\hp\.m2\repository\org\junit\platform\junit-platform-engine\1.10.3\junit-platform-engine-1.10.3.jar;C:\Users\hp\.m2\repository\com\zaxxer\HikariCP\6.3.0\HikariCP-6.3.0.jar;C:\Users\hp\.m2\repository\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\hp"/>
@@ -31,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\hp\AppData\Local\Temp\surefire5835762924696879975\surefirebooter-20250603114431186_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\hp\AppData\Local\Temp\surefire3051746932629847154\surefirebooter-20250603150007449_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.5+9-LTS-239"/>
@@ -60,20 +59,11 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="registrarEvento" classname="com.MichiSistema.persistencia.CRUD.EventoServiceTest" time="0.041">
-    <error message="java.lang.ArithmeticException: long overflow" type="java.lang.IllegalArgumentException"><![CDATA[java.lang.IllegalArgumentException: java.lang.ArithmeticException: long overflow
-	at java.base/java.util.Date.from(Date.java:1363)
-	at com.MichiSistema.persistencia.CRUD.EventoServiceTest.crearEventoPrueba(EventoServiceTest.java:38)
-	at com.MichiSistema.persistencia.CRUD.EventoServiceTest.registrarEvento(EventoServiceTest.java:46)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
-Caused by: java.lang.ArithmeticException: long overflow
-	at java.base/java.lang.Math.multiplyExact(Math.java:1032)
-	at java.base/java.lang.Math.multiplyExact(Math.java:1008)
-	at java.base/java.time.Instant.toEpochMilli(Instant.java:1262)
-	at java.base/java.util.Date.from(Date.java:1361)
-	... 5 more
-]]></error>
+  <testcase name="actualizarEvento" classname="com.MichiSistema.persistencia.CRUD.EventoServiceTest" time="3.787"/>
+  <testcase name="eliminarEvento" classname="com.MichiSistema.persistencia.CRUD.EventoServiceTest" time="3.024"/>
+  <testcase name="obtenerEvento" classname="com.MichiSistema.persistencia.CRUD.EventoServiceTest" time="1.824"/>
+  <testcase name="registrarEvento" classname="com.MichiSistema.persistencia.CRUD.EventoServiceTest" time="1.857">
+    <system-out><![CDATA[Evento insertado:16  Tue Jun 03 15:01:00 PET 2025  Tue Jun 03 15:01:00 PET 2025  null
+]]></system-out>
   </testcase>
 </testsuite>
