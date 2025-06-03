@@ -11,5 +11,5 @@ package com.MichiSistema.Enum;
  */
 
 public enum UnidadMedida{
-    PULGADA, PIE, YARDA, ONZA, LIBRA,TONELADA_CORTA
+    PULGADA, PIE, YARDA, ONZA, LIBRA
 }

@@ -52,8 +52,10 @@ public class ClienteWS {
     }
     
     @WebMethod(operationName = "actualizarCliente")
-    public void actualizarCliente(@WebParam(name = "cliente") Cliente cliente) {
+    public void actualizarCliente(@WebParam(name = "cliente") Cliente cliente,
+            @WebParam(name = "str_tipoCliente") String str_tipoCliente) {
         try{
+            cliente.setTipoCliente(TipoCliente.valueOf(str_tipoCliente));
             clienteService.actualizarCliente(cliente);
         }catch(Exception ex){
             throw new WebServiceException("Error al actualizar cliente "+ex.getMessage());

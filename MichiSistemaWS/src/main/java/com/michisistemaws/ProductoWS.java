@@ -1,5 +1,7 @@
 package com.michisistemaws;
 
+import com.MichiSistema.Enum.TipoProducto;
+import com.MichiSistema.Enum.UnidadMedida;
 import com.MichiSistema.dominio.Producto;
 import com.MichiSistema.negocio.ProductoService;
 import com.MichiSistema.negocio.impl.ProductoServiceImpl;
@@ -31,8 +33,12 @@ public class ProductoWS {
         }
     }
     @WebMethod(operationName = "registrarProducto")
-    public void registrarProducto(@WebParam(name = "producto") Producto producto) {
+    public void registrarProducto(@WebParam(name = "producto") Producto producto,
+            @WebParam(name = "str_tipoProducto") String str_tipoProducto,
+            @WebParam(name = "str_unidadMedida") String str_unidadMedida) {
         try{
+            producto.setCategoriaProducto(TipoProducto.valueOf(str_tipoProducto));
+            producto.setUnidadMedida(UnidadMedida.valueOf(str_unidadMedida));
             productoService.registrarProducto(producto);
         }catch(Exception ex){
             throw new WebServiceException("Error al registrar productos "+ex.getMessage());
