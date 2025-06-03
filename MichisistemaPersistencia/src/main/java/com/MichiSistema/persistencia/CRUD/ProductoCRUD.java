@@ -48,7 +48,7 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
     
     @Override
     protected PreparedStatement getDeletePS(Connection conn, Integer id) throws SQLException {
-        String query = "DELETE FROM Producto WHERE producto_id=?";
+        String query = "UPDATE Producto SET estado=0 WHERE producto_id=?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setInt(1, id);
         return ps;
@@ -76,13 +76,9 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
         producto.setPrecio(rs.getDouble("precio"));
         producto.setEdad_minima(rs.getInt("edad_minima"));
         producto.setStockActual(rs.getInt("stock_actual"));
-        producto.setStockMinimo(rs.getInt("stock_minimo"));   
-        if(rs.getString("estado").compareTo("A")==0){
-            producto.setEstado(true); 
-        }
-        else{
-            producto.setEstado(false);
-        }
+        producto.setStockMinimo(rs.getInt("stock_minimo"));
+        producto.setEstado(rs.getBoolean("estado"));
+
         producto.setCategoriaProducto(TipoProducto.valueOf(rs.getString("tipo_producto")));  // Convertir String a Enum
         producto.setVolumen(rs.getDouble("volumen"));
         producto.setDescripcion(rs.getString("descripcion"));

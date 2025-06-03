@@ -71,9 +71,9 @@ public class ProductoServiceImpl implements ProductoService {
             throw new Exception("El producto no existe");
         }     
          //En lugar de eliminar físicamente, cambiamos el estado a Inactivo
-        producto.setEstado(false);
-        productoDAO.actualizar(producto);
-        
+//        producto.setEstado(false);
+//        productoDAO.actualizar(producto);
+        productoDAO.eliminar(idProducto);
     }
     
     @Override

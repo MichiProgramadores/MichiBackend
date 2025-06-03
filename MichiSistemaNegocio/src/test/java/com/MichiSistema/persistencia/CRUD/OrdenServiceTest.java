@@ -120,7 +120,7 @@ public class OrdenServiceTest {
             cliente.getPersona_id(),
             trabajador.getPersona_id()
     );
-    orden.setEstado(estado);   // ✅ usas el que creaste
+    orden.setEstado(estado);   // 
 //    orden.aplicarDescuentoPorEstado();
     orden.getListaOrdenes().add(detalle);
     
