@@ -16,7 +16,7 @@ public class Producto {
     private double volumen;
     private String descripcion;
     private UnidadMedida unidadMedida;
-    private char estado;
+    private boolean estado;
      // Constructor con parámetros
 
     public Producto(String nombre, double precio, int edad_minima,
@@ -27,7 +27,7 @@ public class Producto {
         this.edad_minima = edad_minima;
         this.stockActual = stockActual;
         this.stockMinimo = stockMinimo;
-        this.estado = 'A';
+        this.estado = true;
         this.categoriaProducto = categoriaProducto;
         this.volumen = volumen;
         this.descripcion = descripcion;
@@ -42,7 +42,7 @@ public class Producto {
         this.edad_minima = 0;             // Valor predeterminado para edad mínima
         this.stockActual = 0;                   // Valor predeterminado para stock
         this.stockMinimo = 0; 
-        this.estado = 'A';                // Valor predeterminado para estado ('A' para activo)
+        this.estado = true;                // Valor predeterminado para estado ('A' para activo)
         this.categoriaProducto = null; // Valor predeterminado para categoría (suponiendo que 'GENERAL' es un valor del enum TipoProducto)
         this.volumen = 0.0;               // Valor predeterminado para volumen
         this.descripcion =""; // Lista vacía de materiales
@@ -109,14 +109,14 @@ public class Producto {
     /**
      * @return the estado
      */
-    public char getEstado() {
+    public boolean getEstado() {
         return estado;
     }
 
     /**
      * @param estado the estado to set
      */
-    public void setEstado(char estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
 

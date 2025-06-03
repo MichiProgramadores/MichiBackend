@@ -20,7 +20,7 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
         ps.setInt(4, producto.getEdad_minima());
         ps.setInt(5, producto.getStockActual());
         ps.setInt(6, producto.getStockMinimo());
-        ps.setString(7, String.valueOf(producto.getEstado()));  
+        ps.setString(7, "1");  
         ps.setString(8, producto.getCategoriaProducto().name());  
         ps.setDouble(9, producto.getVolumen());
         ps.setString(10, producto.getDescripcion());
@@ -30,19 +30,19 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
 
     @Override
     protected PreparedStatement getUpdatePS(Connection conn, Producto producto) throws SQLException {
-        String query = "UPDATE Producto SET nombre=?, precio=?, edad_minima=?, stock_actual=?,stock_minimo=?,estado=?, tipo_producto=?, volumen=?, descripcion=?, unidad_medida=? WHERE producto_id=?";
+        String query = "UPDATE Producto SET nombre=?, precio=?, edad_minima=?, stock_actual=?,stock_minimo=?, tipo_producto=?, volumen=?, descripcion=?, unidad_medida=? WHERE producto_id=?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, producto.getNombre());
         ps.setDouble(2, producto.getPrecio());
         ps.setInt(3, producto.getEdad_minima());
         ps.setInt(4, producto.getStockActual());
         ps.setInt(5, producto.getStockMinimo());
-        ps.setString(6, String.valueOf(producto.getEstado()));  
-        ps.setString(7, producto.getCategoriaProducto().name());  
-        ps.setDouble(8, producto.getVolumen());
-        ps.setString(9, producto.getDescripcion());
-        ps.setString(10, producto.getUnidadMedida().name()); 
-        ps.setInt(11, producto.getProducto_id());
+       // ps.setString(6, String.valueOf(producto.getEstado()));  
+        ps.setString(6, producto.getCategoriaProducto().name());  
+        ps.setDouble(7, producto.getVolumen());
+        ps.setString(8, producto.getDescripcion());
+        ps.setString(9, producto.getUnidadMedida().name()); 
+        ps.setInt(10, producto.getProducto_id());
         return ps;
     }
     
@@ -76,8 +76,13 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
         producto.setPrecio(rs.getDouble("precio"));
         producto.setEdad_minima(rs.getInt("edad_minima"));
         producto.setStockActual(rs.getInt("stock_actual"));
-        producto.setStockMinimo(rs.getInt("stock_minimo"));
-        producto.setEstado(rs.getString("estado").charAt(0));  
+        producto.setStockMinimo(rs.getInt("stock_minimo"));   
+        if(rs.getString("estado").compareTo("A")==0){
+            producto.setEstado(true); 
+        }
+        else{
+            producto.setEstado(false);
+        }
         producto.setCategoriaProducto(TipoProducto.valueOf(rs.getString("tipo_producto")));  // Convertir String a Enum
         producto.setVolumen(rs.getDouble("volumen"));
         producto.setDescripcion(rs.getString("descripcion"));
