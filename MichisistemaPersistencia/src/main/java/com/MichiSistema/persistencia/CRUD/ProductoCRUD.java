@@ -45,7 +45,7 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
         ps.setInt(11, producto.getProducto_id());
         return ps;
     }
-
+    
     @Override
     protected PreparedStatement getDeletePS(Connection conn, Integer id) throws SQLException {
         String query = "DELETE FROM Producto WHERE producto_id=?";
@@ -67,7 +67,7 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
         String query = "SELECT * FROM Producto";
         return conn.prepareStatement(query);
     }
-
+    
     @Override
     protected Producto createFromResultSet(ResultSet rs) throws SQLException {
         Producto producto = new Producto();
