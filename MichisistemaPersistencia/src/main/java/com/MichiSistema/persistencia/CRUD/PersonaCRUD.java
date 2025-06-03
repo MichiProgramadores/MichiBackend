@@ -20,6 +20,7 @@ public class PersonaCRUD extends BaseCRUD<Persona> implements PersonaDAO {
         persona.setApellidos(rs.getString("apellidos"));
         persona.setCelular(rs.getInt("celular"));
         persona.setEmail(rs.getString("email"));
+        persona.setEstado(rs.getBoolean("estado"));
         return persona;
     }
 
@@ -59,7 +60,7 @@ public class PersonaCRUD extends BaseCRUD<Persona> implements PersonaDAO {
     @Override
     protected PreparedStatement getSelectByIdPS(Connection conn, Integer id) throws SQLException {
        PreparedStatement ps = conn.prepareStatement("SELECT persona_id, nombres, apellidos, celular,"
-               + " email FROM Persona WHERE persona_id=?");
+               + " email, estado FROM Persona WHERE persona_id=?");
        ps.setInt(1, id); 
        return ps;
     }
@@ -67,7 +68,7 @@ public class PersonaCRUD extends BaseCRUD<Persona> implements PersonaDAO {
     @Override
     protected PreparedStatement getSelectAllPS(Connection conn) throws SQLException {
         PreparedStatement ps = conn.prepareStatement("SELECT persona_id, nombres, apellidos,"
-                + " celular, email FROM Persona");
+                + " celular, email, estado FROM Persona");
         return ps; 
     }
 

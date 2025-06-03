@@ -54,7 +54,7 @@ public class ClienteCRUD extends BaseCRUD<Cliente> implements ClienteDAO {
     @Override
     protected PreparedStatement getSelectByIdPS(Connection conn, Integer id) throws SQLException {
         PreparedStatement ps = conn.prepareStatement(
-            "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, "
+            "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, p.estado, "
             + "c.tipoCliente, c.puntuacion, c.numeroTipoCliente "
             + "FROM Persona p "
             + "JOIN Cliente c ON p.persona_id = c.persona_id "
@@ -67,7 +67,7 @@ public class ClienteCRUD extends BaseCRUD<Cliente> implements ClienteDAO {
     @Override
     protected PreparedStatement getSelectAllPS(Connection conn) throws SQLException {
         PreparedStatement ps = conn.prepareStatement(
-            "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, "
+            "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, p.estado, "
             + "c.tipoCliente, c.puntuacion, c.numeroTipoCliente "
             + "FROM Persona p "
             + "JOIN Cliente c ON p.persona_id = c.persona_id"
@@ -91,6 +91,7 @@ public class ClienteCRUD extends BaseCRUD<Cliente> implements ClienteDAO {
         cliente.setTipoCliente(TipoCliente.valueOf(rs.getString("tipoCliente")));  // Convertir String a Enum
         cliente.setPuntuacion(rs.getInt("puntuacion"));
         cliente.setNumeroTipoCliente(rs.getString("numeroTipoCliente"));
+        cliente.setEstado(rs.getBoolean("estado"));
         return cliente;
     }
 

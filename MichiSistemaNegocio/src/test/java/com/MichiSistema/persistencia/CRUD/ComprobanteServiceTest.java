@@ -29,6 +29,7 @@ import com.MichiSistema.negocio.impl.OrdenServiceImpl;
 import com.MichiSistema.negocio.impl.ProductoServiceImpl;
 import com.MichiSistema.negocio.impl.UsuarioServiceImpl;
 import com.MichiSistema.persistencia.dao.OrdenDAO;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -88,7 +89,7 @@ public class ComprobanteServiceTest {
     orden.setTotalPagar(100.0);  
     orden.setSaldo(0.0);
     orden.setCantDias(1);
-    orden.setFecha_devolucion(LocalDate.now().plusDays(1));
+    orden.setFecha_devolucion(Date.valueOf(LocalDate.now().plusDays(1)));
     orden.setFecha_entrega(LocalDate.now());
     orden.setFecha_emisión(LocalDate.now());
     orden.setClienteID(id);  // Cliente válido

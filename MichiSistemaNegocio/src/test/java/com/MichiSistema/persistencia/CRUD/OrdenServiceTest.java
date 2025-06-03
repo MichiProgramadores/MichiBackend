@@ -36,6 +36,7 @@ import com.MichiSistema.negocio.TrabajadorService;
 import com.MichiSistema.negocio.impl.ClienteServiceImpl;
 import com.MichiSistema.negocio.impl.ProductoServiceImpl;
 import com.MichiSistema.negocio.impl.TrabajadorServiceImpl;
+import java.sql.Date;
 import java.util.HashSet;
 //import pe.edu.pucp.MichiSistema.persistencia.DAOimpl.EstadoFechaDevolucionCRUD;
 
@@ -114,7 +115,7 @@ public class OrdenServiceTest {
             350,
             200.5,
             3,
-            LocalDate.now().plusDays(1),
+            Date.valueOf(LocalDate.now().plusDays(1)),
             LocalDate.now(),
             cliente.getPersona_id(),
             trabajador.getPersona_id()

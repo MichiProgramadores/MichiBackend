@@ -48,7 +48,7 @@ public class TrabajadorCRUD  extends BaseCRUD<Trabajador> implements TrabajadorD
 
     @Override
     protected PreparedStatement getSelectByIdPS(Connection conn, Integer id) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement("SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, "
+        PreparedStatement ps = conn.prepareStatement("SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, p.estado,  "
                 + "t.tipoTrabajador "
                      + "FROM Persona p "
                      + "JOIN Trabajador t ON p.persona_id = t.persona_id "
@@ -74,6 +74,7 @@ public class TrabajadorCRUD  extends BaseCRUD<Trabajador> implements TrabajadorD
         trabajador.setCelular(rs.getInt("celular"));
         trabajador.setEmail(rs.getString("email"));
         trabajador.setTipoTrabajador(TipoTrabajador.valueOf(rs.getString("tipoTrabajador")));  // Convertir String a Enum
+        trabajador.setEstado(rs.getBoolean("estado"));
         return trabajador;
     }
 
