@@ -4,15 +4,16 @@ package com.MichiSistema.dominio;
  *
  * @author Usuario
  */
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import com.MichiSistema.Enum.TipoEvento;
+import java.time.Instant;
+import java.util.Date;
 
 public class Evento {
     private int evento_id;
-    private LocalDate fechaInicio;
-    private LocalDate fechaFin;
+    private Date fechaInicio;
+    private Date fechaFin;
     private LocalTime horaInicio;
     private LocalTime horaFin;
     private String direccion;
@@ -20,7 +21,7 @@ public class Evento {
     private String descripcion;
     private TipoEvento tipoEvento;
     
-    public Evento(TipoEvento tipoEvento,LocalDate fechaInicio, LocalDate fechaFin,
+    public Evento(TipoEvento tipoEvento,Date fechaInicio, Date fechaFin,
                   LocalTime horaInicio, LocalTime horaFin,
                   String direccion, String codigoPostal) {
         this.fechaInicio = fechaInicio;
@@ -33,8 +34,8 @@ public class Evento {
     }
     // Constructor sin parámetros (con valores predeterminados)
     public Evento() {
-        this.fechaInicio = LocalDate.now(); // Fecha de inicio predeterminada es la fecha actual
-        this.fechaFin = LocalDate.now(); // Fecha de fin predeterminada es la fecha actual
+        this.fechaInicio = Date.from(Instant.MIN); // Fecha de inicio predeterminada es la fecha actual
+        this.fechaFin = Date.from(Instant.MIN); // Fecha de fin predeterminada es la fecha actual
         this.horaInicio = LocalTime.MIDNIGHT; // Hora de inicio predeterminada es la medianoche
         this.horaFin = LocalTime.MIDNIGHT; // Hora de fin predeterminada es la medianoche
         this.direccion = ""; // Dirección predeterminada vacía
@@ -72,28 +73,28 @@ public class Evento {
     /**
      * @return the fechaInicio
      */
-    public LocalDate getFechaInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
     /**
      * @param fechaInicio the fechaInicio to set
      */
-    public void setFechaInicio(LocalDate fechaInicio) {
+    public void setFechaInicio(Date fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
     /**
      * @return the fechaFin
      */
-    public LocalDate getFechaFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
     /**
      * @param fechaFin the fechaFin to set
      */
-    public void setFechaFin(LocalDate fechaFin) {
+    public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -164,8 +165,8 @@ public class Evento {
     @Override
     public String toString(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");  // Define el formato deseado
-        String fechaInicioFormateada = fechaInicio != null ? fechaInicio.format(formatter) : "N/A";
-        String fechaFinFormateada = fechaFin != null ? fechaFin.format(formatter) : "N/A";
+        String fechaInicioFormateada = fechaInicio != null ? fechaInicio.toString(): "N/A";
+        String fechaFinFormateada = fechaFin != null ? fechaFin.toString() : "N/A";
         
         return getEvento_id()+ "  "+fechaInicioFormateada + "  " +fechaFinFormateada + "  "+descripcion;
     }

@@ -14,8 +14,10 @@ import com.MichiSistema.Enum.TipoEvento;
 import com.MichiSistema.dominio.Evento;
 import com.MichiSistema.negocio.EventoService;
 import com.MichiSistema.negocio.impl.EventoServiceImpl;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
@@ -33,7 +35,7 @@ public class EventoServiceTest {
 
     private static Evento crearEventoPrueba() {
         // Creación de un evento de prueba
-        return new Evento(TipoEvento.BODA, LocalDate.now(), LocalDate.now().plusDays(1),
+        return new Evento(TipoEvento.BODA, Date.from(Instant.MIN),Date.from(Instant.MIN),
                           LocalTime.of(10, 0), LocalTime.of(18, 0), "Dirección ejemplo", "12345");
     }
 
