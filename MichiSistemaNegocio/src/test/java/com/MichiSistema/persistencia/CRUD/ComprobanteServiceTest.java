@@ -30,6 +30,7 @@ import com.MichiSistema.negocio.impl.ProductoServiceImpl;
 import com.MichiSistema.negocio.impl.UsuarioServiceImpl;
 import com.MichiSistema.persistencia.dao.OrdenDAO;
 import java.sql.Date;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Random;
@@ -84,14 +85,14 @@ public class ComprobanteServiceTest {
     private Orden crearOrdenPrueba(int id) throws Exception {   
     Orden orden = new Orden();
     orden.setTipoRecepcion(TipoRecepcion.RECOJO_EN_TIENDA); // Usa uno de tus enums
-    orden.setFecha_registro(LocalDateTime.now());
+    orden.setFecha_registro(Date.from(Instant.MIN));
     orden.setSetUpPersonalizado("Sin configuración especial");
     orden.setTotalPagar(100.0);  
     orden.setSaldo(0.0);
     orden.setCantDias(1);
     orden.setFecha_devolucion(Date.valueOf(LocalDate.now().plusDays(1)));
-    orden.setFecha_entrega(LocalDate.now());
-    orden.setFecha_emisión(LocalDate.now());
+    orden.setFecha_entrega(Date.from(Instant.MIN));
+    orden.setFecha_emisión(Date.from(Instant.MIN));
     orden.setClienteID(id);  // Cliente válido
     // Si no se tiene un trabajador creado, debes poner uno válido o crearlo antes
     orden.setTrabajadorID(13);  

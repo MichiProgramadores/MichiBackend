@@ -4,24 +4,21 @@ package com.MichiSistema.dominio;
  * @author "MICHIPROGRAMADORES"
  */
 import com.MichiSistema.Enum.TipoRecepcion;
-import java.time.LocalDateTime; // Para manejar fechas y horas
-import java.time.LocalDate; // Para manejar la fecha (dia/mes/anio)
 import java.util.ArrayList;
 import com.MichiSistema.Enum.TipoEstadoDevolucion;
-import com.MichiSistema.Enum.TipoFechaDevolucion;
-import java.sql.Date;
+import java.util.Date;
 
 public class Orden {
     private int idOrden;
     private TipoRecepcion tipoRecepcion;
-    private LocalDateTime fecha_registro;
+    private Date fecha_registro;
     private String setUpPersonalizado;
     private double totalPagar;
     private double saldo;
     private int cantDias;
     private Date fecha_devolucion;
-    private LocalDate fecha_entrega;
-    private LocalDate fecha_emisión;
+    private Date fecha_entrega;
+    private Date fecha_emisión;
     private ArrayList<DetalleOrden> listaOrdenes;
     private TipoEstadoDevolucion tipoEstadoDevolucion;
     private int clienteID;
@@ -36,16 +33,16 @@ public class Orden {
     }
 
     public Orden(TipoRecepcion tipoRecepcion, String setUpPersonalizado, double totalPagar,
-                 double saldo, int cantDias, Date fecha_devolucion, LocalDate fecha_emisión,
+                 double saldo, int cantDias, Date fecha_devolucion, Date fecha_emisión,
                  int clienteID, int trabajadorID) {
         this.tipoRecepcion = tipoRecepcion;
-        this.fecha_registro = LocalDateTime.now();
+        //this.fecha_registro = ;
         this.setUpPersonalizado = setUpPersonalizado;
         this.totalPagar = totalPagar; 
         this.saldo = saldo;
         this.cantDias = cantDias;
         this.fecha_devolucion = fecha_devolucion;
-        this.fecha_entrega = this.fecha_registro.plusDays(cantDias).toLocalDate();
+        //this.fecha_entrega =;
         this.fecha_emisión = fecha_emisión;
         this.listaOrdenes = new ArrayList<>();
         this.clienteID = clienteID;
@@ -69,12 +66,12 @@ public class Orden {
     public void setTotalPagar(double totalPagar) { this.totalPagar = totalPagar; }
     public double getSaldo() { return saldo; }
     public void setSaldo(double saldo) { this.saldo = saldo; }
-    public LocalDate getFecha_entrega() { return fecha_entrega; }
-    public void setFecha_entrega(LocalDate fecha_entrega) { this.fecha_entrega = fecha_entrega; }
-    public LocalDate getFecha_emisión() { return fecha_emisión; }
-    public void setFecha_emisión(LocalDate fecha_emisión) { this.fecha_emisión = fecha_emisión; }
-    public LocalDateTime getFecha_registro() { return fecha_registro; }
-    public void setFecha_registro(LocalDateTime fecha_registro) { this.fecha_registro = fecha_registro; }
+    public Date getFecha_entrega() { return fecha_entrega; }
+    public void setFecha_entrega(Date fecha_entrega) { this.fecha_entrega = fecha_entrega; }
+    public Date getFecha_emisión() { return fecha_emisión; }
+    public void setFecha_emisión(Date fecha_emisión) { this.fecha_emisión = fecha_emisión; }
+    public Date getFecha_registro() { return fecha_registro; }
+    public void setFecha_registro(Date fecha_registro) { this.fecha_registro = fecha_registro; }
     public int getCantDias() { return cantDias; }
     public void setCantDias(int cantDias) { this.cantDias = cantDias; }
     public int getIdOrden() { return idOrden; }

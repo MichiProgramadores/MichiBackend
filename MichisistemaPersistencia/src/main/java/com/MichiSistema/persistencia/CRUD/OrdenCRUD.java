@@ -17,14 +17,15 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, orden.getTipoRecepcion().name());  // Establecer el tipo de recepción
-        ps.setTimestamp(2, Timestamp.valueOf(orden.getFecha_registro()));  // Convertir LocalDateTime a Timestamp
+        
+        ps.setDate(2, new Date(orden.getFecha_registro().getTime()));  // Convertir LocalDateTime a Timestamp
         ps.setString(3, orden.getSetUpPersonalizado());  // Descripción del set-up
         ps.setDouble(4, orden.getTotalPagar());  // Monto total a pagar
         ps.setDouble(5, orden.getSaldo());  // Saldo pendiente
-        ps.setInt(6, orden.getCantDias());  
-        ps.setDate(7, orden.getFecha_devolucion()); 
-        ps.setDate(8, Date.valueOf(orden.getFecha_entrega())); 
-        ps.setDate(9, Date.valueOf(orden.getFecha_emisión()));  
+        ps.setInt(6, orden.getCantDias());   
+        ps.setDate(7, new Date(orden.getFecha_devolucion().getTime()));
+        ps.setDate(8, new Date(orden.getFecha_entrega().getTime()));
+        ps.setDate(9, new Date(orden.getFecha_emisión().getTime()));
         ps.setInt(10, orden.getClienteID());  
         ps.setInt(11, orden.getTrabajadorID());
         ps.setInt(12, orden.getTipoEstadoFechaDevol_id());//ESTO SE VA A BORRAR SEGUN LA LOGICA
@@ -37,16 +38,16 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setString(1, orden.getTipoRecepcion().name());
-        ps.setTimestamp(2, Timestamp.valueOf(orden.getFecha_registro())); // Convertir LocalDateTime a Timestamp
+        ps.setDate(2, new Date(orden.getFecha_registro().getTime())); // Convertir LocalDateTime a Timestamp
         ps.setString(3, orden.getSetUpPersonalizado());
         ps.setDouble(4, orden.getTotalPagar());
         ps.setDouble(5, orden.getSaldo());
         ps.setInt(6, orden.getCantDias());
-        ps.setDate(7, orden.getFecha_devolucion()); // Convertir LocalDate a Date
-        ps.setDate(8, Date.valueOf(orden.getFecha_entrega()));    // Convertir LocalDate a Date
-        ps.setDate(9, Date.valueOf(orden.getFecha_emisión()));    // Convertir LocalDate a Date
+        ps.setDate(7, new Date(orden.getFecha_devolucion().getTime())); // Convertir LocalDate a Date
+        ps.setDate(8, new Date(orden.getFecha_entrega().getTime()));
+        ps.setDate(9, new Date(orden.getFecha_emisión().getTime()));   // Convertir LocalDate a Date
         ps.setInt(10, orden.getIdOrden());
-            
+          
         return ps;
     }
     
@@ -80,7 +81,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         Orden orden = new Orden();
         orden.setIdOrden(rs.getInt("orden_id"));
         orden.setTipoRecepcion(TipoRecepcion.valueOf(rs.getString("tipo_recepcion")));
-        orden.setFecha_registro(rs.getTimestamp("fecha_registro").toLocalDateTime());
+        orden.setFecha_registro(rs.getDate("fecha_registro"));
         orden.setSetUpPersonalizado(rs.getString("set_up_personalizado"));
         orden.setTotalPagar(rs.getDouble("total_pagar"));
         orden.setSaldo(rs.getDouble("saldo"));
@@ -97,7 +98,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         // Validación para fecha_entrega
         java.sql.Date fechaEntrega = rs.getDate("fecha_entrega");
         if (fechaEntrega != null) {
-            orden.setFecha_entrega(fechaEntrega.toLocalDate());
+            orden.setFecha_entrega(fechaEntrega);
         } else {
             orden.setFecha_entrega(null);
         }
@@ -105,7 +106,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         // Validación para fecha_emision
         java.sql.Date fechaEmision = rs.getDate("fecha_emision");
         if (fechaEmision != null) {
-            orden.setFecha_emisión(fechaEmision.toLocalDate());
+            orden.setFecha_emisión(fechaEmision);
         } else {
             orden.setFecha_emisión(null);
         }
