@@ -4,6 +4,7 @@
  */
 package com.michisistemaws;
 
+import com.MichiSistema.Enum.TipoCliente;
 import com.MichiSistema.dominio.Cliente;
 import com.MichiSistema.negocio.ClienteService;
 import jakarta.jws.WebService;
@@ -40,8 +41,10 @@ public class ClienteWS {
     }
     
     @WebMethod(operationName = "registrarCliente")
-    public void registrarCliente(@WebParam(name = "cliente") Cliente cliente) {
+    public void registrarCliente(@WebParam(name = "cliente") Cliente cliente,
+            @WebParam(name = "str_tipoCliente") String str_tipoCliente) {
         try{
+            cliente.setTipoCliente(TipoCliente.valueOf(str_tipoCliente));
             clienteService.registrarCliente(cliente);
         }catch(Exception ex){
             throw new WebServiceException("Error al registrar cliente "+ex.getMessage());

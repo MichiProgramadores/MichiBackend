@@ -1,5 +1,6 @@
 package com.michisistemaws;
 
+import com.MichiSistema.Enum.TipoTrabajador;
 import com.MichiSistema.dominio.Trabajador;
 import com.MichiSistema.negocio.TrabajadorService;
 import com.MichiSistema.negocio.impl.TrabajadorServiceImpl;
@@ -27,9 +28,12 @@ public class TrabajadorWS {
             throw new WebServiceException("Error al listar trabajadores "+ex.getMessage());
         }
     }
-        @WebMethod(operationName = "registrarTrabajador")
-    public void registrarTrabajador(@WebParam(name = "trabajador") Trabajador trabajador) {
+    
+    @WebMethod(operationName = "registrarTrabajador")
+    public void registrarTrabajador(@WebParam(name = "trabajador") Trabajador trabajador,
+            @WebParam(name = "str_tipoTrabajador") String str_tipoTrabajador) {
         try {
+            trabajador.setTipoTrabajador(TipoTrabajador.valueOf(str_tipoTrabajador));
             trabajadorService.registrarTrabajador(trabajador);
            // return "Trabajador registrado exitosamente";
         } catch (Exception ex) {
