@@ -1,20 +1,20 @@
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Orden.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\UnidadMedida.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoRecepcion.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Persona.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Producto.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoEvento.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Comprobante.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoCliente.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\DetalleOrden.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoTrabajador.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Cliente.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\EstadoFechaDevolucion.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoProducto.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Usuario.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Evento.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoFechaDevolucion.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Trabajador.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoComprobante.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoEstadoDevolucion.java
-D:\25-1\PRO3\PROYECTO\Laboratorio10\PRUEBA_ARIANA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\DetalleComprobante.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Cliente.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Comprobante.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\DetalleComprobante.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\DetalleOrden.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\EstadoFechaDevolucion.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Evento.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Orden.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Persona.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Producto.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Trabajador.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\dominio\Usuario.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoCliente.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoComprobante.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoEstadoDevolucion.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoEvento.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoFechaDevolucion.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoProducto.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoRecepcion.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\TipoTrabajador.java
+D:\VI CICLO\Progra 3\TA\MichiBackend\MichiSistemaDominio\src\main\java\com\MichiSistema\Enum\UnidadMedida.java

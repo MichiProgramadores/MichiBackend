@@ -55,9 +55,9 @@ public class ProductoWS {
     @WebMethod(operationName = "eliminarProducto")
     public void eliminarProducto(@WebParam(name = "idProducto") int idProducto) {
         try{
-            productoService.obtenerProducto(idProducto);
+            productoService.eliminarProducto(idProducto);
         }catch(Exception ex){
-            throw new WebServiceException("Error al obtener producto "+ex.getMessage());
+            throw new WebServiceException("Error al eliminar producto "+ex.getMessage());
         }
     }
     @WebMethod(operationName = "actualizarProducto")
