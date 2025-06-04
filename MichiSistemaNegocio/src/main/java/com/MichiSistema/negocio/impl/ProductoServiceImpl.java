@@ -1,11 +1,14 @@
 
 package com.MichiSistema.negocio.impl;
 
+import com.MichiSistema.Enum.TipoProducto;
 import com.MichiSistema.dominio.Producto;
 import com.MichiSistema.negocio.ProductoService;
 import com.MichiSistema.persistencia.CRUD.ProductoCRUD;
 import com.MichiSistema.persistencia.dao.ProductoDAO;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -90,5 +93,20 @@ public class ProductoServiceImpl implements ProductoService {
         //arrayList o list?
         return (ArrayList<Producto>) productoDAO.obtenerTodos();
     }
+    
+    @Override
+    public ArrayList<String> listarTipoProductos() throws Exception {
+        //arrayList o list?
+        return (ArrayList<String>) Arrays.stream(TipoProducto.values())
+                 .map(Enum::name)
+                 .collect(Collectors.toList());
+    }
+    @Override
+    public ArrayList<Producto> listarPorTipoProductos(TipoProducto tipoProducto) throws Exception {
+        
+        return (ArrayList<Producto>) productoDAO.obtenerPorTipoProducto(tipoProducto);
+    }
+    
+    
     
 }

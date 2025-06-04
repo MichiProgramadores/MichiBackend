@@ -3,9 +3,12 @@ package com.MichiSistema.persistencia.CRUD;
 
 import com.MichiSistema.Enum.TipoProducto;
 import com.MichiSistema.Enum.UnidadMedida;
+import com.MichiSistema.conexion.DBManager;
 import com.MichiSistema.dominio.Producto;
 import com.MichiSistema.persistencia.dao.ProductoDAO;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
 
@@ -91,5 +94,36 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
         producto.setProducto_id(id);
     }
 
+    @Override
+    public List<Producto> obtenerPorTipoProducto(TipoProducto tipo){
+        List<Producto> productos = new ArrayList<>();
+    
+    // Consulta SQL para obtener productos por tipo
+    String sql = "SELECT * FROM Producto WHERE tipo_producto = ?";
+    
+    try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+        // Usamos PreparedStatement para evitar inyecciones SQL
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            // Establecemos el valor del tipoProducto (convertimos el enum a String)
+                ps.setString(1, tipo.toString());
+
+                // Ejecutamos la consulta y obtenemos el resultado
+                try (ResultSet rs = ps.executeQuery()) {
+                    // Iteramos sobre el resultado de la consulta y utilizamos la función createFromResultSet
+                    while (rs.next()) {
+                        Producto producto = createFromResultSet(rs);  // Usamos la función createFromResultSet para mapear los datos
+                        productos.add(producto);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            // En caso de error, se lanza una RuntimeException
+            throw new RuntimeException("Error al obtener productos por tipo: " + tipo, e);
+        }
+
+        // Retornamos la lista de productos encontrados
+        return productos;
+    }
+            
 }
 
