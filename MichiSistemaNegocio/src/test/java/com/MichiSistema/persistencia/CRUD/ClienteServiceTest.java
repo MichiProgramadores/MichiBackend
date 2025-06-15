@@ -32,7 +32,7 @@ public class ClienteServiceTest {
 
     private static Cliente crearClientePrueba() {
         // Crear un cliente de prueba
-        return new Cliente("Juan", "Perez", 987654321, "juan.perez@example.com", TipoCliente.EIN, 100, "1324");
+        return new Cliente("Chizuru", "Mizuhara", 2523244, "chizuruuu@example.com", TipoCliente.EIN, 100, "1324");
     }
 
     @Test
@@ -68,8 +68,8 @@ public class ClienteServiceTest {
         
         Cliente clienteObt = clienteService.obtenerCliente(clienteId);
         assertNotNull(clienteObt);
-        assertEquals("Juan", clienteObt.getNombres());
-        assertEquals(987654321, clienteObt.getCelular());
+        assertEquals("Chizuru", clienteObt.getNombres());
+        assertEquals(2523244, clienteObt.getCelular());
     }
 
     @Test

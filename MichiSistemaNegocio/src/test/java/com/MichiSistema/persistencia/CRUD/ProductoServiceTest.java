@@ -28,7 +28,7 @@ public class ProductoServiceTest {
     }
 
     private static Producto crearProductoPrueba() {
-        return new Producto("CHIZURU", 1299.99, 10, 100, 10, TipoProducto.MOBILIARIO, 300, "producto de decoracion", UnidadMedida.PULGADA);
+        return new Producto("PapaHuayro", 1299.99, 10, 100, 10, TipoProducto.MOBILIARIO, 300, "producto de malcriadez", UnidadMedida.PULGADA);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class ProductoServiceTest {
         productoId =producto.getProducto_id(); 
         Producto productoObt = productoService.obtenerProducto(productoId);
         assertNotNull(productoObt);
-        assertEquals("CHIZURU", productoObt.getNombre());
+        assertEquals("PapaHuayro", productoObt.getNombre());
         assertEquals(1299.99, productoObt.getPrecio());
     }
 
@@ -74,13 +74,13 @@ public class ProductoServiceTest {
         Producto producto = crearProductoPrueba();
         productoService.registrarProducto(producto);
         productoId =producto.getProducto_id();
-        producto.setNombre("CHIZURU");
+        producto.setNombre("PapaHuayro");
         producto.setPrecio(1599.99);
         productoService.actualizarProducto(producto);
 
         Producto productoActualizado = productoService.obtenerProducto(productoId);
         assertNotNull(productoActualizado);
-        assertEquals("CHIZURU", productoActualizado.getNombre());
+        assertEquals("PapaHuayro", productoActualizado.getNombre());
         assertEquals(1599.99, productoActualizado.getPrecio());
     }
 

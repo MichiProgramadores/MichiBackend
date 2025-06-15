@@ -100,7 +100,7 @@ public class OrdenServiceImpl  implements OrdenService{
 //        }
          //Cambiar el estado a Cancelada en lugar de eliminarla físicamente
 //        ordenDAO.actualizarEstado(idOrden, Orden.); 
-        
+//        ordenDAO.eliminarDetalleOrden(idOrden);
         ordenDAO.eliminar(idOrden);
     }
     

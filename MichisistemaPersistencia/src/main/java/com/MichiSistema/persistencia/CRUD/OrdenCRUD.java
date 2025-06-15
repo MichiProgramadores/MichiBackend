@@ -6,6 +6,7 @@ import com.MichiSistema.dominio.Orden;
 import com.MichiSistema.persistencia.dao.OrdenDAO;
 import java.sql.*;
 import java.util.ArrayList;
+//import java.util.Date;
 
 public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
 
@@ -142,6 +143,8 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             throw new RuntimeException("Error al eliminar Orden", e);
         }
     }
+    
+   
     
     private void registrarDetalles(Connection conn, Orden orden) throws SQLException {
         String sp = "{CALL sp_registrar_detalle_orden(?, ?, ?, ?,?,?)}";

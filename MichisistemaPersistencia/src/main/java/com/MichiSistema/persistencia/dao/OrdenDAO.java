@@ -10,4 +10,5 @@ import com.MichiSistema.dominio.Orden;
  */
 public interface OrdenDAO extends BaseDAO<Orden> {
     public void eliminar(int idOrden);
+    
 }
