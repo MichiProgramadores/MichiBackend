@@ -72,7 +72,7 @@ public class UsuarioWS {
     
     @WebMethod(operationName = "autenticarUsuario")
     public Usuario autenticarUsuario(
-            @WebParam(name = "nombreUsuario") int nombreUsuario,
+            @WebParam(name = "nombreUsuario") String nombreUsuario,
             @WebParam(name = "contraseña") String contraseña) {
         try {
             Usuario usuario = usuarioService.autenticar(nombreUsuario, contraseña);
@@ -80,8 +80,6 @@ public class UsuarioWS {
                 throw new WebServiceException("Autenticación fallida: Credenciales inválidas");
             }
             return usuario;
-        } catch (SQLException ex) {
-            throw new WebServiceException("Error de base de datos al autenticar: " + ex.getMessage());
         } catch (Exception ex) {
             throw new WebServiceException("Error al autenticar usuario: " + ex.getMessage());
         }
