@@ -7,6 +7,7 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.xml.ws.WebServiceException;
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -69,20 +70,20 @@ public class UsuarioWS {
         }
     }
     
-//    @WebMethod(operationName = "autenticarUsuario")
-//    public Usuario autenticarUsuario(
-//            @WebParam(name = "idUsuario") int idUsuario,
-//            @WebParam(name = "contraseña") String contraseña) {
-//        try {
-//            Usuario usuario = usuarioService.autenticar(idUsuario, contraseña);
-//            if (usuario == null) {
-//                throw new WebServiceException("Autenticación fallida: Credenciales inválidas");
-//            }
-//            return usuario;
-//        } catch (SQLException ex) {
-//            throw new WebServiceException("Error de base de datos al autenticar: " + ex.getMessage());
-//        } catch (Exception ex) {
-//            throw new WebServiceException("Error al autenticar usuario: " + ex.getMessage());
-//        }
-//    }
+    @WebMethod(operationName = "autenticarUsuario")
+    public Usuario autenticarUsuario(
+            @WebParam(name = "nombreUsuario") int nombreUsuario,
+            @WebParam(name = "contraseña") String contraseña) {
+        try {
+            Usuario usuario = usuarioService.autenticar(nombreUsuario, contraseña);
+            if (usuario == null) {
+                throw new WebServiceException("Autenticación fallida: Credenciales inválidas");
+            }
+            return usuario;
+        } catch (SQLException ex) {
+            throw new WebServiceException("Error de base de datos al autenticar: " + ex.getMessage());
+        } catch (Exception ex) {
+            throw new WebServiceException("Error al autenticar usuario: " + ex.getMessage());
+        }
+    }
 }
