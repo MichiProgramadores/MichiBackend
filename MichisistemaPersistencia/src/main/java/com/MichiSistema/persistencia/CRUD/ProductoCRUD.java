@@ -124,6 +124,51 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
         // Retornamos la lista de productos encontrados
         return productos;
     }
+
+    @Override
+    public List<Producto> obtenerActivos() {
+        List<Producto> entities = new ArrayList<>();
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+            
+             CallableStatement cs = conn.prepareCall("{CALL sp_obtener_productos_activos()}");
+             ResultSet rs = cs.executeQuery()) { 
+            while (rs.next()) {
+                entities.add(createFromResultSet(rs)); 
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al listar productos activos", e);
+        }
+        return entities;
+    }
+
+    @Override
+    public List<Producto> buscarPorNombre(String nombre) {
+        List<Producto> productos = new ArrayList<>();
+
+        // El procedimiento almacenado que utilizas
+        String sql = "{CALL sp_buscar_producto_por_nombre(?)}";
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+             CallableStatement cs = conn.prepareCall(sql)) {
+
+            // Establecemos el parámetro de entrada para el procedimiento almacenado
+            cs.setString(1, nombre);
+
+            // Ejecutamos el procedimiento y obtenemos el resultado
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    // Mapear el resultado del conjunto de resultados a objetos Trabajador
+                    productos.add(createFromResultSet(rs)); // Asumiendo que tienes un método para crear el objeto
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al buscar productos por nombre", e);
+        }
+
+        return productos;
+    }
             
 }
 

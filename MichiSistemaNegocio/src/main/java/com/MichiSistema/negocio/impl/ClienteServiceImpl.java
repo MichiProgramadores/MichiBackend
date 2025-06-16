@@ -6,6 +6,7 @@ import com.MichiSistema.dominio.Cliente;
 import com.MichiSistema.negocio.ClienteService;
 import com.MichiSistema.persistencia.CRUD.ClienteCRUD;
 import com.MichiSistema.persistencia.dao.ClienteDAO;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -97,6 +98,43 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ArrayList<Cliente> listarClientes() throws Exception {
         // Obtener todos los clientes
-        return (ArrayList<Cliente>) clienteDAO.obtenerTodos();
+        ArrayList<Cliente> clientes= new ArrayList<>();
+    
+        try {
+         
+            clientes = (ArrayList<Cliente>) clienteDAO.obtenerTodos(); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener clientes", e);
+        }
+        return clientes;
+    }
+
+    @Override
+    public ArrayList<Cliente> listarClientesActivos() throws Exception {
+        ArrayList<Cliente> clientesActivos = new ArrayList<>();
+    
+        try {
+         
+            clientesActivos = (ArrayList<Cliente>) clienteDAO.obtenerActivos(); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener clientes activos", e);
+        }
+        return clientesActivos;
+    }   
+
+    @Override
+    public ArrayList<Cliente> listarPorNombreClientes(String nombre) throws Exception {
+        ArrayList<Cliente> clientesEncontrados = new ArrayList<>();
+    
+        try {
+         
+            clientesEncontrados = (ArrayList<Cliente>) clienteDAO.buscarPorNombre(nombre); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener clientes por nombre", e);
+        }
+        return clientesEncontrados;
     }
 }

@@ -18,4 +18,6 @@ public interface TrabajadorService {
     void eliminarTrabajador(int idTrabajador) throws Exception;
     Trabajador obtenerTrabajador(int idTrabajador) throws Exception;
     ArrayList<Trabajador> listarTrabajadores() throws Exception;
+    ArrayList<Trabajador> listarTrabajadoresActivos() throws Exception;
+    ArrayList<Trabajador> listarPorNombreTrabajadores(String nombre) throws Exception;
 }

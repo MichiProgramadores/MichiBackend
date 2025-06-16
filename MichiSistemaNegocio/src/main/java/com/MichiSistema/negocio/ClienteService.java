@@ -18,4 +18,6 @@ public interface ClienteService {
     void eliminarCliente(int idCliente) throws Exception;
     Cliente obtenerCliente(int idCliente) throws Exception;
     ArrayList<Cliente> listarClientes() throws Exception;
+    ArrayList<Cliente> listarClientesActivos() throws Exception;
+    ArrayList<Cliente> listarPorNombreClientes(String nombre) throws Exception;
 }

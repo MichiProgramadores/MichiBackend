@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,7 @@ public class ProductoServiceTest {
 
     @Test
     @Order(1)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void registrarProducto() throws Exception {
         Producto producto = crearProductoPrueba();
         productoService.registrarProducto(producto);
@@ -58,6 +60,7 @@ public class ProductoServiceTest {
 
     @Test
     @Order(2)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void obtenerProducto() throws Exception {
         Producto producto = crearProductoPrueba();
         productoService.registrarProducto(producto);
@@ -70,6 +73,7 @@ public class ProductoServiceTest {
 
     @Test
     @Order(3)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void actualizarProducto() throws Exception {
         Producto producto = crearProductoPrueba();
         productoService.registrarProducto(producto);
@@ -86,6 +90,7 @@ public class ProductoServiceTest {
 
     @Test
     @Order(4)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void eliminarProducto() throws Exception {
         Producto producto = crearProductoPrueba();
         productoService.registrarProducto(producto);

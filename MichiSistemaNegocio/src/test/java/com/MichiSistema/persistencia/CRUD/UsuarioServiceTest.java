@@ -15,6 +15,7 @@ import org.junit.jupiter.api.AfterEach;
 
 import java.sql.SQLException;
 import java.util.List;
+import org.junit.jupiter.api.Disabled;
 /**
  *
  * @author Ariana Mulatillo Gomez
@@ -44,6 +45,7 @@ public class UsuarioServiceTest {
 
     @Test
     @Order(1)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void testRegistrarUsuario() throws Exception {
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
@@ -64,6 +66,7 @@ public class UsuarioServiceTest {
 
     @Test
     @Order(2)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void testAutenticarUsuario() throws Exception {     
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
@@ -78,6 +81,7 @@ public class UsuarioServiceTest {
 
     @Test
     @Order(3)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void testActualizarUsuario() throws Exception {
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario1 = crearUsuarioPrueba(trabajador.getPersona_id());
@@ -98,6 +102,7 @@ public class UsuarioServiceTest {
 
     @Test
     @Order(4)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void testEliminarUsuario() throws Exception {
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());

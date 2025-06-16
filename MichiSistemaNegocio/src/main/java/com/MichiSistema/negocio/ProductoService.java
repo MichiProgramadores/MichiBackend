@@ -18,4 +18,6 @@ public interface ProductoService {
     ArrayList<Producto> listarProductos() throws Exception;
     ArrayList<String> listarTipoProductos() throws Exception;
     ArrayList<Producto> listarPorTipoProductos(TipoProducto tipoProducto) throws Exception;
+    ArrayList<Producto> listarProductosActivos() throws Exception;
+    ArrayList<Producto> listarPorNombreProductos(String nombre) throws Exception;
 }

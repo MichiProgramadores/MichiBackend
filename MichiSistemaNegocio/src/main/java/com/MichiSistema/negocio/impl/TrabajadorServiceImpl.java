@@ -83,7 +83,44 @@ public class TrabajadorServiceImpl implements TrabajadorService {
     
     @Override
     public ArrayList<Trabajador> listarTrabajadores() throws Exception {
-        return (ArrayList<Trabajador>) trabajadorDAO.obtenerTodos();
+        ArrayList<Trabajador> trabajadores= new ArrayList<>();
+    
+        try {
+         
+            trabajadores = (ArrayList<Trabajador>) trabajadorDAO.obtenerTodos(); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener trabajadores", e);
+        }
+        return trabajadores;
+    }
+
+    @Override
+    public ArrayList<Trabajador> listarTrabajadoresActivos() throws Exception {
+        ArrayList<Trabajador> trabajadoresActivos = new ArrayList<>();
+    
+        try {
+         
+            trabajadoresActivos = (ArrayList<Trabajador>) trabajadorDAO.obtenerActivos(); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener trabajadores activos", e);
+        }
+        return trabajadoresActivos;
+    }
+
+    @Override
+    public ArrayList<Trabajador> listarPorNombreTrabajadores(String nombre) throws Exception {
+        ArrayList<Trabajador> trabajadoresEncontrados = new ArrayList<>();
+    
+        try {
+         
+            trabajadoresEncontrados = (ArrayList<Trabajador>) trabajadorDAO.buscarPorNombre(nombre); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener trabajadores por nombre", e);
+        }
+        return trabajadoresEncontrados;
     }
 }
 

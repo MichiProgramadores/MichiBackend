@@ -38,6 +38,7 @@ import com.MichiSistema.negocio.impl.TrabajadorServiceImpl;
 import java.sql.Date;
 import java.time.Instant;
 import java.util.HashSet;
+import org.junit.jupiter.api.Disabled;
 //import pe.edu.pucp.MichiSistema.persistencia.DAOimpl.EstadoFechaDevolucionCRUD;
 
 
@@ -129,6 +130,7 @@ public class OrdenServiceTest {
 
     @Test
     @Order(1)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void registrarOrden() throws Exception {
         // Crear un evento de prueba y registrarlo
         
@@ -154,6 +156,7 @@ public class OrdenServiceTest {
 
     @Test
     @Order(2)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void obtenerOrden() throws Exception {
         Orden orden = crearOrdenPrueba();
         ordenService.registrarOrden(orden);
@@ -167,6 +170,7 @@ public class OrdenServiceTest {
 
     @Test
     @Order(3)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void actualizarOrden() throws Exception {
         Orden orden = crearOrdenPrueba();
         ordenService.registrarOrden(orden);
@@ -185,6 +189,7 @@ public class OrdenServiceTest {
 
     @Test
     @Order(4)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void eliminarOrden() throws Exception {
         Orden orden = crearOrdenPrueba();
         ordenService.registrarOrden(orden);

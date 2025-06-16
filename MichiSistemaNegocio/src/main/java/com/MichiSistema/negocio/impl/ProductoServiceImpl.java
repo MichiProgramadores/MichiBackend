@@ -90,8 +90,16 @@ public class ProductoServiceImpl implements ProductoService {
     
     @Override
     public ArrayList<Producto> listarProductos() throws Exception {
-        //arrayList o list?
-        return (ArrayList<Producto>) productoDAO.obtenerTodos();
+        ArrayList<Producto> productos = new ArrayList<>();
+    
+        try {
+         
+            productos = (ArrayList<Producto>) productoDAO.obtenerTodos(); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener productos", e);
+        }
+        return productos;
     }
     
     @Override
@@ -105,6 +113,33 @@ public class ProductoServiceImpl implements ProductoService {
     public ArrayList<Producto> listarPorTipoProductos(TipoProducto tipoProducto) throws Exception {
         
         return (ArrayList<Producto>) productoDAO.obtenerPorTipoProducto(tipoProducto);
+    }
+
+    @Override
+    public ArrayList<Producto> listarProductosActivos() throws Exception {
+        ArrayList<Producto> productosActivos = new ArrayList<>();
+    
+        try {
+         
+            productosActivos = (ArrayList<Producto>) productoDAO.obtenerActivos(); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener productos activos", e);
+        }
+        return productosActivos;
+    }
+
+    @Override
+    public ArrayList<Producto> listarPorNombreProductos(String nombre) throws Exception {
+        ArrayList<Producto> productosEncontrados = new ArrayList<>();
+    
+        try {
+            productosEncontrados = (ArrayList<Producto>) productoDAO.buscarPorNombre(nombre); 
+        }catch (Exception e) {
+            
+            throw new Exception("Error inesperado al obtener productos por nombre", e);
+        }
+        return productosEncontrados;
     }
     
     

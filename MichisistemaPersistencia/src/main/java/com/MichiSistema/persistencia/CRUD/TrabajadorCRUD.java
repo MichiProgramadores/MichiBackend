@@ -6,6 +6,7 @@ import com.MichiSistema.dominio.Trabajador;
 import com.MichiSistema.persistencia.dao.TrabajadorDAO;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -127,6 +128,49 @@ public class TrabajadorCRUD  extends BaseCRUD<Trabajador> implements TrabajadorD
             throw new RuntimeException("Error de conexión al actualizar trabajador", e);
         }
     }
+
+    @Override
+    public List<Trabajador> obtenerActivos() {
+        List<Trabajador> entities = new ArrayList<>();
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+            
+             CallableStatement cs = conn.prepareCall("{CALL sp_obtener_trabajadores_activos()}");
+             ResultSet rs = cs.executeQuery()) { 
+            while (rs.next()) {
+                entities.add(createFromResultSet(rs)); 
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al listar trabajadores activos", e);
+        }
+        return entities;
+    }
+
+    @Override
+    public List<Trabajador> buscarPorNombre(String nombre) {
+        List<Trabajador> trabajadores = new ArrayList<>();
+
+        // El procedimiento almacenado que utilizas
+        String sql = "{CALL sp_buscar_trabajador_por_nombre(?)}";
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+             CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, nombre);
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    // Mapear el resultado del conjunto de resultados a objetos Trabajador
+                    trabajadores.add(createFromResultSet(rs)); // Asumiendo que tienes un método para crear el objeto
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al buscar trabajadores por nombre", e);
+        }
+
+        return trabajadores;
+    }
+    
+    
+    
     
 
 }

@@ -9,6 +9,7 @@ import com.MichiSistema.persistencia.dao.ClienteDAO;
 import com.MichiSistema.persistencia.dao.PersonaDAO;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ClienteCRUD extends BaseCRUD<Cliente> implements ClienteDAO {
@@ -139,4 +140,51 @@ public class ClienteCRUD extends BaseCRUD<Cliente> implements ClienteDAO {
             throw new RuntimeException("Error de conexión al actualizar cliente", e);
         }
     }
+
+    @Override
+    public List<Cliente> obtenerActivos() {
+        List<Cliente> entities = new ArrayList<>();
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+            
+             CallableStatement cs = conn.prepareCall("{CALL sp_obtener_clientes_activos()}");
+             ResultSet rs = cs.executeQuery()) { 
+            while (rs.next()) {
+                entities.add(createFromResultSet(rs)); 
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al listar clientes activos", e);
+        }
+        return entities;
+        
+    }
+    
+    @Override
+    public List<Cliente> buscarPorNombre(String nombre) {
+        List<Cliente> clientes = new ArrayList<>();
+
+        // El procedimiento almacenado que utilizas
+        String sql = "{CALL sp_buscar_cliente_por_nombre(?)}";
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+             CallableStatement cs = conn.prepareCall(sql)) {
+
+            // Establecemos el parámetro de entrada para el procedimiento almacenado
+            cs.setString(1, nombre);
+
+            // Ejecutamos el procedimiento y obtenemos el resultado
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    // Mapear el resultado del conjunto de resultados a objetos Trabajador
+                    clientes.add(createFromResultSet(rs)); // Asumiendo que tienes un método para crear el objeto
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al buscar clientes por nombre", e);
+        }
+
+        return clientes;
+    }
+    
 }

@@ -40,6 +40,24 @@ public class ClienteWS {
         }
     }
     
+    @WebMethod(operationName = "listarClientesActivos")
+    public List<Cliente> listarClientesActivos() {
+        try{
+            return clienteService.listarClientesActivos();
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar clientes activos "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "listarClientesPorNombre")
+    public List<Cliente> listarClientesPorNombre(@WebParam(name = "nombre")String cadena) {
+        try{
+            return clienteService.listarPorNombreClientes(cadena);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar clientes por nombre "+ex.getMessage());
+        }
+    }
+    
     @WebMethod(operationName = "registrarCliente")
     public void registrarCliente(@WebParam(name = "cliente") Cliente cliente,
             @WebParam(name = "str_tipoCliente") String str_tipoCliente) {

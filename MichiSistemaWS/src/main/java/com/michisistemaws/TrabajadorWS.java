@@ -29,6 +29,24 @@ public class TrabajadorWS {
         }
     }
     
+    @WebMethod(operationName = "listaTrabajadoresActivos")
+    public List<Trabajador> listaTrabajadoresActivos() {
+        try{
+            return trabajadorService.listarTrabajadoresActivos();
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar trabajadores activos "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "listaTrabajadoresPorNombre")
+    public List<Trabajador> listaTrabajadoresPorNombre(@WebParam(name = "nombre")String cadena) {
+        try{
+            return trabajadorService.listarPorNombreTrabajadores(cadena);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar trabajadores por nombre "+ex.getMessage());
+        }
+    }
+    
     @WebMethod(operationName = "registrarTrabajador")
     public void registrarTrabajador(@WebParam(name = "trabajador") Trabajador trabajador,
             @WebParam(name = "str_tipoTrabajador") String str_tipoTrabajador) {

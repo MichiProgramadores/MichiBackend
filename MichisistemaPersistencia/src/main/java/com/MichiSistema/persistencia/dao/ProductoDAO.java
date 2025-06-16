@@ -11,5 +11,6 @@ import java.util.List;
  */
 public interface ProductoDAO extends BaseDAO<Producto>{
     List<Producto> obtenerPorTipoProducto(TipoProducto tipo);
-    
+    List<Producto> obtenerActivos();
+    List<Producto> buscarPorNombre(String nombre);
 }

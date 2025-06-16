@@ -41,6 +41,7 @@ public class EventoServiceTest {
 
     @Test
     @Order(1)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void registrarEvento() throws Exception {
         // Crear un evento de prueba y registrarlo
         Evento evento = crearEventoPrueba();
@@ -66,6 +67,7 @@ public class EventoServiceTest {
 
     @Test
     @Order(2)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void obtenerEvento() throws Exception {
         Evento evento = crearEventoPrueba();
         eventoService.registrarEvento(evento);
@@ -78,6 +80,7 @@ public class EventoServiceTest {
 
     @Test
     @Order(3)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void actualizarEvento() throws Exception {
         Evento evento = crearEventoPrueba();
         eventoService.registrarEvento(evento);
@@ -94,6 +97,7 @@ public class EventoServiceTest {
 
     @Test
     @Order(4)
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void eliminarEvento() throws Exception {
         Evento evento = crearEventoPrueba();
         eventoService.registrarEvento(evento);

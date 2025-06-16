@@ -32,6 +32,25 @@ public class ProductoWS {
             throw new WebServiceException("Error al listar productos "+ex.getMessage());
         }
     }
+    
+    @WebMethod(operationName = "listaProductosActivos")
+    public List<Producto> listaProductosActivos() {
+        try{
+            return productoService.listarProductosActivos();
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar productos activos"+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "listarProductosPorNombre")
+    public List<Producto> listarProductosPorNombre(@WebParam(name = "nombre")String cadena) {
+        try{
+            return productoService.listarPorNombreProductos(cadena);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar productos por nombre "+ex.getMessage());
+        }
+    }
+    
     @WebMethod(operationName = "registrarProducto")
     public void registrarProducto(@WebParam(name = "producto") Producto producto,
             @WebParam(name = "str_tipoProducto") String str_tipoProducto,
