@@ -79,8 +79,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
     
     @Override
-    public Usuario autenticar(String user, String contraseña) throws SQLException {
-        return usuarioDAO.autenticar(user, contraseña); // Llamamos al método del CRUD para autenticar
+    public int autenticar(String user, String contra) throws SQLException {
+        return usuarioDAO.autenticar(user, contra); 
     }
     
     @Override

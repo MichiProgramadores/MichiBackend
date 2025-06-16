@@ -31,7 +31,7 @@ public class UsuarioServiceTest {
         trabajadorService= new TrabajadorServiceImpl();
     }
     private Trabajador crearTrabajadorPrueba() throws Exception {
-        Trabajador trabajador = new Trabajador("Chizuru", "Wang", 987654321,
+        Trabajador trabajador = new Trabajador("Papa", "Huayro", 987654321,
                 "user@example.com", TipoTrabajador.DESPACHADOR);
         trabajadorService.registrarTrabajador(trabajador);
         return trabajador;
@@ -40,12 +40,12 @@ public class UsuarioServiceTest {
     // Método auxiliar para crear un usuario de prueba
     private static Usuario crearUsuarioPrueba(int id) {
         // En este caso, se crea el usuario pasando el ID y la contraseña
-        return new Usuario(id, "contrasena123");  
+        return new Usuario(id, "123");  
     }
 
     @Test
     @Order(1)
-            @Disabled("Deshabilitado temporalmente para pruebas")
+          @Disabled("Deshabilitado temporalmente para pruebas")
     void testRegistrarUsuario() throws Exception {
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
@@ -62,11 +62,10 @@ public class UsuarioServiceTest {
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
         usuarioService.registrarUsuario(usuario);
-        //nota: id harcoded
-        Usuario usuarioAutenticado = usuarioService.autenticar(usuario.getNombreUsuario(), "contraseña123");
+        int id = usuarioService.autenticar(usuario.getNombreUsuario(), "123");
 
         // Verificación
-        assertNotNull(usuarioAutenticado);
+        assertNotNull(id);
       
     }
 

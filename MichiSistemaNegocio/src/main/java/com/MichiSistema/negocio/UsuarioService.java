@@ -15,6 +15,6 @@ public interface UsuarioService {
     void eliminarUsuario(int idUsuario) throws Exception;
     Usuario obtenerUsuario(int idUsuario) throws Exception;
     ArrayList<Usuario> listarUsuarios() throws Exception;
-    public Usuario autenticar(String user, String contraseña) throws SQLException ;
+    public int autenticar(String user, String contraseña) throws SQLException ;
 }
 

@@ -95,34 +95,55 @@ public class UsuarioCRUD extends BaseCRUD<Usuario> implements UsuarioDAO {
 
 
     @Override
-    public Usuario autenticar(String user, String contraseña) throws SQLException {
-        // Realizamos la consulta para verificar si el usuario existe y la contraseña es correcta
-        String query = "SELECT persona_id, contrasenha, nombreUsuario FROM Usuario WHERE persona_id=?";
-        try (Connection conn = DBManager.getInstance().obtenerConexion();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+    public int autenticar(String user, String contraseña) throws SQLException {
+    String sqlVerificarUsuario = "{CALL sp_verificar_existencia_usuario_por_nombre(?, ?)}";  // Usamos el parámetro OUT
+    
+    try (Connection conn = DBManager.getInstance().obtenerConexion();
+         CallableStatement cs = conn.prepareCall(sqlVerificarUsuario)) {
 
-            //ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
+        // Establecemos el parámetro de entrada (nombre de usuario)
+        cs.setString(1, user);
+        
+        // Registramos el parámetro de salida (persona_id)
+        cs.registerOutParameter(2, java.sql.Types.INTEGER);  // Es un OUT parameter de tipo INTEGER
 
-            if (rs.next()) {
-                // Comparamos la contraseña almacenada con la que ingresó el usuario
-                String contrasenaAlmacenada = rs.getString("contrasenha");
-                String desencriptada= descifrar(contrasenaAlmacenada, llave);
-                if (contrasenaAlmacenada.equals(desencriptada)) {
-                    // Si la contraseña es correcta, retornamos el usuario
-                    Usuario usuario = new Usuario();
-                    usuario.setId(rs.getInt("persona_id"));
-                    usuario.setNombreUsuario(rs.getString("nombreUsuario"));
-                   // usuario.setContrasena(contrasenaAlmacenada);  // Retornamos el usuario con la contraseña (aunque no es recomendable mostrarla)
-                    return usuario;
-                } else {
-                    throw new SQLException("Contraseña incorrecta");
+        // Ejecutamos el procedimiento
+        cs.execute();
+
+        // Obtenemos el valor del parámetro de salida
+        int personaId = cs.getInt(2);  // Usamos el índice 2 para obtener el parámetro de salida
+        
+        // Verificamos si el ID del usuario es válido
+        if (personaId > 0) {
+            // Ahora que tenemos el persona_id, consultamos la contraseña
+            String sqlObtenerContrasena = "SELECT contrasenha FROM Usuario WHERE persona_id=?";
+            try (PreparedStatement ps = conn.prepareStatement(sqlObtenerContrasena)) {
+                ps.setInt(1, personaId);
+
+                // Ejecutamos la consulta para obtener la contraseña almacenada
+                try (ResultSet rsContrasena = ps.executeQuery()) {
+                    if (rsContrasena.next()) {
+                        String contrasenaAlmacenada = rsContrasena.getString("contrasenha");
+                        String desencriptada = descifrar(contrasenaAlmacenada, llave);
+
+                        // Comparar la contraseña almacenada con la proporcionada
+                        if (contrasenaAlmacenada.equals(desencriptada)) {
+                            // Si la contraseña es correcta, devolvemos el usuario
+                            return personaId;
+                        } else {
+                            throw new SQLException("Contraseña incorrecta");
+                        }
+                    } else {
+                        throw new SQLException("No se encontró la contraseña para el usuario");
+                    }
                 }
-            } else {
-                throw new SQLException("Usuario no encontrado");
             }
+        } else {
+            throw new SQLException("Usuario no encontrado");
         }
     }
+}
+
 
     @Override
     public String cifrar(String texto, String llave) {

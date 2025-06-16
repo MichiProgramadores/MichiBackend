@@ -1,4 +1,13 @@
 -------------------------------------------------------------------------------
 Test set: com.MichiSistema.persistencia.CRUD.UsuarioServiceTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.005 s -- in com.MichiSistema.persistencia.CRUD.UsuarioServiceTest
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 6.856 s <<< FAILURE! -- in com.MichiSistema.persistencia.CRUD.UsuarioServiceTest
+com.MichiSistema.persistencia.CRUD.UsuarioServiceTest.testAutenticarUsuario -- Time elapsed: 6.788 s <<< ERROR!
+java.sql.SQLException: Contraseña incorrecta
+	at com.MichiSistema.persistencia.CRUD.UsuarioCRUD.autenticar(UsuarioCRUD.java:134)
+	at com.MichiSistema.negocio.impl.UsuarioServiceImpl.autenticar(UsuarioServiceImpl.java:83)
+	at com.MichiSistema.persistencia.CRUD.UsuarioServiceTest.testAutenticarUsuario(UsuarioServiceTest.java:66)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
