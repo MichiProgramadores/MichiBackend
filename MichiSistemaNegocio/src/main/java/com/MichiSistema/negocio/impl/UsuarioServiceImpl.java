@@ -26,9 +26,9 @@ public class UsuarioServiceImpl implements UsuarioService {
     @Override
     public void registrarUsuario(Usuario usuario) throws Exception {
         // Validaciones de negocio
-        if (usuario.getNombreUsuario() == null || usuario.getNombreUsuario().trim().isEmpty()) {
-            throw new Exception("El nombre de usuario no puede estar vacío");
-        }
+//        if (usuario.getNombreUsuario() == null || usuario.getNombreUsuario().trim().isEmpty()) {
+//            throw new Exception("El nombre de usuario no puede estar vacío");
+//        }
         if (usuario.getContrasena() == null || usuario.getContrasena().trim().isEmpty()) {
             throw new Exception("La contraseña no puede estar vacía");
         }
@@ -79,8 +79,8 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
     
     @Override
-    public Usuario autenticar(int id, String contraseña) throws SQLException {
-        return usuarioDAO.autenticar(id, contraseña); // Llamamos al método del CRUD para autenticar
+    public Usuario autenticar(String user, String contraseña) throws SQLException {
+        return usuarioDAO.autenticar(user, contraseña); // Llamamos al método del CRUD para autenticar
     }
     
     @Override

@@ -14,7 +14,6 @@ public class Usuario {
     public Usuario(int id, String contrasena) {
         this.id = id;
         this.contrasena = contrasena;
-        this.nombreUsuario="user";
 //        TrabajadorCRUD trabajadorCrud = new TrabajadorCRUD();
 //        Trabajador trabaj = trabajadorCrud.obtenerPorId(id);         
 //        // Generar el nombre de usuario combinando los nombres y apellidos
