@@ -95,39 +95,36 @@ public class UsuarioCRUD extends BaseCRUD<Usuario> implements UsuarioDAO {
 
 
     @Override
-    public int autenticar(String user, String contraseña) throws SQLException {
+    public int autenticar(String user, String contrase) throws SQLException {
     String sqlVerificarUsuario = "{CALL sp_verificar_existencia_usuario_por_nombre(?, ?)}";  // Usamos el parámetro OUT
     
     try (Connection conn = DBManager.getInstance().obtenerConexion();
          CallableStatement cs = conn.prepareCall(sqlVerificarUsuario)) {
-
         // Establecemos el parámetro de entrada (nombre de usuario)
         cs.setString(1, user);
-        
         // Registramos el parámetro de salida (persona_id)
         cs.registerOutParameter(2, java.sql.Types.INTEGER);  // Es un OUT parameter de tipo INTEGER
-
         // Ejecutamos el procedimiento
         cs.execute();
-
         // Obtenemos el valor del parámetro de salida
         int personaId = cs.getInt(2);  // Usamos el índice 2 para obtener el parámetro de salida
-        
+        //System.out.println(personaId);
         // Verificamos si el ID del usuario es válido
         if (personaId > 0) {
             // Ahora que tenemos el persona_id, consultamos la contraseña
             String sqlObtenerContrasena = "SELECT contrasenha FROM Usuario WHERE persona_id=?";
             try (PreparedStatement ps = conn.prepareStatement(sqlObtenerContrasena)) {
                 ps.setInt(1, personaId);
-
+                
                 // Ejecutamos la consulta para obtener la contraseña almacenada
                 try (ResultSet rsContrasena = ps.executeQuery()) {
                     if (rsContrasena.next()) {
                         String contrasenaAlmacenada = rsContrasena.getString("contrasenha");
                         String desencriptada = descifrar(contrasenaAlmacenada, llave);
-
+                       //System.out.println(desencriptada);
+                       //System.out.println(contrase);
                         // Comparar la contraseña almacenada con la proporcionada
-                        if (contrasenaAlmacenada.equals(desencriptada)) {
+                        if (desencriptada.equals(contrase)) {
                             // Si la contraseña es correcta, devolvemos el usuario
                             return personaId;
                         } else {

@@ -45,28 +45,29 @@ public class UsuarioServiceTest {
 
     @Test
     @Order(1)
-          @Disabled("Deshabilitado temporalmente para pruebas")
+          //@Disabled("Deshabilitado temporalmente para pruebas")
     void testRegistrarUsuario() throws Exception {
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
         
         // Registro del usuario
         usuarioService.registrarUsuario(usuario);
-
+       
     }
 
     @Test
     @Order(2)
             @Disabled("Deshabilitado temporalmente para pruebas")
     void testAutenticarUsuario() throws Exception {     
-        Trabajador trabajador= crearTrabajadorPrueba();
-        Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
-        usuarioService.registrarUsuario(usuario);
-        int id = usuarioService.autenticar(usuario.getNombreUsuario(), "123");
-
+        //Trabajador trabajador= crearTrabajadorPrueba();
+        //Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
+        //usuarioService.registrarUsuario(usuario);
+        int id = usuarioService.autenticar("PapaHuayro", "123");
+        Trabajador trabajadorDos= trabajadorService.obtenerTrabajador(id);
         // Verificación
         assertNotNull(id);
-      
+        //assertNotNull(trabajador);
+        //assertEquals(id, trabajador.getPersona_id());
     }
 
     @Test
