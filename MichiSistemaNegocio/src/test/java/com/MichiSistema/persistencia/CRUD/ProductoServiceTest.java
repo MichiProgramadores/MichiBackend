@@ -102,5 +102,35 @@ public class ProductoServiceTest {
                    
     }
     
+    @Test
+    @Order(5)
+    @Disabled("Deshabilitado temporalmente para pruebas")
+    void listarProductosActivos() throws Exception {
+        // Crear un producto de prueba
+        Producto producto = crearProductoPrueba();
+        productoService.registrarProducto(producto);  // Registrar el producto
+
+        // Llamar al método listarProductosActivos() que debe devolver productos activos
+        List<Producto> productosActivos = productoService.listarProductosActivos();
+
+        // Verificar que la lista de productos no sea nula y tenga al menos 1 producto
+        assertNotNull(productosActivos, "La lista de productos activos no debe ser nula");
+        assertFalse(productosActivos.isEmpty(), "La lista de productos activos no debe estar vacía");
+
+        // Verificar que el producto registrado esté presente en la lista de productos activos
+        Producto productoRegistrado = null;
+        for (Producto p : productosActivos) {
+            if (p.getProducto_id() == producto.getProducto_id()) {
+                productoRegistrado = p;
+                break;
+            }
+        }
+
+        // Comprobar que el producto registrado está presente en la lista de activos
+        assertNotNull(productoRegistrado, "El producto registrado debería estar en la lista de productos activos");
+        assertEquals(producto.getNombre(), productoRegistrado.getNombre(), "El nombre del producto debería coincidir");
+        assertEquals(producto.getPrecio(), productoRegistrado.getPrecio(), "El precio del producto debería coincidir");
+    }
+    
     
 }

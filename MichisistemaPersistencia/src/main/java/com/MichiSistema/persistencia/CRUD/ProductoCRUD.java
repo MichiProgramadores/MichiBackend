@@ -137,7 +137,7 @@ public class ProductoCRUD extends BaseCRUD<Producto> implements ProductoDAO{
                 entities.add(createFromResultSet(rs)); 
             }
         } catch (SQLException e) {
-            throw new RuntimeException("Error al listar productos activos", e);
+            throw new RuntimeException("Error al listar productos activos Persistencia", e);
         }
         return entities;
     }

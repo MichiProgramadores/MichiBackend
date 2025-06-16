@@ -137,7 +137,7 @@ public class ProductoServiceImpl implements ProductoService {
             productosEncontrados = (ArrayList<Producto>) productoDAO.buscarPorNombre(nombre); 
         }catch (Exception e) {
             
-            throw new Exception("Error inesperado al obtener productos por nombre", e);
+            throw new Exception("Error inesperado al obtener productos por nombrei", e);
         }
         return productosEncontrados;
     }
