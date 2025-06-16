@@ -77,11 +77,12 @@ public class UsuarioWS {
         try {
             int id = usuarioService.autenticar(nombreUsuario, contraseña);
             if (id==0) {
-                throw new WebServiceException("Autenticación fallida: Credenciales inválidas");
+               // throw new WebServiceException("Autenticación fallida: Credenciales inválidas");
+                return 0;
             }
             return id;
         } catch (Exception ex) {
-            throw new WebServiceException("Error al autenticar usuario: " + ex.getMessage());
+            return 0;
         }
     }
 }
