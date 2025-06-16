@@ -131,15 +131,15 @@ public class UsuarioCRUD extends BaseCRUD<Usuario> implements UsuarioDAO {
                             // Si la contraseña es correcta, devolvemos el usuario
                             return personaId;
                         } else {
-                            throw new SQLException("Contraseña incorrecta");
+                            return 0;
                         }
                     } else {
-                        throw new SQLException("No se encontró la contraseña para el usuario");
+                        return 0;
                     }
                 }
             }
         } else {
-            throw new SQLException("Usuario no encontrado");
+            return 0;
         }
     }
 }
