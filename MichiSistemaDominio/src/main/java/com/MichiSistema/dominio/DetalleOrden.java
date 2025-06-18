@@ -6,7 +6,9 @@ package com.MichiSistema.dominio;
 import com.MichiSistema.Enum.UnidadMedida;
 //import com.MichiSistema.persistencia.CRUD.ProductoCRUD;
 import java.sql.*;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 /**
  *
  * @author Usuario
@@ -19,6 +21,7 @@ public class DetalleOrden {
     private UnidadMedida unidadMedida;
     private double subtotal;
     private int orden_id;
+
     public DetalleOrden(){}
     
     public DetalleOrden(int cantidadSolicitada,int cantidadEntregada, 

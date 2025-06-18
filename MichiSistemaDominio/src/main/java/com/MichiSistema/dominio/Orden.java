@@ -7,6 +7,11 @@ import com.MichiSistema.Enum.TipoRecepcion;
 import java.util.ArrayList;
 import com.MichiSistema.Enum.TipoEstadoDevolucion;
 import java.util.Date;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElementWrapper;
+import jakarta.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 
 public class Orden {
     private int idOrden;
@@ -78,6 +83,8 @@ public class Orden {
     public void setIdOrden(int idOrden) { this.idOrden = idOrden; }
     public Date getFecha_devolucion() { return fecha_devolucion; }
     public void setFecha_devolucion(Date fecha_devolucion) { this.fecha_devolucion = fecha_devolucion; }
+        @XmlElementWrapper(name = "listaOrdenes")
+    @XmlElement(name = "detalleOrden")
     public ArrayList<DetalleOrden> getListaOrdenes() { return listaOrdenes; }
     public void setListaOrdenes(ArrayList<DetalleOrden> listaOrdenes) { this.listaOrdenes = listaOrdenes; }
     public TipoEstadoDevolucion getTipoEstadoDevolucion() { return tipoEstadoDevolucion; }

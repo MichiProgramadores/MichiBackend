@@ -156,7 +156,7 @@ public class OrdenServiceTest {
 
     @Test
     @Order(2)
-            @Disabled("Deshabilitado temporalmente para pruebas")
+    @Disabled("Deshabilitado temporalmente para pruebas")
     void obtenerOrden() throws Exception {
         Orden orden = crearOrdenPrueba();
         ordenService.registrarOrden(orden);
@@ -166,6 +166,8 @@ public class OrdenServiceTest {
         Orden ordenObt = ordenService.obtenerOrden(ordenId);
         assertNotNull(ordenObt);
         assertEquals(TipoRecepcion.DELIVERY, ordenObt.getTipoRecepcion());
+        assertNotNull(ordenObt.getListaOrdenes()); // que no sea null
+        assertFalse(ordenObt.getListaOrdenes().isEmpty(), "La lista de detalles está vacía"); // que no esté vacía
     }
 
     @Test

@@ -67,7 +67,18 @@ public class OrdenWS {
     @WebMethod(operationName = "obtenerOrden")
     public Orden obtenerOrden(@WebParam(name = "idOrden") int idOrden) {
         try{
-            return ordenService.obtenerOrden(idOrden);
+            
+           // return ordenService.obtenerOrden(idOrden);
+           Orden orden = ordenService.obtenerOrden(idOrden);
+
+        // Verifica en consola
+            if (orden.getListaOrdenes() == null) {
+                System.out.println("⚠ listaOrdenes ES NULL en backend");
+            } else {
+                System.out.println("✅ listaOrdenes size: " + orden.getListaOrdenes().size());
+            }
+
+                return orden;
         }catch(Exception ex){
             throw new WebServiceException("Error al obtener orden "+ex.getMessage());
         }

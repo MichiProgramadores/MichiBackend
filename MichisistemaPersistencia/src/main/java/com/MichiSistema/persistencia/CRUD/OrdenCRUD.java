@@ -1,11 +1,15 @@
 package com.MichiSistema.persistencia.CRUD;
+import com.MichiSistema.Enum.TipoCliente;
 import com.MichiSistema.Enum.TipoRecepcion;
+import com.MichiSistema.Enum.UnidadMedida;
 import com.MichiSistema.conexion.DBManager;
 import com.MichiSistema.dominio.DetalleOrden;
 import com.MichiSistema.dominio.Orden;
+import com.MichiSistema.persistencia.dao.DetalleOrdenDAO;
 import com.MichiSistema.persistencia.dao.OrdenDAO;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 //import java.util.Date;
 
 public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
@@ -111,7 +115,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         } else {
             orden.setFecha_emisión(null);
         }
-
+        
         orden.setClienteID(rs.getInt("cliente_persona_id"));  
         orden.setTrabajadorID(rs.getInt("trabajador_persona_id"));  
         return orden;
@@ -189,7 +193,65 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         }
     }
     
+    private ArrayList<DetalleOrden> obtenerDetallesPorOrdenId(Connection conn, int idOrden) throws SQLException {
+    String sql = "SELECT * FROM DetalleOrden WHERE orden_id = ?";
+    ArrayList<DetalleOrden> detalles = new ArrayList<>();
+    System.out.println("🧪 Buscando detalles para orden_id = " + idOrden);
+
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, idOrden);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                
+                DetalleOrden detalle = new DetalleOrden();
+                detalle.setProducto(rs.getInt("producto_id"));
+                detalle.setOrden_id(rs.getInt("orden_id"));
+                detalle.setCantidadSolicitada(rs.getInt("cantidad_solicitada"));
+                detalle.setCantidadEntregada(rs.getInt("cantidad_entregada"));
+                detalle.setSubtotal(rs.getDouble("subtotal"));
+                detalle.setPrecioAsignado(rs.getDouble("precio_asignado")); 
+                detalle.setUnidadMedida(UnidadMedida.valueOf(rs.getString("unidad_medida")));// Puedes mapear a Enum si tienes uno
+                detalles.add(detalle);
+                System.out.println("✅ Encontrado detalle: producto_id = " + rs.getInt("producto_id"));
+                System.out.println("→ Detalle insertado:");
+                System.out.println("  Producto ID: " + detalle.getProducto());
+                System.out.println("  Solicitada: " + detalle.getCantidadSolicitada());
+                System.out.println("  Precio: " + detalle.getPrecioAsignado());
+                System.out.println("  Subtotal: " + detalle.getSubtotal());
+            }
+        }
+    }
+
+    return detalles;
+}
+
     
+    
+    
+    
+    @Override
+    public Orden obtenerPorId(int idOrden){
+        System.out.println("🟢 Entrando a obtenerPorId con idOrden = " + idOrden);
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+             PreparedStatement ps = getSelectByIdPS(conn, idOrden);
+             ResultSet rs = ps.executeQuery()) {
+
+            if (rs.next()) {
+                System.out.println("✅ Existe la orden, llamando a obtenerDetallesPorOrdenId");
+                Orden orden = createFromResultSet(rs);
+                ArrayList<DetalleOrden> detalles= obtenerDetallesPorOrdenId(conn, idOrden);
+                orden.setListaOrdenes(detalles);
+                return orden;
+                } else {
+                System.out.println("❌ No se encontró ninguna orden con ese ID");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener entidad", e);
+        }
+        return null;
+    }
+
     
     
 }

@@ -42,6 +42,7 @@ public abstract class BaseCRUD<T> implements BaseDAO<T> {
 
     @Override
     public T obtenerPorId(Integer id) {
+        System.out.println("HOLA ESTOY ENTRANDO AQUI JEJE");
         try (Connection conn = DBManager.getInstance().obtenerConexion();
              PreparedStatement ps = getSelectByIdPS(conn, id);
              ResultSet rs = ps.executeQuery()) {

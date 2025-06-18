@@ -38,6 +38,7 @@ public class OrdenServiceImpl  implements OrdenService{
         this.productoDAO = new ProductoCRUD();
         this.clienteDAO = new ClienteCRUD();
         this.trabajadorDAO = new TrabajadorCRUD();
+        System.out.println("🟨 ordenDAO es instancia de: " + ordenDAO.getClass().getName());
     }
     
     @Override
