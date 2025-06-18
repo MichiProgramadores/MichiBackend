@@ -156,7 +156,7 @@ public class OrdenServiceTest {
 
     @Test
     @Order(2)
-    @Disabled("Deshabilitado temporalmente para pruebas")
+    //@Disabled("Deshabilitado temporalmente para pruebas")
     void obtenerOrden() throws Exception {
         Orden orden = crearOrdenPrueba();
         ordenService.registrarOrden(orden);
