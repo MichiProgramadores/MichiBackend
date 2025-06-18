@@ -186,5 +186,39 @@ public class ClienteCRUD extends BaseCRUD<Cliente> implements ClienteDAO {
 
         return clientes;
     }
-    
+     @Override
+    public List<Cliente> obtenerPorTipoIDCliente(TipoCliente tipo) {
+        List<Cliente> clientes = new ArrayList<>();
+
+        // Consulta SQL para obtener clientes por tipoCliente
+        String sql = "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, p.estado, "
+                   + "c.tipoCliente, c.puntuacion, c.numeroTipoCliente "
+                   + "FROM Persona p "
+                   + "JOIN Cliente c ON p.persona_id = c.persona_id "
+                   + "WHERE c.tipoCliente = ?";
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+            // Usamos PreparedStatement para evitar inyecciones SQL
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Establecemos el valor del tipoCliente (convertimos el enum a String)
+                ps.setString(1, tipo.toString());
+
+                // Ejecutamos la consulta y obtenemos el resultado
+                try (ResultSet rs = ps.executeQuery()) {
+                    // Iteramos sobre el resultado de la consulta y utilizamos la función createFromResultSet
+                    while (rs.next()) {
+                        Cliente cliente = createFromResultSet(rs);  // Usamos la función createFromResultSet para mapear los datos
+                        clientes.add(cliente);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            // En caso de error, se lanza una RuntimeException
+            throw new RuntimeException("Error al obtener clientes por tipo: " + tipo, e);
+        }
+
+        // Retornamos la lista de clientes encontrados
+        return clientes;
+    }
+
 }

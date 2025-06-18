@@ -5,6 +5,7 @@
 
 package com.MichiSistema.negocio;
 
+import com.MichiSistema.Enum.TipoCliente;
 import com.MichiSistema.dominio.Cliente;
 import java.util.ArrayList;
 
@@ -20,4 +21,5 @@ public interface ClienteService {
     ArrayList<Cliente> listarClientes() throws Exception;
     ArrayList<Cliente> listarClientesActivos() throws Exception;
     ArrayList<Cliente> listarPorNombreClientes(String nombre) throws Exception;
+    ArrayList<Cliente> listarPorTipoClientes(TipoCliente tipoCliente) throws Exception;
 }

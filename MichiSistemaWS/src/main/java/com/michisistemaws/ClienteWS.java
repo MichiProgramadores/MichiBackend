@@ -97,5 +97,14 @@ public class ClienteWS {
             throw new WebServiceException("Error al obtener cliente "+ex.getMessage());
         }
     }
-    
+    @WebMethod(operationName = "listarClientesPorTipo")
+    public List<Cliente> listarPorTipoCliente(@WebParam(name = "tipoCliente") String tipo) {
+        try {
+            // Llamada al servicio que obtiene los clientes por tipo
+            return clienteService.listarPorTipoClientes(TipoCliente.valueOf(tipo));
+        } catch (Exception ex) {
+            // Captura cualquier error y lanza una WebServiceException con el mensaje de error
+            throw new WebServiceException("Error al listar clientes por tipo: " + ex.getMessage());
+        }
+    }
 }

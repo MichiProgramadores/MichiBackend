@@ -2,6 +2,7 @@
 
 package com.MichiSistema.negocio.impl;
 
+import com.MichiSistema.Enum.TipoCliente;
 import com.MichiSistema.dominio.Cliente;
 import com.MichiSistema.negocio.ClienteService;
 import com.MichiSistema.persistencia.CRUD.ClienteCRUD;
@@ -137,4 +138,22 @@ public class ClienteServiceImpl implements ClienteService {
         }
         return clientesEncontrados;
     }
+    
+    @Override
+    public ArrayList<Cliente> listarPorTipoClientes(TipoCliente tipoCliente) throws Exception {
+        ArrayList<Cliente> clientes = new ArrayList<>();
+
+        try {
+            // Lógica para obtener los clientes por tipoCliente (similar a lo que hace obtenerPorTipoProducto)
+            // Aquí deberías implementar la llamada a productoDAO o el método correspondiente para obtener los clientes
+            clientes = (ArrayList<Cliente>) clienteDAO.obtenerPorTipoIDCliente(tipoCliente);
+        } catch (Exception e) {
+            // Manejo de la excepción si ocurre algún error
+            System.err.println("Error inesperado al obtener clientes por tipo: " + tipoCliente);
+            // Imprime la traza de la excepción
+        }
+
+        return clientes;
+    }
+
 }
