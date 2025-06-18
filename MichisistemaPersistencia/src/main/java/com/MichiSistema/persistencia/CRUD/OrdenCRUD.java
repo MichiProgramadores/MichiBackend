@@ -213,12 +213,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
                 detalle.setPrecioAsignado(rs.getDouble("precio_asignado")); 
                 detalle.setUnidadMedida(UnidadMedida.valueOf(rs.getString("unidad_medida")));// Puedes mapear a Enum si tienes uno
                 detalles.add(detalle);
-                System.out.println("✅ Encontrado detalle: producto_id = " + rs.getInt("producto_id"));
-                System.out.println("→ Detalle insertado:");
-                System.out.println("  Producto ID: " + detalle.getProducto());
-                System.out.println("  Solicitada: " + detalle.getCantidadSolicitada());
-                System.out.println("  Precio: " + detalle.getPrecioAsignado());
-                System.out.println("  Subtotal: " + detalle.getSubtotal());
+
             }
         }
     }
@@ -238,13 +233,13 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
              ResultSet rs = ps.executeQuery()) {
 
             if (rs.next()) {
-                System.out.println("✅ Existe la orden, llamando a obtenerDetallesPorOrdenId");
+                System.out.println("Existe la orden, llamando a obtenerDetallesPorOrdenId");
                 Orden orden = createFromResultSet(rs);
                 ArrayList<DetalleOrden> detalles= obtenerDetallesPorOrdenId(conn, idOrden);
                 orden.setListaOrdenes(detalles);
                 return orden;
                 } else {
-                System.out.println("❌ No se encontró ninguna orden con ese ID");
+                System.out.println(" No se encontró ninguna orden con ese ID");
             }
         } catch (SQLException e) {
             throw new RuntimeException("Error al obtener entidad", e);
