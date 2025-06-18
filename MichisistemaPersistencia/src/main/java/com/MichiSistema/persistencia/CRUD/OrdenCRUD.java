@@ -16,7 +16,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
 
     @Override
     protected PreparedStatement getInsertPS(Connection conn, Orden orden) throws SQLException {
-        String query = "INSERT INTO Orden(tipo_recepcion, fecha_registro, set_up_personalizado, total_pagar, saldo, cantidad_dias, fecha_devolucion, fecha_entrega, fecha_emision, cliente_persona_id,"
+            String query = "INSERT INTO Orden(tipo_recepcion, fecha_registro, set_up_personalizado, total_pagar, saldo, cantidad_dias, fecha_devolucion, fecha_entrega, fecha_emision, cliente_persona_id,"
                 + "trabajador_persona_id, tipoEstadoFechaDevol_id) "
                 + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         

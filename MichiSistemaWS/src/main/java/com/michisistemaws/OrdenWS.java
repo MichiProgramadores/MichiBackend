@@ -6,6 +6,7 @@ package com.michisistemaws;
 
 import com.MichiSistema.Enum.TipoEstadoDevolucion;
 import com.MichiSistema.Enum.TipoFechaDevolucion;
+import com.MichiSistema.Enum.TipoRecepcion;
 import com.MichiSistema.dominio.Orden;
 import com.MichiSistema.negocio.OrdenService;
 import com.MichiSistema.negocio.impl.OrdenServiceImpl;
@@ -38,8 +39,9 @@ public class OrdenWS {
     }
     
     @WebMethod(operationName = "registrarOrden")
-    public void registrarOrden(@WebParam(name = "orden") Orden orden) {
+    public void registrarOrden(@WebParam(name = "orden") Orden orden,@WebParam(name = "str_tipoRecepcion") String str_tipoRecepcion) {
         try{
+            orden.setTipoRecepcion(TipoRecepcion.valueOf(str_tipoRecepcion));
             ordenService.registrarOrden(orden);
         }catch(Exception ex){
             throw new WebServiceException("Error al registrar orden "+ex.getMessage());
