@@ -45,7 +45,8 @@ public class UsuarioCRUD extends BaseCRUD<Usuario> implements UsuarioDAO {
         PreparedStatement ps = conn.prepareStatement(
             "UPDATE Usuario SET contrasenha=?, nombreUsuario=? WHERE persona_id=?"
         );
-        ps.setString(1, usuario.getContrasena());
+        String contra=cifrar(usuario.getContrasena(), llave);
+        ps.setString(1, contra);
         ps.setString(2, usuario.getNombreUsuario());
         ps.setInt(3, usuario.getId());  // persona_id como referencia
         return ps;
@@ -88,7 +89,8 @@ public class UsuarioCRUD extends BaseCRUD<Usuario> implements UsuarioDAO {
     protected Usuario createFromResultSet(ResultSet rs) throws SQLException {
         Usuario usuario = new Usuario();
         usuario.setId(rs.getInt("persona_id"));
-        usuario.setContrasena(rs.getString("contrasenha"));
+        String desencriptada = descifrar(rs.getString("contrasenha"), llave);
+        usuario.setContrasena(desencriptada);
         usuario.setNombreUsuario(rs.getString("nombreUsuario"));
         return usuario;
     }

@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.MichiSistema.persistencia.CRUD.ClienteServiceTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.060 s -- in com.MichiSistema.persistencia.CRUD.ClienteServiceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 4, Time elapsed: 0.039 s -- in com.MichiSistema.persistencia.CRUD.ClienteServiceTest
