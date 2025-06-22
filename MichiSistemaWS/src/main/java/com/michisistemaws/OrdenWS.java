@@ -49,8 +49,9 @@ public class OrdenWS {
     }
     
     @WebMethod(operationName = "actualizarOrden")
-    public void actualizarOrden(@WebParam(name = "orden") Orden orden) {
+    public void actualizarOrden(@WebParam(name = "orden") Orden orden, @WebParam(name = "str_tipoRecepcion") String str_tipoRecepcion) {
         try{
+            orden.setTipoRecepcion(TipoRecepcion.valueOf(str_tipoRecepcion));
             ordenService.actualizarOrden(orden);
         }catch(Exception ex){
             throw new WebServiceException("Error al actualizar orden "+ex.getMessage());
@@ -87,20 +88,21 @@ public class OrdenWS {
     }
     
     @WebMethod(operationName = "actualizarEstadoDevolucion")
-    public void actualizarEstadoOrden(@WebParam(name = "ventaId") int ventaId,
-            @WebParam(name = "estado") TipoEstadoDevolucion estado) {
+    public void actualizarEstadoOrden(@WebParam(name = "idOrden") int idOrden,
+           @WebParam(name = "str_tipoEstadoDevol") String str_tipoEstadoDevol) {
         try{
-            ordenService.actualizarEstadoDevolucion(ventaId, estado);
+            TipoEstadoDevolucion estado = TipoEstadoDevolucion.valueOf(str_tipoEstadoDevol);
+            ordenService.actualizarEstadoDevolucion(idOrden, estado);
         }catch(Exception ex){
             throw new WebServiceException("Error al actualizar el estado de devolucion de la orden "+ex.getMessage());
         }
     }
     
     @WebMethod(operationName = "actualizarEstadoFechaDevolucion")
-    public void actualizarEstadoFechaDevolucion(@WebParam(name = "ventaId") Integer ventaId,
+    public void actualizarEstadoFechaDevolucion(@WebParam(name = "idOrden") Integer idOrden,
             @WebParam(name = "estado") TipoFechaDevolucion estadoFecha) {
         try{
-            ordenService.actualizarEstadoFechaDevolucion(ventaId, estadoFecha);
+            ordenService.actualizarEstadoFechaDevolucion(idOrden, estadoFecha);
         }catch(Exception ex){
             throw new WebServiceException("Error al actualizar el estado de la fecha de devolucion de la orden "+ex.getMessage());
         }

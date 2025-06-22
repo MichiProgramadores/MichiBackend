@@ -1,5 +1,6 @@
 package com.MichiSistema.persistencia.CRUD;
 import com.MichiSistema.Enum.TipoCliente;
+import com.MichiSistema.Enum.TipoEstadoDevolucion;
 import com.MichiSistema.Enum.TipoRecepcion;
 import com.MichiSistema.Enum.UnidadMedida;
 import com.MichiSistema.conexion.DBManager;
@@ -10,6 +11,8 @@ import com.MichiSistema.persistencia.dao.OrdenDAO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 //import java.util.Date;
 
 public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
@@ -181,6 +184,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
                 }
                 // Registrar detalles después de insertar la orden
                 registrarDetalles(conn, orden);
+                actualizarMontoTotal(conn, orden);
                 conn.commit();
             } catch (SQLException e) {
                 conn.rollback();
@@ -219,15 +223,31 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
     }
 
     return detalles;
-}
+    }
 
     
-    
+    private void actualizarMontoTotal(Connection conn, Orden orden) throws SQLException {
+        double montoTotal = 0;
+        ArrayList<DetalleOrden> detalles = obtenerDetallesPorOrdenId(conn, orden.getIdOrden());
+
+        // Calcula el monto total sumando los subtotales de los detalles
+        for (DetalleOrden detalle : detalles) {
+            montoTotal += detalle.getSubtotal(); // Sumar el subtotal de cada detalle
+        }
+
+        // Actualizar la orden con el monto total calculado
+        String updateQuery = "UPDATE Orden SET total_pagar = ? WHERE orden_id = ?";
+        try (PreparedStatement ps = conn.prepareStatement(updateQuery)) {
+            ps.setDouble(1, montoTotal);
+            ps.setInt(2, orden.getIdOrden());
+            ps.executeUpdate();
+        }
+    }
     
     
     @Override
     public Orden obtenerPorId(int idOrden){
-        System.out.println("🟢 Entrando a obtenerPorId con idOrden = " + idOrden);
+        
         try (Connection conn = DBManager.getInstance().obtenerConexion();
              PreparedStatement ps = getSelectByIdPS(conn, idOrden);
              ResultSet rs = ps.executeQuery()) {
@@ -248,6 +268,62 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
     }
 
     
+    private void actualizarDetalles(Connection conn, DetalleOrden detalle) throws SQLException {
+        String sp = "{CALL sp_actualizar_detalle_orden(?, ?)}";
+        try (CallableStatement cs = conn.prepareCall(sp)) {
+            
+                cs.setInt(1, detalle.getOrden_id());
+                cs.setInt(2, detalle.getProducto());//get producto trae el id del producto
+                cs.setInt(3, detalle.getCantidadSolicitada());
+                cs.setInt(4, detalle.getCantidadEntregada());
+                cs.setDouble(5, detalle.getPrecioAsignado());
+                cs.setString(6, detalle.getUnidadMedida().name());
+                //cs.setDouble(7, detalle.getSubtotal());
+                cs.execute();
+            
+        }
+    }
+    @Override
+    public void actualizarCantidadEntregada(Orden orden){
+        System.out.println(" Entrando a actualizar cantidad entregada orden" + orden.getIdOrden());
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+            PreparedStatement ps = getUpdatePS(conn, orden)) {
+            
+            ps.executeUpdate();
+            ArrayList<DetalleOrden> detalles= obtenerDetallesPorOrdenId(conn, orden.getIdOrden());
+            for (DetalleOrden detalle : detalles) {
+                if(detalle.getCantidadEntregada()>0)
+                    actualizarDetalles(conn, detalle);
+            }
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar entidad", e);
+        }
+    }
+
+    @Override
+    public void actualizarEstadoDevolucion(int idOrden, TipoEstadoDevolucion estado) {
+        String sp = "{CALL sp_actualizar_tipo_estado_devolucion(?, ?)}";
+//        String updateQuery = "UPDATE Orden SET tipo_estado_devolucion = ? WHERE orden_id = ?";
+//
+//        
+        try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+             System.out.println("Actualizando estado de devolucion: " + estado.name());
+            try (CallableStatement cs = conn.prepareCall(sp)) { 
+                 
+                cs.setInt(1, idOrden);
+                cs.setString(2, estado.name());
+                
+                cs.executeUpdate();
+            }catch(SQLException e){
+                e.printStackTrace();
+                throw new RuntimeException("Error al ejecutar procedimiento de actu del estado", e);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al contectar con la bd para actualizar el estado", e);
+        }
+            
+    }
     
 }
     

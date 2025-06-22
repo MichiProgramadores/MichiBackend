@@ -52,7 +52,11 @@ public class OrdenServiceImpl  implements OrdenService{
         if (trabajadorDAO.obtenerPorId(orden.getTrabajadorID()) == null) {
             throw new Exception("El empleado no existe");
         }
-        
+        if(orden.getFecha_entrega().before(orden.getFecha_emisión())
+                || orden.getFecha_devolucion().before(orden.getFecha_entrega())
+                ||orden.getFecha_devolucion().before(orden.getFecha_emisión())){
+            throw new Exception("Las fechas ingresadas son incorrectas");
+        }
         // Validar stock de productos
         for (DetalleOrden detalle : orden.getListaOrdenes()) {
             Producto producto = productoDAO.obtenerPorId(detalle.getProducto());
@@ -125,8 +129,9 @@ public class OrdenServiceImpl  implements OrdenService{
     }
 
     @Override
-    public void actualizarEstadoDevolucion(int ventaId, TipoEstadoDevolucion estado) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void actualizarEstadoDevolucion(int idOrden, TipoEstadoDevolucion estado) throws Exception {
+        
+        ordenDAO.actualizarEstadoDevolucion( idOrden, estado);
     }
 
 }
