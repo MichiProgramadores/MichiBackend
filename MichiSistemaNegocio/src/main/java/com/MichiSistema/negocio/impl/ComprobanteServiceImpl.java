@@ -84,7 +84,9 @@ public class ComprobanteServiceImpl implements ComprobanteService {
             throw new Exception("El total de la venta debe ser mayor a 0");
         }
         
-        comprobanteDAO.actualizarEstado(comprobante.getId_comprobante(), "FACTURADO");
+        //comprobanteDAO.actualizarEstado(comprobante, "FACTURADO");
+        comprobanteDAO.actualizar(comprobante);
+        
     }
 
     @Override
@@ -97,7 +99,7 @@ public class ComprobanteServiceImpl implements ComprobanteService {
             throw new Exception("No se puede eliminar un comprobante pagado");
         }
         
-        comprobanteDAO.actualizarEstado(idComprobante,"Eliminado");
+        comprobanteDAO.actualizarEstado(comprobante, "ELIMINADO");
 
     }
 
@@ -116,8 +118,8 @@ public class ComprobanteServiceImpl implements ComprobanteService {
     }
 
     @Override
-    public void actualizarEstadoComprobante(int id_comprobante, String estado) {
+    public void actualizarEstadoComprobante(Comprobante comprobante, String estado) {
 
-        comprobanteDAO.actualizarEstado(id_comprobante, estado);
+        comprobanteDAO.actualizarEstado(comprobante, estado);
     }
 }

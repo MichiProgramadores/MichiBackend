@@ -10,5 +10,5 @@ package com.MichiSistema.Enum;
  * @author Mulatillo Gomez, Ariana Camila
  */
 public enum TipoComprobante {
-    INVOICE,RECEIPT, CREDIT_NOTE, DEBIT_NOTE, PURCHASE_ORDER, SALES_ORDER,HOLA_SOY_OSCAR
+    INVOICE,RECEIPT, CREDIT_NOTE, DEBIT_NOTE, PURCHASE_ORDER, SALES_ORDER
 }

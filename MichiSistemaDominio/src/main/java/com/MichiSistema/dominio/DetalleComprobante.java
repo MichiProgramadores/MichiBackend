@@ -1,6 +1,7 @@
 package com.MichiSistema.dominio;
 import com.MichiSistema.Enum.UnidadMedida;
 //import com.MichiSistema.persistencia.CRUD.ProductoCRUD;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -8,13 +9,14 @@ import com.MichiSistema.Enum.UnidadMedida;
  */
 import java.sql.*;
 
+@XmlRootElement
 public class DetalleComprobante {
     private int producto_id;
-    private double subtotal;
+    private double subtotal; //sin tax
     private int cantidad;
-    
     private UnidadMedida unidad_medida;
     private int comprobante_id;
+    
     // Constructor con parámetros
     public DetalleComprobante(int comprobante_id, Producto producto, 
             int cantidad) throws SQLException {
@@ -28,6 +30,16 @@ public class DetalleComprobante {
         this.cantidad = cantidad; // Inicializa la cantidad del producto 
         this.comprobante_id= comprobante_id;
     }
+
+    public DetalleComprobante(int producto_id, double subtotal, int cantidad,
+            UnidadMedida unidad_medida, int comprobante_id) {
+        this.producto_id = producto_id;
+        this.subtotal = subtotal;
+        this.cantidad = cantidad;
+        this.unidad_medida = unidad_medida;
+        this.comprobante_id = comprobante_id;
+    }
+    
     public DetalleComprobante(){
     }
 
@@ -39,6 +51,7 @@ public class DetalleComprobante {
         this.unidad_medida = otroDetalle.unidad_medida; // Copia la unidad de medida
         this.comprobante_id=otroDetalle.comprobante_id;
     }
+    
     /**
      * @return the producto_id
      */

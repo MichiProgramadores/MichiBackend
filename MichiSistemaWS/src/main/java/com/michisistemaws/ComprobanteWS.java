@@ -67,6 +67,7 @@ public class ComprobanteWS {
         }
     }
     
+    /*
     @WebMethod(operationName = "actualizarEstadoComprobante")
     public void actualizarEstadoComprobante(@WebParam(name = "idComprobante") int idComprobante,
             @WebParam(name = "toString") String toString) {
@@ -76,5 +77,6 @@ public class ComprobanteWS {
             throw new WebServiceException("Error al actualizar el estado del comprobante "+ex.getMessage());
         }
     }
+    */
     
 }

@@ -9,6 +9,7 @@ import com.MichiSistema.persistencia.dao.BaseDAO;
  * @author rober
  */
 public interface ComprobanteDAO extends BaseDAO<Comprobante>{
-   public void actualizarEstado(int id_comprobante, String estado);
-   
+    public void actualizar(Comprobante comprobante);
+   public void actualizarEstado(Comprobante comprobante, String estado);
+   public Comprobante obtenerPorId(int idComprobante);
 }
