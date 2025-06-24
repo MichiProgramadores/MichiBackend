@@ -9,32 +9,28 @@ public class EventoCRUD extends BaseCRUD<Evento> implements EventoDAO{
 
     @Override
     protected PreparedStatement getInsertPS(Connection conn, Evento evento) throws SQLException {
-        String query = "INSERT INTO Evento(fechaInicio, fechaFin, horaInicio, horaFin, direccion, codigoPostal, descripcion, tipoEvento) "
-               + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO Evento(fechaInicio, fechaFin, direccion, codigoPostal, descripcion, tipoEvento) "
+               + "VALUES(?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         ps.setDate(1, new Date(evento.getFechaInicio().getTime()));
         ps.setDate(2, new Date(evento.getFechaFin().getTime())); // Convertir LocalDate a Date
-        ps.setTime(3, java.sql.Time.valueOf(evento.getHoraInicio())); // Convertir LocalTime a Time
-        ps.setTime(4, java.sql.Time.valueOf(evento.getHoraFin())); // Convertir LocalTime a Time
-        ps.setString(5, evento.getDireccion());
-        ps.setString(6, evento.getCodigoPostal());
-        ps.setString(7, evento.getDescripcion());
-        ps.setString(8, evento.getTipoEvento().toString());
+        ps.setString(3, evento.getDireccion());
+        ps.setString(4, evento.getCodigoPostal());
+        ps.setString(5, evento.getDescripcion());
+        ps.setString(6, evento.getTipoEvento().toString());
         return ps;
     }
 
     @Override
     protected PreparedStatement getUpdatePS(Connection conn, Evento evento) throws SQLException {
-        String query = "UPDATE Evento SET fechaInicio=?, fechaFin=?, horaInicio=?, horaFin=?, direccion=?, codigoPostal=?, descripcion=? WHERE evento_id=?";
+        String query = "UPDATE Evento SET fechaInicio=?, fechaFin=?, direccion=?, codigoPostal=?, descripcion=? WHERE evento_id=?";
         PreparedStatement ps = conn.prepareStatement(query);
         ps.setDate(1, new Date(evento.getFechaInicio().getTime()));
         ps.setDate(2, new Date(evento.getFechaFin().getTime()));
-        ps.setTime(3, java.sql.Time.valueOf(evento.getHoraInicio()));
-        ps.setTime(4, java.sql.Time.valueOf(evento.getHoraFin()));
-        ps.setString(5, evento.getDireccion());
-        ps.setString(6, evento.getCodigoPostal());
-        ps.setString(7, evento.getDescripcion());
-        ps.setInt(8, evento.getEvento_id());
+        ps.setString(3, evento.getDireccion());
+        ps.setString(4, evento.getCodigoPostal());
+        ps.setString(5, evento.getDescripcion());
+        ps.setInt(6, evento.getEvento_id());
         return ps;
     }
 
@@ -48,7 +44,7 @@ public class EventoCRUD extends BaseCRUD<Evento> implements EventoDAO{
 
     @Override
     protected PreparedStatement getSelectByIdPS(Connection conn, Integer id) throws SQLException {
-       String query = "SELECT evento_id, fechaInicio, fechaFin, horaInicio, horaFin, direccion, codigoPostal, descripcion FROM Evento WHERE evento_id=?";
+       String query = "SELECT evento_id, fechaInicio, fechaFin, direccion, codigoPostal, descripcion FROM Evento WHERE evento_id=?";
        PreparedStatement ps = conn.prepareStatement(query);
        ps.setInt(1, id);
        return ps;
@@ -66,8 +62,6 @@ public class EventoCRUD extends BaseCRUD<Evento> implements EventoDAO{
         evento.setEvento_id(rs.getInt("evento_id"));
         evento.setFechaInicio(rs.getDate("fechaInicio"));  // Convertir Date a LocalDate
         evento.setFechaFin(rs.getDate("fechaFin"));  // Convertir Date a LocalDate
-        evento.setHoraInicio(rs.getTime("horaInicio").toLocalTime());  // Convertir Time a LocalTime
-        evento.setHoraFin(rs.getTime("horaFin").toLocalTime());  // Convertir Time a LocalTime
         evento.setDireccion(rs.getString("direccion"));
         evento.setCodigoPostal(rs.getString("codigoPostal"));
         evento.setDescripcion(rs.getString("descripcion"));

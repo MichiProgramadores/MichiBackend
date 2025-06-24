@@ -14,20 +14,15 @@ public class Evento {
     private int evento_id;
     private Date fechaInicio;
     private Date fechaFin;
-    private LocalTime horaInicio;
-    private LocalTime horaFin;
     private String direccion;
     private String codigoPostal;
     private String descripcion;
     private TipoEvento tipoEvento;
     
     public Evento(TipoEvento tipoEvento,Date fechaInicio, Date fechaFin,
-                  LocalTime horaInicio, LocalTime horaFin,
-                  String direccion, String codigoPostal) {
+                                  String direccion, String codigoPostal) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
         this.direccion = direccion;
         this.codigoPostal = codigoPostal;
         this.tipoEvento=tipoEvento;
@@ -36,8 +31,6 @@ public class Evento {
     public Evento() {
         this.fechaInicio = new Date(); // Fecha de inicio predeterminada es la fecha actual
         this.fechaFin = new Date(); // Fecha de fin predeterminada es la fecha actual
-        this.horaInicio = LocalTime.MIDNIGHT; // Hora de inicio predeterminada es la medianoche
-        this.horaFin = LocalTime.MIDNIGHT; // Hora de fin predeterminada es la medianoche
         this.direccion = ""; // Dirección predeterminada vacía
         this.codigoPostal = ""; // Código postal predeterminado vacío
         this.descripcion = ""; // Descripción predeterminada vacía
@@ -49,8 +42,6 @@ public class Evento {
         this.evento_id = otroEvento.evento_id; // Copia el ID del evento
         this.fechaInicio = otroEvento.fechaInicio; // Copia la fecha de inicio
         this.fechaFin = otroEvento.fechaFin; // Copia la fecha de fin
-        this.horaInicio = otroEvento.horaInicio; // Copia la hora de inicio
-        this.horaFin = otroEvento.horaFin; // Copia la hora de fin
         this.direccion = otroEvento.direccion; // Copia la dirección
         this.codigoPostal = otroEvento.codigoPostal; // Copia el código postal
         this.descripcion = otroEvento.descripcion; // Copia la descripción del evento
@@ -97,35 +88,6 @@ public class Evento {
     public void setFechaFin(Date fechaFin) {
         this.fechaFin = fechaFin;
     }
-
-    /**
-     * @return the horaInicio
-     */
-    public LocalTime getHoraInicio() {
-        return horaInicio;
-    }
-
-    /**
-     * @param horaInicio the horaInicio to set
-     */
-    public void setHoraInicio(LocalTime horaInicio) {
-        this.horaInicio = horaInicio;
-    }
-
-    /**
-     * @return the horaFin
-     */
-    public LocalTime getHoraFin() {
-        return horaFin;
-    }
-
-    /**
-     * @param horaFin the horaFin to set
-     */
-    public void setHoraFin(LocalTime horaFin) {
-        this.horaFin = horaFin;
-    }
-
     /**
      * @return the direccion
      */

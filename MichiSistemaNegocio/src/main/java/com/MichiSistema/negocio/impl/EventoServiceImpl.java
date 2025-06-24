@@ -29,9 +29,6 @@ public class EventoServiceImpl implements EventoService {
         if (evento.getFechaInicio() == null || evento.getFechaFin() == null) {
             throw new Exception("Las fechas del evento no pueden estar vacías");
         }
-        if (evento.getHoraInicio() == null || evento.getHoraFin() == null) {
-            throw new Exception("Las horas del evento no pueden estar vacías");
-        }
         if (evento.getFechaInicio().after(evento.getFechaFin())) {
             throw new Exception("La fecha de inicio no puede ser posterior a la fecha de fin");
         }
@@ -50,9 +47,6 @@ public class EventoServiceImpl implements EventoService {
         // Validaciones de negocio
         if (evento.getFechaInicio() == null || evento.getFechaFin() == null) {
             throw new Exception("Las fechas del evento no pueden estar vacías");
-        }
-        if (evento.getHoraInicio() == null || evento.getHoraFin() == null) {
-            throw new Exception("Las horas del evento no pueden estar vacías");
         }
         if (evento.getFechaInicio().after(evento.getFechaFin())) {
             throw new Exception("La fecha de inicio no puede ser posterior a la fecha de fin");
