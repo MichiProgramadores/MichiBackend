@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.MichiSistema.persistencia.CRUD.EventoServiceTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 2.148 s -- in com.MichiSistema.persistencia.CRUD.EventoServiceTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 3, Time elapsed: 2.376 s -- in com.MichiSistema.persistencia.CRUD.EventoServiceTest

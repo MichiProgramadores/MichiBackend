@@ -94,21 +94,21 @@ public class ComprobanteWS {
     */
     
     @WebMethod(operationName = "reporteFacturacion")
-    public byte[] reporteTrabajadores(@WebParam(name = "fecha_inicio") Date fechaInicio,
+    public byte[] reporteFacturacion(@WebParam(name = "fecha_inicio") Date fechaInicio,
             @WebParam(name = "fecha_fin") Date fechafin){
         try{
+            // Convertir java.util.Date a java.sql.Date si es necesario
+            java.sql.Date sqlFechaInicio = new java.sql.Date(fechaInicio.getTime());
+            java.sql.Date sqlFechaFin = new java.sql.Date(fechafin.getTime());
+
             Map<String, Object> params = new HashMap<>();
-            params.put("fecha_inicio", fechaInicio);  
-            params.put("fecha_fin", fechafin);
-            /*if(id_buscado==0){
-                params.put("header","REPORTE HISTÓRICO DE TRABAJADORES" );
-            }else{
-                params.put("header","REPORTE HISTÓRICO DEL TRABAJADOR "+id_buscado );
-            }*/
-            params.put("logo",ImageIO.read(new File(getFileResource("logoMichiSistema.png"))));
+            params.put("fecha_inicio", sqlFechaInicio);  
+            params.put("fecha_fin", sqlFechaFin);
+            params.put("logo", ImageIO.read(new File(getFileResource("logoMichiSistema.png"))));
+
             String fileXML = getFileResource("ComprobantesFactura.jrxml");            
             return generarBufferFromJP(fileXML, params);
-        }catch(Exception ex){
+        } catch(Exception ex) {
             throw new WebServiceException("Error al generar reporte de facturacion: " + ex.getMessage());
         }
     }
