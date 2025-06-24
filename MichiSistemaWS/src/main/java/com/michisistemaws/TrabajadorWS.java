@@ -140,6 +140,17 @@ public class TrabajadorWS {
         JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
         return JasperExportManager.exportReportToPdf(jp);
     }
+    
+    @WebMethod(operationName = "listarTrabajadoresPorTipo")
+    public List<Trabajador> listarPorTipoTrabajador(@WebParam(name = "tipoTrabajador") String tipo) {
+        try {
+            // Llamada al servicio que obtiene los trabajadores por tipo
+            return trabajadorService.listarPorTipoTrabajadores(TipoTrabajador.valueOf(tipo));
+        } catch (Exception ex) {
+            // Captura cualquier error y lanza una WebServiceException con el mensaje de error
+            throw new WebServiceException("Error al listar trabajadores por tipo: " + ex.getMessage());
+        }
+    }
 
     
 }

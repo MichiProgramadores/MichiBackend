@@ -168,6 +168,41 @@ public class TrabajadorCRUD  extends BaseCRUD<Trabajador> implements TrabajadorD
 
         return trabajadores;
     }
+
+    @Override
+    public List<Trabajador> obtenerPorTipoTrabajador(TipoTrabajador tipo) {
+        List<Trabajador> trabajadores = new ArrayList<>();
+
+    // Consulta SQL para obtener trabajadores por tipoTrabajador
+    String sql = "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, p.estado, "
+               + "t.tipoTrabajador "
+               + "FROM Persona p "
+               + "JOIN Trabajador t ON p.persona_id = t.persona_id "
+               + "WHERE t.tipoTrabajador = ?";
+
+    try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+        // Usamos PreparedStatement para evitar inyecciones SQL
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            // Establecemos el valor del tipoTrabajador (convertimos el enum a String)
+            ps.setString(1, tipo.toString());
+
+            // Ejecutamos la consulta y obtenemos el resultado
+            try (ResultSet rs = ps.executeQuery()) {
+                // Iteramos sobre el resultado de la consulta y utilizamos la función createFromResultSet
+                while (rs.next()) {
+                    Trabajador trabajador = createFromResultSet(rs);  // Usamos la función createFromResultSet para mapear los datos
+                    trabajadores.add(trabajador);
+                }
+            }
+        }
+    } catch (SQLException e) {
+        // En caso de error, se lanza una RuntimeException
+        throw new RuntimeException("Error al obtener trabajadores por tipo: " + tipo, e);
+    }
+
+    // Retornamos la lista de trabajadores encontrados
+    return trabajadores;
+    }
     
     
     

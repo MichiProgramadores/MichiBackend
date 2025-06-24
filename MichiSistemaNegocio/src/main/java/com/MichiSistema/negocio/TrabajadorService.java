@@ -5,6 +5,7 @@
 
 package com.MichiSistema.negocio;
 
+import com.MichiSistema.Enum.TipoTrabajador;
 import com.MichiSistema.dominio.Trabajador;
 import java.util.ArrayList;
 
@@ -20,4 +21,5 @@ public interface TrabajadorService {
     ArrayList<Trabajador> listarTrabajadores() throws Exception;
     ArrayList<Trabajador> listarTrabajadoresActivos() throws Exception;
     ArrayList<Trabajador> listarPorNombreTrabajadores(String nombre) throws Exception;
+    ArrayList<Trabajador> listarPorTipoTrabajadores(TipoTrabajador tipoCliente) throws Exception;
 }

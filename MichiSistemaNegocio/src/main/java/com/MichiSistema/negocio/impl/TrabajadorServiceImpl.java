@@ -4,6 +4,7 @@
  */
 
 package com.MichiSistema.negocio.impl;
+import com.MichiSistema.Enum.TipoTrabajador;
 import com.MichiSistema.dominio.Trabajador;
 import com.MichiSistema.negocio.TrabajadorService;
 import com.MichiSistema.persistencia.CRUD.TrabajadorCRUD;
@@ -121,6 +122,24 @@ public class TrabajadorServiceImpl implements TrabajadorService {
             throw new Exception("Error inesperado al obtener trabajadores por nombre", e);
         }
         return trabajadoresEncontrados;
+    }
+
+    @Override
+    public ArrayList<Trabajador> listarPorTipoTrabajadores(TipoTrabajador tipoTrabajador) throws Exception {
+        ArrayList<Trabajador> trabajadores = new ArrayList<>();
+
+    try {
+        // Lógica para obtener los trabajadores por tipoTrabajador
+        // Aquí deberías implementar la llamada a trabajadorDAO o el método correspondiente para obtener los trabajadores
+        trabajadores = (ArrayList<Trabajador>) trabajadorDAO.obtenerPorTipoTrabajador(tipoTrabajador);
+    } catch (Exception e) {
+        // Manejo de la excepción si ocurre algún error
+        System.err.println("Error inesperado al obtener trabajadores por tipo: " + tipoTrabajador);
+        // Imprime la traza de la excepción
+        e.printStackTrace();
+    }
+
+    return trabajadores;
     }
 }
 
