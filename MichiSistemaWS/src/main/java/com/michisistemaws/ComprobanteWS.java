@@ -4,6 +4,7 @@
  */
 package com.michisistemaws;
 
+import com.MichiSistema.conexion.DBManager;
 import com.MichiSistema.dominio.Comprobante;
 import com.MichiSistema.negocio.ComprobanteService;
 import com.MichiSistema.negocio.impl.ComprobanteServiceImpl;
@@ -11,7 +12,20 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.xml.ws.WebServiceException;
+import java.io.File;
+import java.sql.Connection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.imageio.ImageIO;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 @WebService(serviceName = "ComprobanteWS")
 public class ComprobanteWS {
@@ -78,5 +92,46 @@ public class ComprobanteWS {
         }
     }
     */
+    
+    @WebMethod(operationName = "reporteFacturacion")
+    public byte[] reporteTrabajadores(@WebParam(name = "fecha_inicio") Date fechaInicio,
+            @WebParam(name = "fecha_fin") Date fechafin){
+        try{
+            Map<String, Object> params = new HashMap<>();
+            params.put("fecha_inicio", fechaInicio);  
+            params.put("fecha_fin", fechafin);
+            /*if(id_buscado==0){
+                params.put("header","REPORTE HISTÓRICO DE TRABAJADORES" );
+            }else{
+                params.put("header","REPORTE HISTÓRICO DEL TRABAJADOR "+id_buscado );
+            }*/
+            params.put("logo",ImageIO.read(new File(getFileResource("logoMichiSistema.png"))));
+            String fileXML = getFileResource("ComprobantesFactura.jrxml");            
+            return generarBufferFromJP(fileXML, params);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al generar reporte de facturacion: " + ex.getMessage());
+        }
+    }
+    
+    private String getFileResource(String fileName){ 
+        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        filePath = filePath.replace("%20", " ");
+        return filePath;
+    }
+
+    private byte[] generarBufferFromJP(String inFileXML, Map<String, Object> params) throws JRException {
+        
+        String fileJasper = inFileXML +".jasper";
+        if(!new File(fileJasper).exists()){
+            
+            JasperCompileManager.compileReportToFile(inFileXML, fileJasper);         
+        }
+        
+        JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
+        
+        Connection conn = DBManager.getInstance().obtenerConexion();
+        JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
+        return JasperExportManager.exportReportToPdf(jp);
+    }
     
 }

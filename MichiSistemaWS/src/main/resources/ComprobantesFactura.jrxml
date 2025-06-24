@@ -1,0 +1,246 @@
+<!-- Created with Jaspersoft Studio version 7.0.3.final using JasperReports Library version 7.0.3-41034ca841d452f3305ba55b9042260aaa1ab5dd  -->
+<jasperReport name="ComprobantesFactura" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9dfaebde-68b0-4ce1-a516-6cf589d71b62">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="ArianaMichi"/>
+	<parameter name="fecha_inicio" class="java.sql.Date"/>
+	<parameter name="fecha_fin" class="java.sql.Date"/>
+	<parameter name="logo" class="java.awt.Image"/>
+	<query language="SQL"><![CDATA[SELECT 
+    comprobante_id,
+    orden_id,
+    monto_total,
+    estado,
+    fecha_emision,
+    tipo_comprobante,
+    taxes,
+    cliente_persona_id,
+    SUM(monto_total) AS total_montos
+FROM `Michisitos`.`Comprobante`
+WHERE 
+    fecha_emision BETWEEN STR_TO_DATE($P{fecha_inicio}, '%Y-%m-%d') 
+    AND STR_TO_DATE($P{fecha_fin}, '%Y-%m-%d')
+GROUP BY 
+    comprobante_id, 
+    orden_id, 
+    monto_total, 
+    estado, 
+    fecha_emision, 
+    tipo_comprobante, 
+    taxes, 
+    cliente_persona_id]]></query>
+	<field name="comprobante_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="comprobante_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="comprobante_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="orden_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="orden_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="orden_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="monto_total" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="monto_total"/>
+		<property name="com.jaspersoft.studio.field.label" value="monto_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="estado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="estado"/>
+		<property name="com.jaspersoft.studio.field.label" value="estado"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="fecha_emision" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_emision"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_emision"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="tipo_comprobante" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="tipo_comprobante"/>
+		<property name="com.jaspersoft.studio.field.label" value="tipo_comprobante"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="taxes" class="java.lang.Float">
+		<property name="com.jaspersoft.studio.field.name" value="taxes"/>
+		<property name="com.jaspersoft.studio.field.label" value="taxes"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="cliente_persona_id" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="cliente_persona_id"/>
+		<property name="com.jaspersoft.studio.field.label" value="cliente_persona_id"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="Comprobante"/>
+	</field>
+	<field name="total_montos" class="java.lang.Double">
+		<property name="com.jaspersoft.studio.field.name" value="total_montos"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_montos"/>
+	</field>
+	<variable name="total_montos1" resetType="Column" calculation="Sum" class="java.lang.Double">
+		<expression><![CDATA[$F{total_montos}]]></expression>
+	</variable>
+	<background splitType="Stretch"/>
+	<title height="90" splitType="Stretch">
+		<element kind="textField" uuid="2a15592c-98fe-44e4-af3a-2aaabe99afc2" x="211" y="60" width="133" height="30" fontSize="16.0" bold="true">
+			<expression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_inicio}) 
++ " - " + 
+new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
+]]></expression>
+		</element>
+		<element kind="staticText" uuid="3678fe44-53b1-4eec-9613-bb744f9d476b" x="158" y="0" width="239" height="50" fontSize="19.0" bold="true" hTextAlign="Center">
+			<text><![CDATA[REPORTE DE FACTURACIÓN
+]]></text>
+		</element>
+		<element kind="image" uuid="70d29a0c-e21c-4bdb-82b4-e7e5f1648da7" x="20" y="0" width="120" height="80">
+			<expression><![CDATA[$P{logo}]]></expression>
+			<property name="com.jaspersoft.studio.unit.x" value="px"/>
+			<property name="com.jaspersoft.studio.unit.y" value="px"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+		</element>
+	</title>
+	<pageHeader height="39" splitType="Stretch">
+		<element kind="staticText" uuid="c3b6f800-cd8a-47c9-b899-809f83bc6327" x="0" y="0" width="299" height="39" fontSize="13.0">
+			<text><![CDATA[Reporte de facturación en base a los comprobantes emitidos en el rango de fecha proporcionado]]></text>
+		</element>
+		<element kind="textField" uuid="3bedf923-0fbf-4c6a-80c6-3188a9d9f8af" x="450" y="4" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
+			<paragraph spacingBefore="5"/>
+			<expression><![CDATA[new java.util.Date()]]></expression>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+		</element>
+	</pageHeader>
+	<columnHeader height="31" splitType="Stretch">
+		<element kind="staticText" uuid="e30313a2-4f73-467c-8483-f082be6b8eac" mode="Opaque" x="0" y="1" width="50" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true" hTextAlign="Center">
+			<paragraph spacingBefore="5"/>
+			<text><![CDATA[ID]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4eaff77-024e-4387-bb80-e8d68b958aaf"/>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+				<topPen lineWidth="1.0" lineStyle="Solid"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="199fcf60-17ec-44c7-b411-ced300ec8212" mode="Opaque" x="50" y="1" width="104" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true" hTextAlign="Center">
+			<paragraph spacingBefore="5"/>
+			<text><![CDATA[MONTO TOTAL]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a7bdb16-4a8d-4511-a72f-51d06cbd1a08"/>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+				<topPen lineWidth="1.0" lineStyle="Solid"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="db5c7e0c-7793-435a-9b70-74159e872a5e" mode="Opaque" x="258" y="1" width="170" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true" hTextAlign="Center">
+			<paragraph spacingBefore="5"/>
+			<text><![CDATA[FECHA DE EMISIÓN]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8080ac69-a064-493f-87cf-2b70a0e956b2"/>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+				<topPen lineWidth="1.0" lineStyle="Solid"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="35f1fdb5-4499-4a40-a804-2b941a07bf8c" mode="Opaque" x="428" y="1" width="127" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true" hTextAlign="Center">
+			<paragraph spacingBefore="5"/>
+			<text><![CDATA[TIPO]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b146fb8-704b-45fa-bcb7-86503ce8c708"/>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+				<topPen lineWidth="1.0" lineStyle="Solid"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+		<element kind="staticText" uuid="5f68ebb5-8c1d-4207-81fa-68db1d4d7a9d" mode="Opaque" x="154" y="1" width="104" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true" hTextAlign="Center">
+			<paragraph spacingBefore="5"/>
+			<text><![CDATA[TAXES]]></text>
+			<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cbb77f81-9a46-4247-97bf-9989a9084f79"/>
+			<property name="com.jaspersoft.studio.unit.width" value="px"/>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+			<box>
+				<pen lineWidth="1.0" lineStyle="Solid"/>
+				<topPen lineWidth="1.0" lineStyle="Solid"/>
+				<leftPen lineWidth="1.0" lineStyle="Solid"/>
+				<bottomPen lineWidth="1.0" lineStyle="Solid"/>
+				<rightPen lineWidth="1.0" lineStyle="Solid"/>
+			</box>
+		</element>
+	</columnHeader>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<element kind="textField" uuid="1a3929f4-86e8-466e-be0e-eb1efa0c3941" x="0" y="0" width="50" height="30" fontSize="13.0" hTextAlign="Center">
+				<paragraph spacingBefore="5"/>
+				<expression><![CDATA[$F{comprobante_id}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c4eaff77-024e-4387-bb80-e8d68b958aaf"/>
+				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="e1af859b-15ab-47ef-a6ac-69a0647d2bf8" x="50" y="0" width="104" height="30" fontSize="13.0" hTextAlign="Center">
+				<paragraph spacingBefore="5"/>
+				<expression><![CDATA[$F{monto_total}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a7bdb16-4a8d-4511-a72f-51d06cbd1a08"/>
+				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="cdb3c346-2dd0-4d06-99b8-6a84a0252c97" x="428" y="0" width="126" height="30" fontSize="13.0" hTextAlign="Center">
+				<paragraph spacingBefore="5"/>
+				<expression><![CDATA[$F{tipo_comprobante}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b146fb8-704b-45fa-bcb7-86503ce8c708"/>
+				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="f29a433d-14fa-4188-b78e-fa93068ea1e4" x="154" y="0" width="104" height="30" fontSize="13.0" hTextAlign="Center">
+				<paragraph spacingBefore="5"/>
+				<expression><![CDATA[$F{taxes}]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cbb77f81-9a46-4247-97bf-9989a9084f79"/>
+				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</element>
+			<element kind="textField" uuid="cce7dca8-e1c9-4861-8178-966f54c8165f" x="258" y="0" width="170" height="30" fontSize="13.0" hTextAlign="Center">
+				<paragraph spacingBefore="5"/>
+				<expression><![CDATA[new java.text.SimpleDateFormat("yyyy-MM-dd").format($F{fecha_emision}) ]]></expression>
+				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8080ac69-a064-493f-87cf-2b70a0e956b2"/>
+				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
+			</element>
+		</band>
+	</detail>
+	<columnFooter height="56" splitType="Stretch">
+		<element kind="staticText" uuid="4f048391-ae2b-4772-a9db-e879d92b4d7b" x="0" y="0" width="370" height="30" fontSize="16.0">
+			<paragraph spacingBefore="5"/>
+			<text><![CDATA[Monto total obtenido por comprobantes en el rango:]]></text>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+		</element>
+		<element kind="textField" uuid="0e487795-2fcc-4023-965e-8ace896aba2f" x="370" y="0" width="184" height="30" fontSize="13.0" hTextAlign="Right">
+			<paragraph spacingBefore="5"/>
+			<expression><![CDATA[" S/. " + $V{total_montos1}]]></expression>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+		</element>
+	</columnFooter>
+	<pageFooter height="54" splitType="Stretch">
+		<element kind="textField" uuid="42a18547-cc69-48e1-8a31-73ae55072fa6" x="180" y="10" width="100" height="30" hTextAlign="Right">
+			<expression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+		<element kind="textField" uuid="12932606-1643-48f5-85bd-e8c4b666f12b" x="280" y="10" width="100" height="30" evaluationTime="Report" hTextAlign="Left">
+			<expression><![CDATA[" de " + $V{PAGE_NUMBER}]]></expression>
+		</element>
+	</pageFooter>
+	<summary height="42" splitType="Stretch"/>
+</jasperReport>
