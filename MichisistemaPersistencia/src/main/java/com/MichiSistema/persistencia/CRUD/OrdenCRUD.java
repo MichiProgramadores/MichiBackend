@@ -202,7 +202,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
     private ArrayList<DetalleOrden> obtenerDetallesPorOrdenId(Connection conn, int idOrden) throws SQLException {
     String sql = "SELECT * FROM DetalleOrden WHERE orden_id = ?";
     ArrayList<DetalleOrden> detalles = new ArrayList<>();
-    System.out.println("🧪 Buscando detalles para orden_id = " + idOrden);
+    //System.out.println("🧪 Buscando detalles para orden_id = " + idOrden);
 
     try (PreparedStatement ps = conn.prepareStatement(sql)) {
         ps.setInt(1, idOrden);
@@ -255,7 +255,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
              ResultSet rs = ps.executeQuery()) {
 
             if (rs.next()) {
-                System.out.println("Existe la orden, llamando a obtenerDetallesPorOrdenId");
+                
                 Orden orden = createFromResultSet(rs);
                 ArrayList<DetalleOrden> detalles= obtenerDetallesPorOrdenId(conn, idOrden);
                 orden.setListaOrdenes(detalles);
@@ -270,24 +270,83 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
     }
 
     
-    private void actualizarDetalles(Connection conn, DetalleOrden detalle) throws SQLException {
-        String sp = "{CALL sp_actualizar_detalle_orden(?, ?)}";
-        try (CallableStatement cs = conn.prepareCall(sp)) {
-            
+//    private void actualizarDetalles(Connection conn, Orden orden) throws SQLException {
+//        String sp = "{CALL sp_actualizar_detalle_orden(?, ?,?,?,?,?)}";
+//        try (CallableStatement cs = conn.prepareCall(sp)) {
+//            System.out.println("## lista detalles size : "+ orden.getListaOrdenes().size());
+//            for(DetalleOrden detalle : orden.getListaOrdenes()){
+//                cs.setInt(1, detalle.getOrden_id());
+//                cs.setInt(2, detalle.getProducto());//get producto trae el id del producto
+//                cs.setInt(3, detalle.getCantidadSolicitada());
+//                cs.setInt(4, detalle.getCantidadEntregada());
+//                cs.setDouble(5, detalle.getPrecioAsignado());
+//                cs.setString(6, detalle.getUnidadMedida().name());
+//                //cs.setDouble(7, detalle.getSubtotal());
+//                cs.execute();
+//            }
+//        }
+//    }
+    private void actualizarDetalles(Connection conn, Orden orden) throws SQLException {
+    String sp = "{CALL sp_actualizar_detalle_orden(?, ?, ?, ?, ?, ?)}";
+    try (CallableStatement cs = conn.prepareCall(sp)) {
+        System.out.println("## lista detalles size : " + orden.getListaOrdenes().size());
+        
+        for (DetalleOrden detalle : orden.getListaOrdenes()) {
+            try {
                 cs.setInt(1, detalle.getOrden_id());
-                cs.setInt(2, detalle.getProducto());//get producto trae el id del producto
+                cs.setInt(2, detalle.getProducto()); //get producto trae el id del producto
                 cs.setInt(3, detalle.getCantidadSolicitada());
                 cs.setInt(4, detalle.getCantidadEntregada());
                 cs.setDouble(5, detalle.getPrecioAsignado());
                 cs.setString(6, detalle.getUnidadMedida().name());
                 //cs.setDouble(7, detalle.getSubtotal());
                 cs.execute();
+            } catch (SQLException e) {
+                // Manejar el error específico para cada detalle
+                System.err.println("Error al actualizar el detalle de la orden con producto ID: " + detalle.getProducto());
+                throw new SQLException("Error al actualizar el detalle de la orden: " + e.getMessage(), e);
+            }
+        }
+    } catch (SQLException e) {
+        // Manejar los errores de la base de datos relacionados con el CallableStatement
+        System.err.println("Error al preparar o ejecutar el stored procedure para actualizar detalles: " + e.getMessage());
+        throw e; // Re-lanzar la excepción para que sea manejada por la capa superior
+    }
+}
+
+    
+    @Override
+    public void actualizar(Orden orden) {
+        try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+            conn.setAutoCommit(false);
             
+            try {
+                try(PreparedStatement ps= getUpdatePS(conn, orden)){
+                    ps.executeUpdate();
+                    
+                }
+                
+                // Llamar a la función que actualiza el detalle de la orden
+                actualizarDetalles(conn, orden); // Actualizar detalles de la orden
+                actualizarMontoTotal(conn, orden); // Actualizar monto total de la orden (si es necesario)
+                System.out.println(" Entrando a ingresar nuevos detalles a orden" + orden.getIdOrden());   
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al actualizar Orden", e);
         }
     }
+
+    
+    
     @Override
     public void actualizarCantidadEntregada(Orden orden){
-        System.out.println(" Entrando a actualizar cantidad entregada orden" + orden.getIdOrden());
+        
         try (Connection conn = DBManager.getInstance().obtenerConexion();
             PreparedStatement ps = getUpdatePS(conn, orden)) {
             
@@ -295,7 +354,8 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             ArrayList<DetalleOrden> detalles= obtenerDetallesPorOrdenId(conn, orden.getIdOrden());
             for (DetalleOrden detalle : detalles) {
                 if(detalle.getCantidadEntregada()>0)
-                    actualizarDetalles(conn, detalle);
+                   // actualizarCantProductoDetalle(conn, detalle);
+                System.out.println(" Entrando a actualizar cantidad entregada orden" + orden.getIdOrden());    
             }
             
         } catch (SQLException e) {
