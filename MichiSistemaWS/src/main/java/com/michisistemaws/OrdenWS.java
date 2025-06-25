@@ -76,9 +76,9 @@ public class OrdenWS {
 
         // Verifica en consola
             if (orden.getListaOrdenes() == null) {
-                System.out.println("⚠ listaOrdenes ES NULL en backend");
+                System.out.println(" listaOrdenes ES NULL en backend");
             } else {
-                System.out.println("✅ listaOrdenes size: " + orden.getListaOrdenes().size());
+                System.out.println(" listaOrdenes size: " + orden.getListaOrdenes().size());
             }
 
                 return orden;

@@ -94,7 +94,9 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         orden.setTotalPagar(rs.getDouble("total_pagar"));
         orden.setSaldo(rs.getDouble("saldo"));
         orden.setCantDias(rs.getInt("cantidad_dias"));
-
+        if(rs.getString("tipo_estado_devolucion")!=null){
+            orden.setTipoEstadoDevolucion(TipoEstadoDevolucion.valueOf(rs.getString("tipo_estado_devolucion")));
+        }
         // Validación para fecha_devolucion
         java.sql.Date fechaDevolucion = rs.getDate("fecha_devolucion");
         if (fechaDevolucion != null) {
@@ -303,7 +305,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
 
     @Override
     public void actualizarEstadoDevolucion(int idOrden, TipoEstadoDevolucion estado) {
-        String sp = "{CALL sp_actualizar_tipo_estado_devolucion(?, ?)}";
+        String sp = "{CALL sp_actualizar_puntuacion(?, ?)}";
 //        String updateQuery = "UPDATE Orden SET tipo_estado_devolucion = ? WHERE orden_id = ?";
 //
 //        
