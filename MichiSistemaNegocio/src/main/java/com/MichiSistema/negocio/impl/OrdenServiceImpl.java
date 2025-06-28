@@ -7,6 +7,7 @@ package com.MichiSistema.negocio.impl;
 
 import com.MichiSistema.Enum.TipoEstadoDevolucion;
 import com.MichiSistema.Enum.TipoFechaDevolucion;
+import com.MichiSistema.Enum.TipoRecepcion;
 import com.MichiSistema.dominio.DetalleOrden;
 import com.MichiSistema.dominio.EstadoFechaDevolucion;
 import com.MichiSistema.dominio.Orden;
@@ -22,7 +23,10 @@ import com.MichiSistema.persistencia.dao.OrdenDAO;
 import com.MichiSistema.persistencia.dao.ProductoDAO;
 import com.MichiSistema.persistencia.dao.TrabajadorDAO;
 import com.MichiSistema.persistencia.dao.UsuarioDAO;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -133,5 +137,16 @@ public class OrdenServiceImpl  implements OrdenService{
         
         ordenDAO.actualizarEstadoDevolucion( idOrden, estado);
     }
-
+    @Override
+    public ArrayList<String> listarTipoRecepcion() throws Exception {
+        //arrayList o list?
+        return (ArrayList<String>) Arrays.stream(TipoRecepcion.values())
+                 .map(Enum::name)
+                 .collect(Collectors.toList());
+    }
+    @Override
+    public ArrayList<Orden> listarPorTipoRecepcion(TipoRecepcion tipo) throws Exception {
+        
+        return (ArrayList<Orden>) ordenDAO.obtenerPorTipoOrden(tipo);
+    }
 }

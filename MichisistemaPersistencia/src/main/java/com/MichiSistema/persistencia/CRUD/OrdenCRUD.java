@@ -341,6 +341,36 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
             throw new RuntimeException("Error al actualizar Orden", e);
         }
     }
+     @Override
+    public List<Orden> obtenerPorTipoOrden(TipoRecepcion tipo){
+        List<Orden> ordenes = new ArrayList<>();
+    
+    // Consulta SQL para obtener productos por tipo
+    String sql = "SELECT * FROM Orden WHERE tipo_recepcion = ?";
+    
+    try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+        // Usamos PreparedStatement para evitar inyecciones SQL
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            // Establecemos el valor del tipoProducto (convertimos el enum a String)
+                ps.setString(1, tipo.toString());
+
+                // Ejecutamos la consulta y obtenemos el resultado
+                try (ResultSet rs = ps.executeQuery()) {
+                    // Iteramos sobre el resultado de la consulta y utilizamos la función createFromResultSet
+                    while (rs.next()) {
+                        Orden orden = createFromResultSet(rs);  // Usamos la función createFromResultSet para mapear los datos
+                        ordenes.add(orden);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            // En caso de error, se lanza una RuntimeException
+            throw new RuntimeException("Error al obtener ordenes por tipo de recepcion: " + tipo, e);
+        }
+
+        // Retornamos la lista de productos encontrados
+        return ordenes;
+    }
 
     
     

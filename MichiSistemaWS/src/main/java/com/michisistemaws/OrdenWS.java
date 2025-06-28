@@ -107,6 +107,22 @@ public class OrdenWS {
             throw new WebServiceException("Error al actualizar el estado de la fecha de devolucion de la orden "+ex.getMessage());
         }
     }
+    @WebMethod(operationName = "listarTipoRecepcion")
+    public List<String> listarTipoRecepcion() {
+        try{
+            return ordenService.listarTipoRecepcion();
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar tipo recepcion "+ex.getMessage());
+        }
+    }
     
+    @WebMethod(operationName = "listarOrdenesPorTipo")
+    public List<Orden> listarPorTipo(@WebParam(name = "tipoRecepcion") String tipo) {
+        try{
+            return ordenService.listarPorTipoRecepcion(TipoRecepcion.valueOf(tipo));
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar ordenes por tipo "+ex.getMessage());
+        }
+    }
     
 }

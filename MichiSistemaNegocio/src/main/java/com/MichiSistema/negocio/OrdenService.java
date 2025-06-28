@@ -7,7 +7,9 @@ package com.MichiSistema.negocio;
 
 import com.MichiSistema.Enum.TipoEstadoDevolucion;
 import com.MichiSistema.Enum.TipoFechaDevolucion;
+import com.MichiSistema.Enum.TipoRecepcion;
 import com.MichiSistema.dominio.Orden;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,4 +24,6 @@ public interface OrdenService{
 //    List<Orden> buscarOrdenesPorFecha(Date inicio, Date fin) throws Exception;
     void actualizarEstadoDevolucion(int ventaId, TipoEstadoDevolucion estado) throws Exception;
     void actualizarEstadoFechaDevolucion(Integer ventaId, TipoFechaDevolucion estadoFecha) throws Exception;
+    ArrayList<Orden> listarPorTipoRecepcion(TipoRecepcion tipoRecepcion) throws Exception;
+    public ArrayList<String> listarTipoRecepcion() throws Exception;
 }
