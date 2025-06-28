@@ -8,6 +8,7 @@ import com.MichiSistema.dominio.DetalleComprobante;
 import com.MichiSistema.persistencia.dao.ComprobanteDAO;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements ComprobanteDAO {
     
@@ -240,5 +241,33 @@ public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements Comprobant
         }
         return null;
     }
+    @Override
+    public List<Comprobante> obtenerPorIdOrden(int idOrden) {
+        List<Comprobante> comprobantes = new ArrayList<>();
+        String query = "SELECT * FROM Comprobante WHERE orden_id = ?"; // Filtramos por el idOrden
 
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+             PreparedStatement ps = conn.prepareStatement(query)) {
+
+            // Establecemos el parámetro en la consulta
+            ps.setInt(1, idOrden);
+
+            // Ejecutamos la consulta
+            try (ResultSet rs = ps.executeQuery()) {
+                // Iteramos sobre el resultado y lo agregamos a la lista
+                while (rs.next()) {
+                    Comprobante comprobante = createFromResultSet(rs);
+                    
+                    //obtener detalles de comprobante
+                    ArrayList<DetalleComprobante> detalles= obtenerDetallesPorComprobanteId(conn, comprobante.getId_comprobante());
+                    comprobante.setDetalles(detalles);
+                    comprobantes.add(comprobante);
+                }
+            }
+
+            } catch (SQLException e) {
+                throw new RuntimeException("Error al obtener comprobantes por idOrden", e);
+            }
+            return comprobantes;
+        }
 }

@@ -81,6 +81,14 @@ public class ComprobanteWS {
         }
     }
     
+    @WebMethod(operationName = "obtenerComprobantesPorOrden")
+    public List<Comprobante> obtenerComprobantesPorOrden(@WebParam(name = "idOrden") int idOrden) {
+        try{
+            return comprobanteService.obtenerComprobantesPorOrden(idOrden);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al obtener comprobante "+ex.getMessage());
+        }
+    }    
     /*
     @WebMethod(operationName = "actualizarEstadoComprobante")
     public void actualizarEstadoComprobante(@WebParam(name = "idComprobante") int idComprobante,

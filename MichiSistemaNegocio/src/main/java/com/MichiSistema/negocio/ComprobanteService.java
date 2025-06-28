@@ -18,4 +18,5 @@ public interface ComprobanteService {
     Comprobante obtenerComprobante(int idComprobante) throws Exception;
     List<Comprobante> listarComprobante() throws Exception;
     public void actualizarEstadoComprobante(Comprobante comprobante, String toString);
+    List<Comprobante> obtenerComprobantesPorOrden(int idOrden)throws Exception;
 }

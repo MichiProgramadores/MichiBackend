@@ -122,4 +122,9 @@ public class ComprobanteServiceImpl implements ComprobanteService {
 
         comprobanteDAO.actualizarEstado(comprobante, estado);
     }
+    
+    @Override
+    public List<Comprobante> obtenerComprobantesPorOrden(int idOrden) throws Exception {
+        return comprobanteDAO.obtenerPorIdOrden(idOrden);
+    }
 }

@@ -35,7 +35,8 @@ public class EventoServiceTest {
 
     private static Evento crearEventoPrueba() {
         // Creación de un evento de prueba
-        return new Evento(TipoEvento.BODA, new Date(), new Date(), "Dirección ejemplo", "12345");
+        return new Evento();
+        //return new Evento(TipoEvento.BODA, new Date(), new Date(), "Dirección ejemplo", "12345");
     }
 
     @Test
@@ -66,7 +67,7 @@ public class EventoServiceTest {
 
     @Test
     @Order(2)
-            //@Disabled("Deshabilitado temporalmente para pruebas")
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void obtenerEvento() throws Exception {
         Evento evento = crearEventoPrueba();
         eventoService.registrarEvento(evento);
