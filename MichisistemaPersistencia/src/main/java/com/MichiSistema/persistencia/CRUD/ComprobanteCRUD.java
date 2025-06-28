@@ -24,8 +24,8 @@ public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements Comprobant
         */
         
         // Query de inserción
-        String query = "INSERT INTO Comprobante(orden_id, monto_total, estado, fecha_emision, tipo_comprobante, taxes, cliente_persona_id) "
-                + "VALUES(?, ?, ?, ?, ?, ?, ?)";
+	String query = "INSERT INTO Comprobante(orden_id, monto_total, estado, tipo_comprobante, taxes) "
+                + "VALUES(?,?, UPPER(?), ?, ?)";
         
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         
@@ -237,7 +237,7 @@ public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements Comprobant
     @Override
     public List<Comprobante> obtenerPorIdOrden(int idOrden) {
         List<Comprobante> comprobantes = new ArrayList<>();
-        String query = "SELECT * FROM Comprobante WHERE orden_id = ?"; // Filtramos por el idOrden
+        String query = "SELECT * FROM Comprobante WHERE orden_id = ? and UPPER(estado)<> 'ELIMINADO'"; // Filtramos por el idOrden // Filtramos por el idOrden
 
         try (Connection conn = DBManager.getInstance().obtenerConexion();
              PreparedStatement ps = conn.prepareStatement(query)) {
