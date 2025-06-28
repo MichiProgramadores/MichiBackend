@@ -15,23 +15,28 @@ public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements Comprobant
     @Override
     protected PreparedStatement getInsertPS(Connection conn, Comprobante comprobante) throws SQLException {
         
+        /*
         // Cálculo del tax (suponiendo que el tax es un 18% del monto_total)
         double tax = comprobante.getMonto_total() * 0.18;
+        
         // Obtener la fecha de emisión actual (el día de hoy)
         Date fechaEmision = new Date(System.currentTimeMillis());
+        */
         
         // Query de inserción
-        String query = "INSERT INTO Comprobante(orden_id, monto_total, estado, tipo_comprobante, taxes) "
-                + "VALUES(?,?, ?, ?, ?)";
+        String query = "INSERT INTO Comprobante(orden_id, monto_total, estado, fecha_emision, tipo_comprobante, taxes, cliente_persona_id) "
+                + "VALUES(?, ?, ?, ?, ?, ?, ?)";
         
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
+        
         // Establecer parámetros en el PreparedStatement
         ps.setInt(1, comprobante.getOrden_id());
         ps.setDouble(2, comprobante.getMonto_total());
         ps.setString(3, comprobante.getEstado());
-        ps.setString(4, comprobante.getTipoComprobante().name());  // Enum a String
-        ps.setDouble(5, comprobante.getTax());  // Establecer el tax calculado
+        ps.setDate(4, new java.sql.Date(comprobante.getFecha_emision().getTime()));
+        ps.setString(5, comprobante.getTipoComprobante().name());  // Enum a String
+        ps.setDouble(6, comprobante.getTax());  // Establecer el tax calculado
+        ps.setInt(7, comprobante.getCliente_id());
         
         return ps;
         
@@ -116,42 +121,30 @@ public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements Comprobant
         actualizar(comprobante);
     }
     
-    @Override             
+    @Override           
     public void insertar(Comprobante comprobante) {
-    try (Connection conn = DBManager.getInstance().obtenerConexion()) {
-        conn.setAutoCommit(false);
-        try {
-            String sql = "UPDATE Comprobante SET orden_id=?, monto_total=?, estado=?, fecha_emision=?, tipo_comprobante=?, taxes=?, cliente_persona_id=? WHERE comprobante_id=?";
-            try (PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-                ps.setInt(1, comprobante.getOrden_id());
-                ps.setDouble(2, comprobante.getMonto_total());
-                ps.setString(3, comprobante.getEstado());
-
-                ps.setDate(4, new java.sql.Date(comprobante.getFecha_emision().getTime()));
-                ps.setString(5, comprobante.getTipoComprobante().name());  // Usar el nombre del enum
-                ps.setDouble(6, comprobante.getTax()); 
-                ps.setInt(7, comprobante.getCliente_id());
-
-                ps.setInt(8, comprobante.getId_comprobante());
-                
-                try (ResultSet rs = ps.getGeneratedKeys()) {
-                    if (rs.next()) {
-                        setId(comprobante, rs.getInt(1));
+        try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+            conn.setAutoCommit(false);
+            try {
+                try (PreparedStatement ps = getInsertPS(conn, comprobante)) {
+                    ps.executeUpdate();
+                    try (ResultSet rs = ps.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            setId(comprobante, rs.getInt(1));
+                        }
                     }
                 }
+                registrarDetalles(conn, comprobante);
+                conn.commit();
+            } catch (SQLException e) {
+                conn.rollback();
+                throw e;
+            } finally {
+                conn.setAutoCommit(true);
             }
-            
-            registrarDetalles(conn, comprobante);
-            conn.commit();
-        } catch (SQLException e) {
-            conn.rollback();
-            throw e;
-        } finally {
-            conn.setAutoCommit(true);
-        }
-        } catch (SQLException e) {
-            throw new RuntimeException("Error al registrar Comprobante", e);
-        }
+            } catch (SQLException e) {
+                throw new RuntimeException("Error al registrar Comprobante", e);
+            }
     }
     
     @Override             
