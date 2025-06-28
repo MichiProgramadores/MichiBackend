@@ -7,6 +7,7 @@ package com.michisistemaws;
 import com.MichiSistema.Enum.TipoEstadoDevolucion;
 import com.MichiSistema.Enum.TipoFechaDevolucion;
 import com.MichiSistema.Enum.TipoRecepcion;
+import com.MichiSistema.conexion.DBManager;
 import com.MichiSistema.dominio.Orden;
 import com.MichiSistema.negocio.OrdenService;
 import com.MichiSistema.negocio.impl.OrdenServiceImpl;
@@ -14,7 +15,20 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.xml.ws.WebServiceException;
+import java.io.File;
+import java.sql.Connection;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import javax.imageio.ImageIO;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  *
@@ -123,6 +137,47 @@ public class OrdenWS {
         }catch(Exception ex){
             throw new WebServiceException("Error al listar ordenes por tipo "+ex.getMessage());
         }
+    }
+    
+    @WebMethod(operationName = "reporteRenta")
+    public byte[] reporteRenta(@WebParam(name = "fecha_inicio") Date fechaInicio,
+            @WebParam(name = "fecha_fin") Date fechafin){
+        try{
+            // Convertir java.util.Date a java.sql.Date si es necesario
+            java.sql.Date sqlFechaInicio = new java.sql.Date(fechaInicio.getTime());
+            java.sql.Date sqlFechaFin = new java.sql.Date(fechafin.getTime());
+
+            Map<String, Object> params = new HashMap<>();
+            params.put("fecha_inicio", sqlFechaInicio);  
+            params.put("fecha_fin", sqlFechaFin);
+            params.put("logo", ImageIO.read(new File(getFileResource("logoMichiSistema.png"))));
+
+            String fileXML = getFileResource("REPORTERENTA.jrxml");            
+            return generarBufferFromJP(fileXML, params);
+        } catch(Exception ex) {
+            throw new WebServiceException("Error al generar reporte de facturacion: " + ex.getMessage());
+        }
+    }
+    
+    private String getFileResource(String fileName){ 
+        String filePath = getClass().getClassLoader().getResource(fileName).getPath();
+        filePath = filePath.replace("%20", " ");
+        return filePath;
+    }
+
+    private byte[] generarBufferFromJP(String inFileXML, Map<String, Object> params) throws JRException {
+        
+        String fileJasper = inFileXML +".jasper";
+        if(!new File(fileJasper).exists()){
+            
+            JasperCompileManager.compileReportToFile(inFileXML, fileJasper);         
+        }
+        
+        JasperReport jr = (JasperReport) JRLoader.loadObjectFromFile(fileJasper);
+        
+        Connection conn = DBManager.getInstance().obtenerConexion();
+        JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
+        return JasperExportManager.exportReportToPdf(jp);
     }
     
 }
