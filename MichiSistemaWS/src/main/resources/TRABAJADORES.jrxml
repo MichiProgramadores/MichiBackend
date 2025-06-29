@@ -93,7 +93,7 @@ WHERE
 		<element kind="textField" uuid="10c18d72-f938-4f6f-a1a7-9af5a58f2859" x="420" y="27" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
 			<expression><![CDATA[new java.util.Date()]]></expression>
 		</element>
-		<element kind="textField" uuid="a837e837-c7bc-4a1f-9b48-8fe1798a1563" x="166" y="57" width="222" height="30" fontSize="19.0" bold="true" hTextAlign="Center">
+		<element kind="textField" uuid="a837e837-c7bc-4a1f-9b48-8fe1798a1563" x="141" y="59" width="273" height="30" fontSize="19.0" bold="true" hTextAlign="Center">
 			<expression><![CDATA[$P{TIPO_TRABAJADOR} == null ? "" : $P{TIPO_TRABAJADOR} + " " + ($P{ESTADO} == null ? "" : ($P{ESTADO} ? "ACTIVOS" : "INACTIVOS"))]]></expression>
 		</element>
 	</title>
