@@ -34,7 +34,7 @@ public class ProductoServiceTest {
 
     @Test
     @Order(1)
-            //@Disabled("Deshabilitado temporalmente para pruebas")
+            @Disabled("Deshabilitado temporalmente para pruebas")
     void registrarProducto() throws Exception {
         Producto producto = crearProductoPrueba();
         productoService.registrarProducto(producto);

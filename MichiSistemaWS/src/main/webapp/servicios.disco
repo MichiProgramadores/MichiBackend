@@ -1,17 +1,17 @@
 <discovery xmlns="http://schemas.xmlsoap.org/disco/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-    ref="http://localhost:8080/MichiSistemaWS/ClienteWS?WSDL"/>
+    ref="http://3.83.2.11:8080/MichiSistemaWS/ClienteWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-    ref="http://localhost:8080/MichiSistemaWS/ComprobanteWS?WSDL"/>
+    ref="http://3.83.2.11:8080/MichiSistemaWS/ComprobanteWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-    ref="http://localhost:8080/MichiSistemaWS/EventoWS?WSDL"/>
+    ref="http://3.83.2.11:8080/MichiSistemaWS/EventoWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-    ref="http://localhost:8080/MichiSistemaWS/OrdenWS?WSDL"/>
+    ref="http://3.83.2.11:8080/MichiSistemaWS/OrdenWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-    ref="http://localhost:8080/MichiSistemaWS/ProductoWS?WSDL"/>
+    ref="http://3.83.2.11:8080/MichiSistemaWS/ProductoWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-    ref="http://localhost:8080/MichiSistemaWS/TrabajadorWS?WSDL"/>
+    ref="http://3.83.2.11:8080/MichiSistemaWS/TrabajadorWS?WSDL"/>
   <contractRef xmlns="http://schemas.xmlsoap.org/disco/scl/"
-    ref="http://localhost:8080/MichiSistemaWS/UsuarioWS?WSDL"/>
+    ref="http://3.83.2.11:8080/MichiSistemaWS/UsuarioWS?WSDL"/>
 </discovery>
 
