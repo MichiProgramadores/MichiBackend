@@ -155,7 +155,7 @@ public class OrdenWS {
             String fileXML = getFileResource("REPORTERENTA.jrxml");            
             return generarBufferFromJP(fileXML, params);
         } catch(Exception ex) {
-            throw new WebServiceException("Error al generar reporte de facturacion: " + ex.getMessage());
+            throw new WebServiceException("Error al generar reporte de renta: " + ex.getMessage());
         }
     }
     
