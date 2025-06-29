@@ -204,8 +204,94 @@ public class TrabajadorCRUD  extends BaseCRUD<Trabajador> implements TrabajadorD
     return trabajadores;
     }
     
+    @Override
+    public List<Trabajador> obtenerPorTipoYEstado(TipoTrabajador tipo, String estado) {
+        List<Trabajador> trabajadores = new ArrayList<>();
+
+        // Consulta base
+        String sql = "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, p.estado, "
+                   + "t.tipoTrabajador "
+                   + "FROM Persona p "
+                   + "JOIN Trabajador t ON p.persona_id = t.persona_id "
+                   + "WHERE 1=1"; // Esto nos permite agregar condiciones dinámicamente con AND
+
+        // Si tipoTrabajador no es nulo, añadir filtro
+        if (tipo != null) {
+            sql += " AND t.tipoTrabajador = ?";
+        }
+
+        // Convertir estado a un valor adecuado y agregar el filtro correspondiente
+        if (estado != null) {
+            if ("CUALQUIERA".equals(estado)) {
+                // Si es "CUALQUIERA", no aplicar filtro de estado
+            } else if ("INACTIVO".equals(estado)) {
+                sql += " AND p.estado = 0";
+            } else if ("ACTIVO".equals(estado)) {
+                sql += " AND p.estado = 1";
+            }
+        }
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            int paramIndex = 1;
+
+            // Si tipoTrabajador no es nulo, establecer el valor del parámetro
+            if (tipo != null) {
+                ps.setString(paramIndex++, tipo.toString());
+            }
+
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Trabajador trabajador = createFromResultSet(rs);
+                    trabajadores.add(trabajador);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener trabajadores con filtros tipo/estado: " + e.getMessage(), e);
+        }
+
+        return trabajadores;
+    }
     
-    
+    @Override
+    public List<Trabajador> obtenerPorEstado(String estado) {
+        List<Trabajador> trabajadores = new ArrayList<>();
+
+        // Consulta base
+        String sql = "SELECT p.persona_id, p.nombres, p.apellidos, p.celular, p.email, p.estado, "
+                   + "t.tipoTrabajador "
+                   + "FROM Persona p "
+                   + "JOIN Trabajador t ON p.persona_id = t.persona_id "
+                   + "WHERE 1=1";  // Esto nos permite agregar condiciones dinámicamente con AND
+
+        // Convertir el estado a un valor adecuado y agregar el filtro correspondiente
+        if (estado != null) {
+            if ("CUALQUIERA".equals(estado)) {
+                // Si es "CUALQUIERA", no aplicar filtro de estado
+            } else if ("INACTIVO".equals(estado)) {
+                sql += " AND p.estado = 0";  // Filtro para estado inactivo (0)
+            } else if ("ACTIVO".equals(estado)) {
+                sql += " AND p.estado = 1";  // Filtro para estado activo (1)
+            }
+        }
+
+        try (Connection conn = DBManager.getInstance().obtenerConexion();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            // Ejecutar la consulta y obtener el resultado
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Trabajador trabajador = createFromResultSet(rs);
+                    trabajadores.add(trabajador);
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al obtener trabajadores por estado: " + e.getMessage(), e);
+        }
+
+        return trabajadores;
+    }
     
 
 }

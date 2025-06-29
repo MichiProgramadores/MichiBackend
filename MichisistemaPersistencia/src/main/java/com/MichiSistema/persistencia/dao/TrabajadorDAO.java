@@ -13,4 +13,6 @@ public interface TrabajadorDAO extends BaseDAO<Trabajador>{
     List<Trabajador> obtenerActivos();
     List<Trabajador> buscarPorNombre(String nombre);
     List<Trabajador> obtenerPorTipoTrabajador(TipoTrabajador tipo);
+    List<Trabajador> obtenerPorTipoYEstado(TipoTrabajador tipo, String estado);
+    List<Trabajador> obtenerPorEstado(String estado);
 }

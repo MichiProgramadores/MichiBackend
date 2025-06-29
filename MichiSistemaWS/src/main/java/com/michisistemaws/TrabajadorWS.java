@@ -60,6 +60,27 @@ public class TrabajadorWS {
         }
     }
     
+    @WebMethod(operationName = "listaTrabajadoresPorTipoEstado")
+    public List<Trabajador> listaTrabajadoresPorTipoEstado(@WebParam(name = "tipo")String tipo,
+            @WebParam(name = "estado")String estado) {
+        try{
+            return trabajadorService.ObtenerPorTipoEstadoTrabajadores(TipoTrabajador.valueOf(tipo), estado);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar trabajadores por tipo y estado "+ex.getMessage());
+        }
+    }
+    
+    @WebMethod(operationName = "listaTrabajadoresPorEstado")
+    public List<Trabajador> listaTrabajadoresPorEstado(@WebParam(name = "estado")String estado) {
+        try{
+            return trabajadorService.ObtenerPorEstadoTrabajadores(estado);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar trabajadores por estado "+ex.getMessage());
+        }
+    }
+    
+    
+    
     @WebMethod(operationName = "registrarTrabajador")
     public void registrarTrabajador(@WebParam(name = "trabajador") Trabajador trabajador,
             @WebParam(name = "str_tipoTrabajador") String str_tipoTrabajador) {

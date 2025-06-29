@@ -22,4 +22,6 @@ public interface TrabajadorService {
     ArrayList<Trabajador> listarTrabajadoresActivos() throws Exception;
     ArrayList<Trabajador> listarPorNombreTrabajadores(String nombre) throws Exception;
     ArrayList<Trabajador> listarPorTipoTrabajadores(TipoTrabajador tipoCliente) throws Exception;
+    ArrayList<Trabajador> ObtenerPorTipoEstadoTrabajadores(TipoTrabajador tipoCliente,String estado) throws Exception;
+    ArrayList<Trabajador> ObtenerPorEstadoTrabajadores(String estado) throws Exception;
 }
