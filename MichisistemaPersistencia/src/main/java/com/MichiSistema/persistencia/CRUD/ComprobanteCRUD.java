@@ -24,9 +24,8 @@ public class ComprobanteCRUD extends BaseCRUD<Comprobante> implements Comprobant
         */
         
         // Query de inserción
-	String query = "INSERT INTO Comprobante(orden_id, monto_total, estado, tipo_comprobante, taxes) "
-                + "VALUES(?,?, UPPER(?), ?, ?)";
-        
+        String query = "INSERT INTO Comprobante(orden_id, monto_total, estado, fecha_emision, tipo_comprobante, taxes, cliente_persona_id) "
+                + "VALUES(?, ?,UPPER(?), ?, ?, ?, ?)";        
         PreparedStatement ps = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
         
         // Establecer parámetros en el PreparedStatement
