@@ -8,6 +8,7 @@
 	<parameter name="logo" class="java.awt.Image"/>
 	<parameter name="id_buscado" class="java.lang.Integer"/>
 	<parameter name="header" class="java.lang.String"/>
+	<parameter name="ESTADO" class="java.lang.Boolean"/>
 	<query language="sql"><![CDATA[SELECT 
     `Michisitos`.`Trabajador`.`tipoTrabajador`,
     `Michisitos`.`Persona`.nombres,
@@ -23,8 +24,19 @@ INNER JOIN
     `Michisitos`.`Persona` 
     ON `Michisitos`.`Trabajador`.persona_id = `Michisitos`.`Persona`.persona_id
 WHERE 
-    `Michisitos`.`Trabajador`.`tipoTrabajador` = $P{TIPO_TRABAJADOR}
-    AND ($P{id_buscado} = 0 OR `Michisitos`.`Persona`.persona_id = $P{id_buscado})
+    (
+       
+        (`Michisitos`.`Trabajador`.`tipoTrabajador` = $P{TIPO_TRABAJADOR} OR $P{TIPO_TRABAJADOR} IS NULL)
+    )
+    AND
+    (
+
+        ($P{id_buscado} = 0 OR `Michisitos`.`Persona`.persona_id = $P{id_buscado})
+    )
+    AND
+    (
+        (`Michisitos`.`Persona`.estado = $P{ESTADO} OR $P{ESTADO} IS NULL)
+    )
 ]]></query>
 	<field name="tipoTrabajador" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.name" value="tipoTrabajador"/>
@@ -67,7 +79,7 @@ WHERE
 	</field>
 	<sortField name="persona_id"/>
 	<background splitType="Stretch"/>
-	<title height="85" splitType="Stretch">
+	<title height="89" splitType="Stretch">
 		<element kind="image" uuid="ef406f5a-a971-4a3e-b91f-b4af5a64c127" x="20" y="0" width="120" height="80">
 			<expression><![CDATA[$P{logo}]]></expression>
 			<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -75,24 +87,20 @@ WHERE
 			<property name="com.jaspersoft.studio.unit.width" value="px"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</element>
-		<element kind="textField" uuid="e14bd202-f6fd-4186-8b4d-14f32b1b0b5f" x="173" y="10" width="208" height="50" fontSize="19.0" bold="true" hTextAlign="Center">
+		<element kind="textField" uuid="e14bd202-f6fd-4186-8b4d-14f32b1b0b5f" x="173" y="5" width="208" height="50" fontSize="19.0" bold="true" hTextAlign="Center">
 			<expression><![CDATA[$P{header}]]></expression>
 		</element>
-	</title>
-	<pageHeader height="30" splitType="Stretch">
-		<element kind="textField" uuid="10c18d72-f938-4f6f-a1a7-9af5a58f2859" x="450" y="0" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
+		<element kind="textField" uuid="10c18d72-f938-4f6f-a1a7-9af5a58f2859" x="420" y="27" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
 			<expression><![CDATA[new java.util.Date()]]></expression>
 		</element>
-		<element kind="staticText" uuid="3f6af570-d16a-4359-87fb-d9d8301e7558" x="0" y="0" width="80" height="30" fontSize="16.0">
-			<text><![CDATA[Categoría:]]></text>
+		<element kind="textField" uuid="a837e837-c7bc-4a1f-9b48-8fe1798a1563" x="166" y="57" width="222" height="30" fontSize="19.0" bold="true" hTextAlign="Center">
+			<expression><![CDATA[$P{TIPO_TRABAJADOR} == null ? "" : $P{TIPO_TRABAJADOR} + " " + ($P{ESTADO} == null ? "" : ($P{ESTADO} ? "ACTIVOS" : "INACTIVOS"))]]></expression>
 		</element>
-		<element kind="textField" uuid="796fefca-1ad0-4c0f-abfb-f52194784099" x="80" y="0" width="190" height="30" fontSize="16.0">
-			<expression><![CDATA[$P{TIPO_TRABAJADOR}]]></expression>
-		</element>
-	</pageHeader>
+	</title>
+	<pageHeader splitType="Stretch"/>
 	<detail>
-		<band height="346" splitType="Stretch">
-			<element kind="textField" uuid="1961b513-b30c-4394-8e5e-0f1457f32f61" x="100" y="0" width="130" height="30" fontSize="15.0" bold="true" hTextAlign="Center">
+		<band height="452" splitType="Stretch">
+			<element kind="textField" uuid="1961b513-b30c-4394-8e5e-0f1457f32f61" x="100" y="30" width="130" height="30" fontSize="15.0" bold="true" hTextAlign="Center">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<expression><![CDATA[$F{persona_id}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fbdc558c-1e82-47e2-a8b3-15264285a416"/>
@@ -102,7 +110,7 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="staticText" uuid="ed3694f7-f02b-4ef6-bacf-0a106fd3ebd9" mode="Opaque" x="0" y="0" width="100" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
+			<element kind="staticText" uuid="ed3694f7-f02b-4ef6-bacf-0a106fd3ebd9" mode="Opaque" x="0" y="30" width="100" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<text><![CDATA[ID]]></text>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fbdc558c-1e82-47e2-a8b3-15264285a416"/>
@@ -112,7 +120,7 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="textField" uuid="2dc19978-5b5c-4a21-989c-d506bebd0922" x="350" y="0" width="205" height="30" fontSize="13.0">
+			<element kind="textField" uuid="2dc19978-5b5c-4a21-989c-d506bebd0922" x="350" y="30" width="205" height="30" fontSize="13.0">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<expression><![CDATA[$F{Nombre Completo}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="061dda2f-6210-41dd-865d-0d491f763751"/>
@@ -122,7 +130,7 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="staticText" uuid="a372131f-d807-412f-bd70-8119801e7faf" mode="Opaque" x="230" y="0" width="120" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
+			<element kind="staticText" uuid="a372131f-d807-412f-bd70-8119801e7faf" mode="Opaque" x="230" y="30" width="120" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<text><![CDATA[Nombre completo]]></text>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="061dda2f-6210-41dd-865d-0d491f763751"/>
@@ -132,7 +140,7 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="textField" uuid="8d8f2781-caa6-4dd9-abc6-631f41aac62c" x="100" y="30" width="130" height="30" fontSize="13.0">
+			<element kind="textField" uuid="8d8f2781-caa6-4dd9-abc6-631f41aac62c" x="100" y="60" width="130" height="30" fontSize="13.0">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<expression><![CDATA[$F{celular}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3f734a2-070c-492f-893d-f33bedbb017f"/>
@@ -142,7 +150,7 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="staticText" uuid="3fc3a39b-5f5e-4dbe-a59a-2a59a7659485" mode="Opaque" x="230" y="30" width="120" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
+			<element kind="staticText" uuid="3fc3a39b-5f5e-4dbe-a59a-2a59a7659485" mode="Opaque" x="230" y="60" width="120" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<text><![CDATA[Email]]></text>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c3f734a2-070c-492f-893d-f33bedbb017f"/>
@@ -152,7 +160,7 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="staticText" uuid="35f6613d-2270-49e1-a4ea-5b3bf7df20a3" mode="Opaque" x="0" y="30" width="100" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
+			<element kind="staticText" uuid="35f6613d-2270-49e1-a4ea-5b3bf7df20a3" mode="Opaque" x="0" y="60" width="100" height="30" backcolor="#FFBC8A" fontSize="13.0" bold="true">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<text><![CDATA[Celular]]></text>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="03de95a0-d566-40c4-8799-f7c5e2531762"/>
@@ -162,14 +170,7 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="subreport" uuid="a38876f2-2fb7-4ea4-9e19-f2598b68ebec" x="-20" y="60" width="595" height="246">
-				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<expression><![CDATA["ORDENES.jasper"]]></expression>
-				<parameter name="TRABAJADOR_ID">
-					<expression><![CDATA[$F{persona_id}]]></expression>
-				</parameter>
-			</element>
-			<element kind="textField" uuid="95b68b32-fd2c-4741-bbd1-f15981fae105" x="350" y="30" width="205" height="30" fontSize="13.0">
+			<element kind="textField" uuid="95b68b32-fd2c-4741-bbd1-f15981fae105" x="350" y="60" width="205" height="30" fontSize="13.0">
 				<paragraph leftIndent="5" spacingBefore="6"/>
 				<expression><![CDATA[$F{email}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="03de95a0-d566-40c4-8799-f7c5e2531762"/>
@@ -179,9 +180,27 @@ WHERE
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
+			<element kind="textField" uuid="46d914d9-0f66-446c-8b41-471fca70636a" x="0" y="0" width="420" height="30" fontSize="13.0" hTextAlign="Left">
+				<paragraph spacingBefore="6"/>
+				<expression><![CDATA[($P{TIPO_TRABAJADOR} == null && $P{ESTADO} == null) ? 
+    "Tipo Trabajador: " + $F{tipoTrabajador} + " Estado: " + ($F{estado} ? "Activo" : "Inactivo") : 
+$P{TIPO_TRABAJADOR} == null ? 
+    "Tipo Trabajador: " + $F{tipoTrabajador} : 
+$P{ESTADO} == null ? 
+    "Estado: " + ($F{estado} ? "Activo" : "Inactivo") : 
+    ""]]></expression>
+				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+			</element>
+			<element kind="subreport" uuid="a5bd5384-24bf-44b5-ac16-9f78a8ed9eca" x="-20" y="90" width="554" height="361">
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<expression><![CDATA["ORDENES.jasper"]]></expression>
+				<parameter name="TRABAJADOR_ID">
+					<expression><![CDATA[$F{persona_id}]]></expression>
+				</parameter>
+			</element>
 		</band>
 	</detail>
-	<pageFooter height="54" splitType="Stretch">
+	<pageFooter height="48" splitType="Stretch">
 		<element kind="textField" uuid="54c32f7d-0c54-4cfb-af21-a58dda115862" x="180" y="12" width="100" height="30" hTextAlign="Right">
 			<expression><![CDATA["Pagina " + $V{PAGE_NUMBER}]]></expression>
 		</element>
@@ -189,5 +208,5 @@ WHERE
 			<expression><![CDATA[" de " + $V{PAGE_NUMBER}]]></expression>
 		</element>
 	</pageFooter>
-	<summary height="205" splitType="Stretch"/>
+	<summary height="33" splitType="Stretch"/>
 </jasperReport>

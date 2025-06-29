@@ -94,15 +94,15 @@ new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
 			<property name="com.jaspersoft.studio.unit.width" value="px"/>
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 		</element>
+		<element kind="textField" uuid="3bedf923-0fbf-4c6a-80c6-3188a9d9f8af" x="449" y="30" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
+			<paragraph spacingBefore="5"/>
+			<expression><![CDATA[new java.util.Date()]]></expression>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+		</element>
 	</title>
 	<pageHeader height="39" splitType="Stretch">
 		<element kind="staticText" uuid="c3b6f800-cd8a-47c9-b899-809f83bc6327" x="0" y="0" width="299" height="39" fontSize="13.0">
 			<text><![CDATA[Reporte de facturación en base a los comprobantes emitidos en el rango de fecha proporcionado]]></text>
-		</element>
-		<element kind="textField" uuid="3bedf923-0fbf-4c6a-80c6-3188a9d9f8af" x="450" y="4" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
-			<paragraph spacingBefore="5"/>
-			<expression><![CDATA[new java.util.Date()]]></expression>
-			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 		</element>
 	</pageHeader>
 	<columnHeader height="31" splitType="Stretch">
@@ -186,7 +186,7 @@ new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
 			</element>
 			<element kind="textField" uuid="e1af859b-15ab-47ef-a6ac-69a0647d2bf8" x="50" y="0" width="104" height="30" fontSize="13.0" hTextAlign="Center">
 				<paragraph spacingBefore="5"/>
-				<expression><![CDATA[$F{monto_total}]]></expression>
+				<expression><![CDATA[String.format("%.2f", $F{monto_total})]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a7bdb16-4a8d-4511-a72f-51d06cbd1a08"/>
 				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 				<box>
@@ -204,7 +204,7 @@ new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
 			</element>
 			<element kind="textField" uuid="f29a433d-14fa-4188-b78e-fa93068ea1e4" x="154" y="0" width="104" height="30" fontSize="13.0" hTextAlign="Center">
 				<paragraph spacingBefore="5"/>
-				<expression><![CDATA[$F{taxes}]]></expression>
+				<expression><![CDATA[String.format("%.2f", $F{taxes})]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cbb77f81-9a46-4247-97bf-9989a9084f79"/>
 				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 				<box>

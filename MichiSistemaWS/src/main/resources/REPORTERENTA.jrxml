@@ -110,15 +110,15 @@ ORDER BY
 new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
 ]]></expression>
 		</element>
+		<element kind="textField" uuid="49481658-2ca6-44c2-b8d6-43ec3cdb8d77" x="449" y="30" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
+			<paragraph spacingBefore="5"/>
+			<expression><![CDATA[new java.util.Date()]]></expression>
+			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+		</element>
 	</title>
 	<pageHeader height="49" splitType="Stretch">
 		<element kind="staticText" uuid="fa8bb0a3-9717-453a-9b56-5ee19c081aa4" x="0" y="0" width="299" height="39" fontSize="13.0">
 			<text><![CDATA[Reporte de renta de productos a clientes en un determinado rango de fechas]]></text>
-		</element>
-		<element kind="textField" uuid="49481658-2ca6-44c2-b8d6-43ec3cdb8d77" x="450" y="4" width="105" height="30" fontSize="16.0" pattern="MMMMM dd, yyyy">
-			<paragraph spacingBefore="5"/>
-			<expression><![CDATA[new java.util.Date()]]></expression>
-			<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 		</element>
 	</pageHeader>
 	<columnHeader height="30" splitType="Stretch">
@@ -216,11 +216,12 @@ new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="textField" uuid="e45a199b-0213-485e-8528-7caddb4dd534" x="50" y="0" width="120" height="30" fontSize="13.0" hTextAlign="Center">
-				<paragraph spacingBefore="5"/>
+			<element kind="textField" uuid="e45a199b-0213-485e-8528-7caddb4dd534" x="50" y="0" width="120" height="30" fontSize="13.0" hTextAlign="Left">
+				<paragraph leftIndent="5" spacingBefore="5"/>
 				<expression><![CDATA[$F{nombre_producto}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cbb77f81-9a46-4247-97bf-9989a9084f79"/>
 				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
@@ -236,7 +237,7 @@ new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
 			</element>
 			<element kind="textField" uuid="a4828b20-2d39-4e70-8e80-701929a092a6" x="470" y="0" width="84" height="30" fontSize="13.0" hTextAlign="Center">
 				<paragraph spacingBefore="5"/>
-				<expression><![CDATA[$F{precio_producto}]]></expression>
+				<expression><![CDATA[String.format("%.2f", $F{precio_producto})]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="2b146fb8-704b-45fa-bcb7-86503ce8c708"/>
 				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
 				<box>
@@ -253,11 +254,12 @@ new java.text.SimpleDateFormat("yyyy-MM").format($P{fecha_fin})
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>
 			</element>
-			<element kind="textField" uuid="51107033-8f5e-43cf-bfb2-f6fb8588fe0a" x="170" y="0" width="120" height="30" fontSize="13.0" hTextAlign="Center">
-				<paragraph spacingBefore="5"/>
+			<element kind="textField" uuid="51107033-8f5e-43cf-bfb2-f6fb8588fe0a" x="170" y="0" width="120" height="30" fontSize="13.0" hTextAlign="Left">
+				<paragraph leftIndent="5" spacingBefore="5"/>
 				<expression><![CDATA[$F{nombre_cliente}]]></expression>
 				<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="cbb77f81-9a46-4247-97bf-9989a9084f79"/>
 				<property name="com.jaspersoft.studio.unit.spacingBefore" value="px"/>
+				<property name="com.jaspersoft.studio.unit.leftIndent" value="px"/>
 				<box>
 					<pen lineWidth="1.0" lineStyle="Solid"/>
 				</box>

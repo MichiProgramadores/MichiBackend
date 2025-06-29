@@ -102,11 +102,24 @@ public class TrabajadorWS {
     
     @WebMethod(operationName = "reporteTrabajadores")
     public byte[] reporteTrabajadores(@WebParam(name = "TIPO_TRABAJADOR") String tipoTrabajador,
-            @WebParam(name = "ID_BUSCADO") Integer id_buscado){
+            @WebParam(name = "ID_BUSCADO") Integer id_buscado,@WebParam(name = "ESTADO")String estado){
         try{
             Map<String, Object> params = new HashMap<>();
-            params.put("TIPO_TRABAJADOR", tipoTrabajador);  
+            if(tipoTrabajador.equals("GENERAL")){
+                params.put("TIPO_TRABAJADOR", null); 
+            }else{
+                params.put("TIPO_TRABAJADOR", tipoTrabajador); 
+            }
+             
             params.put("id_buscado", id_buscado);
+            if(estado.equals("INACTIVO")){
+                params.put("ESTADO", false);
+            }else if(estado.equals("ACTIVO")){
+                params.put("ESTADO", true);
+            }else{
+                params.put("ESTADO", null);
+            }
+            
             if(id_buscado==0){
                 params.put("header","REPORTE HISTÓRICO DE TRABAJADORES" );
             }else{
