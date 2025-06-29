@@ -29,12 +29,12 @@ public class ProductoServiceTest {
     }
 
     private static Producto crearProductoPrueba() {
-        return new Producto("PapaHuayro", 1299.99, 10, 100, 10, TipoProducto.MOBILIARIO, 300, "producto de malcriadez", UnidadMedida.PULGADA);
+        return new Producto("Parlante", 1299.99, 10, 100, 10, TipoProducto.TECNOLOGIA, 300, "JBL 500", UnidadMedida.PULGADA);
     }
 
     @Test
     @Order(1)
-            @Disabled("Deshabilitado temporalmente para pruebas")
+            //@Disabled("Deshabilitado temporalmente para pruebas")
     void registrarProducto() throws Exception {
         Producto producto = crearProductoPrueba();
         productoService.registrarProducto(producto);

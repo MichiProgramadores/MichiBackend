@@ -31,8 +31,8 @@ public class UsuarioServiceTest {
         trabajadorService= new TrabajadorServiceImpl();
     }
     private Trabajador crearTrabajadorPrueba() throws Exception {
-        Trabajador trabajador = new Trabajador("Papa", "Huayro", 987654321,
-                "user@example.com", TipoTrabajador.DESPACHADOR);
+        Trabajador trabajador = new Trabajador("Robin", "Bosque", 987654321,
+                "robin.bosque@gmail.com", TipoTrabajador.DESPACHADOR);
         trabajadorService.registrarTrabajador(trabajador);
         return trabajador;
     }
@@ -45,7 +45,7 @@ public class UsuarioServiceTest {
 
     @Test
     @Order(1)
-        @Disabled("Deshabilitado temporalmente para pruebas")
+       // @Disabled("Deshabilitado temporalmente para pruebas")
     void testRegistrarUsuario() throws Exception {
         Trabajador trabajador= crearTrabajadorPrueba();
         Usuario usuario = crearUsuarioPrueba(trabajador.getPersona_id());
