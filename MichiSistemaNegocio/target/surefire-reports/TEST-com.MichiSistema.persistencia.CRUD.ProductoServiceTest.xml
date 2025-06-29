@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.MichiSistema.persistencia.CRUD.ProductoServiceTest" time="0.025" tests="5" errors="0" skipped="5" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.MichiSistema.persistencia.CRUD.ProductoServiceTest" time="0.027" tests="5" errors="0" skipped="5" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="user.country" value="PE"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
-    <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire10400649697831712780\surefirebooter-20250628204326616_3.jar C:\Users\Usuario\AppData\Local\Temp\surefire10400649697831712780 2025-06-28T20-43-26_387-jvmRun1 surefire-20250628204326616_1tmp surefire_0-20250628204326616_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Usuario\AppData\Local\Temp\surefire17710450475054808031\surefirebooter-20250628222010897_3.jar C:\Users\Usuario\AppData\Local\Temp\surefire17710450475054808031 2025-06-28T22-20-10_701-jvmRun1 surefire-20250628222010897_1tmp surefire_0-20250628222010897_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Usuario\Desktop\FINALBACKEND\MichiBackend\MichiSistemaNegocio\target\test-classes;C:\Users\Usuario\Desktop\FINALBACKEND\MichiBackend\MichiSistemaNegocio\target\classes;C:\Users\Usuario\.m2\repository\com\mysql\mysql-connector-j\8.0.33\mysql-connector-j-8.0.33.jar;C:\Users\Usuario\.m2\repository\com\google\protobuf\protobuf-java\3.21.9\protobuf-java-3.21.9.jar;C:\Users\Usuario\.m2\repository\com\MichiSistema\MichiSistemaDominio\0\MichiSistemaDominio-0.jar;C:\Users\Usuario\.m2\repository\jakarta\xml\bind\jakarta.xml.bind-api\4.0.0\jakarta.xml.bind-api-4.0.0.jar;C:\Users\Usuario\.m2\repository\jakarta\activation\jakarta.activation-api\2.1.0\jakarta.activation-api-2.1.0.jar;C:\Users\Usuario\.m2\repository\com\MichiSistema\MichisistemaPersistencia\0\MichisistemaPersistencia-0.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.3\junit-jupiter-api-5.10.3.jar;C:\Users\Usuario\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-commons\1.10.3\junit-platform-commons-1.10.3.jar;C:\Users\Usuario\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.3\junit-jupiter-params-5.10.3.jar;C:\Users\Usuario\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.3\junit-jupiter-engine-5.10.3.jar;C:\Users\Usuario\.m2\repository\org\junit\platform\junit-platform-engine\1.10.3\junit-platform-engine-1.10.3.jar;C:\Users\Usuario\.m2\repository\com\zaxxer\HikariCP\6.3.0\HikariCP-6.3.0.jar;C:\Users\Usuario\.m2\repository\org\slf4j\slf4j-api\2.0.12\slf4j-api-2.0.12.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire10400649697831712780\surefirebooter-20250628204326616_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Usuario\AppData\Local\Temp\surefire17710450475054808031\surefirebooter-20250628222010897_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.5+9-LTS-239"/>
