@@ -416,11 +416,17 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
     }
 
     @Override
-    public void actualizarSaldoCero(int idOrden) {
-        String updateQuery= "UPDATE Orden SET saldo = 0 WHERE orden_id = ? ";
+    public void actualizarSaldoCero(Orden orden) {
+        //Orden orden = ordenDAO.obtenerPorId(idOrden);
+
+        String updateQuery= "UPDATE Orden SET saldo = ? WHERE orden_id = ? ";
         try (Connection conn = DBManager.getInstance().obtenerConexion()) {
             try (PreparedStatement ps = conn.prepareStatement(updateQuery)) {
-                ps.setInt(1, idOrden);
+                if(orden.getSaldo()==0)
+                    ps.setDouble(1,orden.getTotalPagar());
+                else 
+                    ps.setDouble(1,0.0);
+                ps.setInt(2, orden.getIdOrden());
                 ps.executeUpdate();
             } catch (SQLException ex) {
                  throw new RuntimeException("Error al contectar con la bd para actualizar el saldo", ex);

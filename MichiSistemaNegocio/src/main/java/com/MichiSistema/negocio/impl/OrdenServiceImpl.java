@@ -157,6 +157,6 @@ public class OrdenServiceImpl  implements OrdenService{
         if (orden == null) {
             throw new Exception("Orden no encontrada");
         }
-        ordenDAO.actualizarSaldoCero(idOrden);
+        ordenDAO.actualizarSaldoCero(orden);
     }
 }
