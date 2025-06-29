@@ -3,5 +3,6 @@ com\MichiSistema\persistencia\CRUD\ComprobanteServiceTest.class
 com\MichiSistema\persistencia\CRUD\EventoServiceTest.class
 com\MichiSistema\persistencia\CRUD\TrabajadorServiceTest.class
 com\MichiSistema\persistencia\CRUD\ClienteServiceTest.class
+com\MichiSistema\persistencia\CRUD\BDTest.class
 com\MichiSistema\persistencia\CRUD\ProductoServiceTest.class
 com\MichiSistema\persistencia\CRUD\UsuarioServiceTest.class
