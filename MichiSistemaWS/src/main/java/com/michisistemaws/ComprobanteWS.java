@@ -12,7 +12,9 @@ import jakarta.jws.WebService;
 import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.xml.ws.WebServiceException;
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.util.Date;
 import java.util.HashMap;
@@ -26,6 +28,8 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.text.PDFTextStripper;
 
 @WebService(serviceName = "ComprobanteWS")
 public class ComprobanteWS {
@@ -115,7 +119,15 @@ public class ComprobanteWS {
             params.put("logo", ImageIO.read(new File(getFileResource("logoMichiSistema.png"))));
 
             String fileXML = getFileResource("ComprobantesFactura.jrxml");            
-            return generarBufferFromJP(fileXML, params);
+            byte[] fileBuffer = generarBufferFromJP(fileXML, params);
+            
+            if (fileBuffer == null || fileBuffer.length == 0 ||  !isPdfNotEmpty(fileBuffer)) {
+            // Si el archivo está vacío, devolver null
+                return null;
+            }
+
+            // Si el archivo tiene contenido, devolver el buffer
+            return fileBuffer;
         } catch(Exception ex) {
             throw new WebServiceException("Error al generar reporte de facturacion: " + ex.getMessage());
         }
@@ -140,6 +152,29 @@ public class ComprobanteWS {
         Connection conn = DBManager.getInstance().obtenerConexion();
         JasperPrint jp = JasperFillManager.fillReport(jr,params, conn);          
         return JasperExportManager.exportReportToPdf(jp);
+    }
+    
+    private boolean isPdfNotEmpty(byte[] fileBuffer) {
+        try {
+            // Crear un InputStream a partir del byte array del PDF
+            ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(fileBuffer);
+
+            // Cargar el documento PDF desde el InputStream
+            PDDocument document = PDDocument.load(byteArrayInputStream);
+
+            // Usar PDFTextStripper para extraer el texto del PDF
+            PDFTextStripper stripper = new PDFTextStripper();
+            String pdfText = stripper.getText(document);
+
+            // Verificar si el contenido del PDF tiene texto (no está vacío)
+            document.close();
+
+            // Si el PDF tiene texto, no está vacío
+            return !pdfText.trim().isEmpty();  // Retorna true si tiene texto
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;  // Si hay un error, asumimos que está vacío
+        }
     }
     
 }
