@@ -346,9 +346,9 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         List<Orden> ordenes = new ArrayList<>();
     
     // Consulta SQL para obtener productos por tipo
-    String sql = "SELECT * FROM Orden WHERE tipo_recepcion = ?";
+        String sql = "SELECT * FROM Orden WHERE tipo_recepcion = ?";
     
-    try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+        try (Connection conn = DBManager.getInstance().obtenerConexion()) {
         // Usamos PreparedStatement para evitar inyecciones SQL
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             // Establecemos el valor del tipoProducto (convertimos el enum a String)
@@ -396,9 +396,7 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
     @Override
     public void actualizarEstadoDevolucion(int idOrden, TipoEstadoDevolucion estado) {
         String sp = "{CALL sp_actualizar_puntuacion(?, ?)}";
-//        String updateQuery = "UPDATE Orden SET tipo_estado_devolucion = ? WHERE orden_id = ?";
-//
-//        
+        
         try (Connection conn = DBManager.getInstance().obtenerConexion()) {
              System.out.println("Actualizando estado de devolucion: " + estado.name());
             try (CallableStatement cs = conn.prepareCall(sp)) { 
@@ -416,7 +414,21 @@ public class OrdenCRUD extends BaseCRUD<Orden> implements OrdenDAO{
         }
             
     }
-    
+
+    @Override
+    public void actualizarSaldoCero(int idOrden) {
+        String updateQuery= "UPDATE Orden SET saldo = 0 WHERE orden_id = ? ";
+        try (Connection conn = DBManager.getInstance().obtenerConexion()) {
+            try (PreparedStatement ps = conn.prepareStatement(updateQuery)) {
+                ps.setInt(1, idOrden);
+                ps.executeUpdate();
+            } catch (SQLException ex) {
+                 throw new RuntimeException("Error al contectar con la bd para actualizar el saldo", ex);
+            }
+        } catch (SQLException ex) {
+            throw new RuntimeException("Error al contectar con la bd para actualizar el saldo", ex);
+        }  
+    }
 }
     
    

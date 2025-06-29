@@ -19,4 +19,5 @@ public interface OrdenDAO extends BaseDAO<Orden> {
     public List<Orden> obtenerPorTipoOrden(TipoRecepcion tipo);
     public void actualizarCantidadEntregada(Orden orden);
     public void actualizarEstadoDevolucion(int idOrden, TipoEstadoDevolucion estado);
+    public void actualizarSaldoCero(int idOrden);
 }

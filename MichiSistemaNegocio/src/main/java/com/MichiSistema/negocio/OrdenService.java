@@ -26,4 +26,6 @@ public interface OrdenService{
     void actualizarEstadoFechaDevolucion(Integer ventaId, TipoFechaDevolucion estadoFecha) throws Exception;
     ArrayList<Orden> listarPorTipoRecepcion(TipoRecepcion tipoRecepcion) throws Exception;
     public ArrayList<String> listarTipoRecepcion() throws Exception;
+
+    public void actualizarSaldoCero(int idOrden) throws Exception;
 }

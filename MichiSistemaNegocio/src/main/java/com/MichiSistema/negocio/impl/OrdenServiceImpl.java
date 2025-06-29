@@ -149,4 +149,14 @@ public class OrdenServiceImpl  implements OrdenService{
         
         return (ArrayList<Orden>) ordenDAO.obtenerPorTipoOrden(tipo);
     }
+
+    @Override
+    public void actualizarSaldoCero(int idOrden) throws Exception{
+
+        Orden orden = ordenDAO.obtenerPorId(idOrden);
+        if (orden == null) {
+            throw new Exception("Orden no encontrada");
+        }
+        ordenDAO.actualizarSaldoCero(idOrden);
+    }
 }

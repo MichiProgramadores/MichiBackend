@@ -139,6 +139,14 @@ public class OrdenWS {
         }
     }
     
+    @WebMethod(operationName = "actualizarSaldoCero")
+    public void actualizarSaldoCero(@WebParam(name = "idOrden") int idOrden) {
+        try{
+            ordenService.actualizarSaldoCero(idOrden);
+        }catch(Exception ex){
+            throw new WebServiceException("Error al listar ordenes por tipo "+ex.getMessage());
+        }
+    }
     @WebMethod(operationName = "reporteRenta")
     public byte[] reporteRenta(@WebParam(name = "fecha_inicio") Date fechaInicio,
             @WebParam(name = "fecha_fin") Date fechafin){
